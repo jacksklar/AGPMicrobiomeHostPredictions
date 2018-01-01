@@ -14,18 +14,24 @@ import seaborn as sns
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
+from xgboost import XGBClassifier
 
 from sklearn.model_selection import RepeatedStratifiedKFold
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_curve, auc, accuracy_score, matthews_corrcoef
 from scipy import interp
 
-metadata_df = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
-otu_df = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/AGP_Otu_Data.csv", index_col = 0)
+metadata_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
+otu_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Otu_Data.csv", index_col = 0)
 otu_df = otu_df.loc[metadata_df.index, :]
-taxa_df = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Raw_Data/taxa_md5.xls", sep = "\t", index_col = 0)
+taxa_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Raw_Data/taxa_md5.xls", sep = "\t", index_col = 0)
 taxa_df = taxa_df[taxa_df.index.isin(otu_df.columns)]
 taxa_df = taxa_df.replace(np.nan, 'Unknown', regex=True)
+
+##info for plotting questionnaire cohorts
+feature_info = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/feature_info.csv", index_col = 0)
+frequency_info = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/frequency_feature_info.csv", index_col = 0)
+
 
 ## Funtion maps abundance of bacteria from the lowest level (Operational Taxonomuc Unit, OTU) to rank of interest
 ## Used to test trade-off between loss of information and reduction of feature space
@@ -39,8 +45,8 @@ def mapOTU(df, taxa_df, colname):
             break
     ### Get groups of OTUs belonging to the same phylogenetic tree branch
     taxa_groups = taxa_path.to_frame(0).groupby([0])
-    print colname
-    print len(taxa_groups.groups)
+    print(colname)
+    print(len(taxa_groups.groups))
     summedOTUs = pd.DataFrame([],columns = taxa_groups.groups)
     ### Sum OTU counts
     for group in taxa_groups.groups:
@@ -51,20 +57,19 @@ def mapOTU(df, taxa_df, colname):
 #otu_df = mapOTU(otu_df, taxa_df, "Genus")
 #otu_df = otu_df.reindex(otu_df.mean().sort_values(ascending = False).index, axis=1)
 
-##info for plotting questionnaire cohorts
-feature_info = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/feature_info.csv", index_col = 0)
-frequency_info = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/frequency_feature_info.csv", index_col = 0)
-
 ##OTU abundance converted to relative abundance, removal of OTUs with mean relative abundance bellow 0.01% 
 otu_df_full = otu_df
+print(otu_df.shape[1])
 otu_max_abund =  otu_df.mean(axis = 0).div(10000)
 otu_sig = otu_max_abund[otu_max_abund > 0.0001].index
 otu_df = otu_df.loc[:, otu_sig]
-print otu_df.shape[1]
+print(otu_df.shape[1])
 num_iterations = 100
 
 
-RANDOM_STATE_RF = 123123
+RANDOM_STATE_RF = 347945
+RANDOM_STATE_LR = 893244
+RANDOM_STATE_XGB = 478423
 RANDOM_STATE_CV = 124213
 
 def empiricalPVal(statistic, null_dist):
@@ -162,7 +167,7 @@ class AGPCohortClassification:
     def buildDataSubset(self):
         X = otu_df.loc[self.cohort.index,:].astype(float).values
         y = self.cohort["target"].astype(float)
-        print y.value_counts()
+        print(y.value_counts())
         X = np.log(X + 1.0)
         ## limit cohorts to 2000 samples
         max_samples = 1500
@@ -179,50 +184,50 @@ class AGPCohortClassification:
     ## Target variable shuffled and model trained over same split of data to assess ability for classifier to find signal in noise
     ## Shuffled performance used to obtain significance non-shuffled standard classifiers
     def GroupCV(self, X, y):
-        #self.svm = modelResults()
+        #self.xgb = modelResults()
         self.rf = modelResults()
         self.lasso = modelResults()
         ##100 iterations Group Shuffle-Split Cross Validation (matched case-control pairs remain stratified)
-        cv = RepeatedStratifiedKFold(n_splits = 4, n_repeats = 25, random_state = RANDOM_STATE_CV) #75/25 training/test split for each iteration
+        cv = RepeatedStratifiedKFold(n_splits=4, n_repeats=25, random_state=RANDOM_STATE_CV) #75/25 training/test split for each iteration
         for fold_num, (train, test) in enumerate(cv.split(X, y)):
             ##standard scale the log-transformed abundance data 
             scaler = StandardScaler().fit(X[train])
             X_train = scaler.transform(X[train])
             X_test = scaler.transform(X[test])
             y_shuffled = shuffle(y)
-            print(str(fold_num) + ","),
-            ##SVM:
-            #self.trainModel(X_train, X_test, y[train], y[test], False, self.svm, alg_svm)
-            #self.trainModel(X_train, X_test, y_shuffled[train], y_shuffled[test], True, self.svm, alg_svm)
+            print(str(fold_num), end=", ")
+            ##XGBoost:
+            #self.trainModel(X_train, X_test, y[train], y[test], False, self.xgb)
+            #self.trainModel(X_train, X_test, y_shuffled[train], y_shuffled[test], True, self.xgb)
             ##RANDOM FOREST:
             self.trainModel(X_train, X_test, y[train], y[test], False, self.rf)
             self.trainModel(X_train, X_test, y_shuffled[train], y_shuffled[test], True, self.rf)
-            ##RIDGE LOGISTIC REGRESSION:
+            #RIDGE LOGISTIC REGRESSION:
             self.trainModel(X_train, X_test, y[train], y[test], False, self.lasso)
             self.trainModel(X_train, X_test, y_shuffled[train], y_shuffled[test], True, self.lasso)
         if self.plot:
             self.rf.plotROC(self.feature_name, self.save, self.title, "rf")
-            #self.svm.plotROC(self.feature_name, self.save, self.title, "svm")
-        print 
-        print
+            #self.xgb.plotROC(self.feature_name, self.save, self.title, "xgb")
+        print()
+        print()
     
     ##train one of three classifiers on CV iteration
     ##returns performance metrics, feature importances, saves to classifier object
     def trainModel(self, X_train, X_test, y_train, y_test, shuffle, model_type):
-        #if model_type == self.svm:
-        #   alg = SVC(C = 0.001, kernel='linear', class_weight = 'balanced', probability=True)  
-        #   alg.fit(X_train, y_train)   
-        #   imp = alg.coef_[0,:]
+        #if model_type == self.xgb:
+        #    alg = XGBClassifier(booster="gbtree", eta=0.3, subsample=0.7, verbosity=0, random_state=RANDOM_STATE_XGB)
+        #    alg.fit(X_train, y_train)
+        #    imp = alg.feature_importances_    
         if model_type == self.rf:        
-            alg = RandomForestClassifier(n_estimators = 128, min_samples_leaf = 2, n_jobs = -1, class_weight = 'balanced', random_state=RANDOM_STATE_RF)
+            alg = RandomForestClassifier()
+            alg = RandomForestClassifier(n_estimators=512, min_samples_leaf=1, n_jobs=-1, bootstrap=True, 
+                                         max_samples=0.7, class_weight='balanced', random_state=RANDOM_STATE_RF)
             alg.fit(X_train, y_train)
             imp = alg.feature_importances_        
-
         if model_type == self.lasso:        
-            alg = LogisticRegression(solver = 'liblinear', penalty = "l2", class_weight =  'balanced')    
+            alg = LogisticRegression(solver='liblinear', penalty="l2", class_weight='balanced', random_state=RANDOM_STATE_LR)    
             alg.fit(X_train, y_train)
             imp = alg.coef_[0,:]
-            
         y_pred = alg.predict_proba(X_test)[:,1]
         y_pred_class = alg.predict(X_test)
         y_true = y_test
@@ -231,10 +236,9 @@ class AGPCohortClassification:
         roc_auc = auc(fpr, tpr)
         matthew = matthews_corrcoef(y_true, y_pred_class)
         acc = accuracy_score(y_true, y_pred_class)
-        
         if shuffle:
             #results for shuffled target variable (corrupted) dataset used as null hypothesis
-            model_type.shuffled_tprs.append(interp(self.rf.mean_fpr, fpr, tpr))
+            model_type.shuffled_tprs.append(np.interp(self.rf.mean_fpr, fpr, tpr))
             model_type.shuffled_tprs[-1][0] = 0.0
             model_type.shuffled_aucs.append(roc_auc)
             model_type.shuffled_matthews.append(matthew)  
@@ -242,7 +246,7 @@ class AGPCohortClassification:
         else:
             #results of classifier on cohort
             model_type.importances.append(imp)
-            model_type.tprs.append(interp(model_type.mean_fpr, fpr, tpr)) 
+            model_type.tprs.append(np.interp(model_type.mean_fpr, fpr, tpr)) 
             model_type.tprs[-1][0] = 0.0
             model_type.aucs.append(roc_auc)
             model_type.accuracy.append(acc)                                               
@@ -262,7 +266,7 @@ class QuestionnaireResults():
     
     def AppendModelRes(self, model_obj, cohort_n, feature_name):
         self.model_results.loc[feature_name, :] = model_obj.getMetrics(cohort_n)
-        self.model_importances.loc[feature_name, :] = model_obj.getImportances(col_names)
+        self.model_importances.loc[feature_name, :] = model_obj.getImportances(self.col_names)
         self.model_aucs.loc[feature_name, :] = model_obj.aucs  
         self.model_shuffled_aucs.loc[feature_name, :] = model_obj.shuffled_aucs
 
@@ -291,97 +295,130 @@ metrics = ["p_val", "n_samples", "auc_mean", "auc_std", "auc_median",  "shuffled
 def PredPipeline(save_path, dir_path):
     feature_list = os.listdir(dir_path)
     col_names = otu_df.columns
-    #svm_FR = QuestionnaireResults(num_iterations, col_names, "svm", save_path)
+    #xgb_FR = QuestionnaireResults(num_iterations, col_names, "xgb", save_path)
     rf_FR = QuestionnaireResults(num_iterations, col_names, "rf", save_path)
     lasso_FR = QuestionnaireResults(num_iterations, col_names, "lasso", save_path)
-
     for feature in feature_list:
         feature_name = feature.split(".")[0]
-        print feature_name
+        print(feature_name)
         if feature_name == "":
             continue
         if feature_name not in feature_info.index.values:
-            print "Skipping"
+            print("Skipping")
             continue
         cohort = pd.read_csv(dir_path + feature, index_col = 0) 
+        # cohort.index = cohort["num"]
         cohort_n = len(cohort)
         CohClass = AGPCohortClassification(feature_name, cohort, True, True, "Classification of " + feature_info.loc[feature_name, "plot_name"])
         CohClass.classifyFeature()
-        #svm_FR.AppendModelRes(CohClass.svm, cohort_n)
+        #xgb_FR.AppendModelRes(CohClass.xgb, cohort_n, feature_name)
         rf_FR.AppendModelRes(CohClass.rf, cohort_n, feature_name)
         lasso_FR.AppendModelRes(CohClass.lasso, cohort_n, feature_name)
 
-    #svm_FR.SaveModelDF()
+    #xgb_FR.SaveModelDF()
     rf_FR.SaveModelDF()
     lasso_FR.SaveModelDF()
     #Plot performance of binary cohorts (disease, lifestyle, etc.)
-    #PlotFeatureBox(svm_FR.model_results, svm_FR.model_aucs, save_path, "svm")
+    #PlotFeatureBox(xgb_FR.model_results, xgb_FR.model_aucs, save_path, "xgb")
     PlotFeatureBox(rf_FR.model_results, rf_FR.model_aucs, save_path, "rf")
     PlotFeatureBox(lasso_FR.model_results, lasso_FR.model_aucs, save_path, "lasso")
 
 def FreqPredPipeline(save_path, dir_path):
-    #svm_FR = QuestionnaireResults(num_iterations, col_names, "svm", save_path)
+    #xgb_FR = QuestionnaireResults(num_iterations, col_names, "svm", save_path)
     rf_FR = QuestionnaireResults(num_iterations, col_names, "rf", save_path)
     lasso_FR = QuestionnaireResults(num_iterations, col_names, "lasso", save_path)
     for feature in frequency_list:
         feature_name = feature.split(".")[0]
-        print feature_name
+        print(feature_name)
         if feature_name == "":
             continue
         if feature_name not in frequency_info.index.values:
-            print "Skipping"
+            print("Skipping")
             continue
         cohort = pd.read_csv(dir_path + feature, index_col = 0) 
         cohort_n = len(cohort)
         CohClass = AGPCohortClassification(feature_name, cohort, True, True, "Classification of " + " ".join([val.capitalize() for val in feature_name.split("_")[:-3]]) + " " + frequency_info.loc[feature_name, "plot_name"])
         CohClass.classifyFeature()
-        #svm_FR.AppendModelRes(CohClass.svm, cohort_n)
+        #xgb_FR.AppendModelRes(CohClass.xgb_FR, cohort_n)
         rf_FR.AppendModelRes(CohClass.rf, cohort_n, feature_name)
     lasso_FR.AppendModelRes(CohClass.lasso, cohort_n, feature_name)
-    #svm_FR.SaveModelDF()
+    #xgb_FR.SaveModelDF()
     rf_FR.SaveModelDF()
     lasso_FR.SaveModelDF()
     #PlotFeatureBox(svm_FR.model_results, svm_FR.model_aucs, save_path, "svm")
     #PlotFeatureBox(rf_FR.model_results, rf_FR.model_aucs, save_path, "rf")
     #PlotFeatureBox(lasso_FR.model_results, lasso_FR.model_aucs, save_path, "lasso")
     
+        
+#%%
+#Recompute
+col_names = otu_df.columns
+#excluded Groups
+dir_path = "/Users/jacksklar/Desktop/newcohortsforrf/alc_matched/"
+save_path = "/Users/jacksklar/Desktop/New_Cohort_Results/alc_matched/"
+feature_list = os.listdir(dir_path)
+PredPipeline(save_path, dir_path)
+
+dir_path = "/Users/jacksklar/Desktop/newcohortsforrf/cohorts_reformatted/"
+save_path = "/Users/jacksklar/Desktop/New_Cohort_Results/cohorts_reformatted/"
+feature_list = os.listdir(dir_path)
+PredPipeline(save_path, dir_path)
+
+
+dir_path = "/Users/jacksklar/Desktop/newcohortsforrf/cohorts_reformatted-1/"
+save_path = "/Users/jacksklar/Desktop/New_Cohort_Results/cohorts_reformatted/"
+feature_list = os.listdir(dir_path)
+PredPipeline(save_path, dir_path)
+    
 #%%
 
-col_names = otu_df.columns
     
 #excluded Groups
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/agp_excluded_results/"
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/agp_excluded_cohorts/"
+dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
+save_path = dir_path + "Results/Phase_I_Results_xgb/"
+dir_path = dir_path + "Feature_Cohorts/Phase_I_Cohorts/"
 feature_list = os.listdir(dir_path)
 PredPipeline(save_path, dir_path)
 
+#%%
+
+
+dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
+col_names = otu_df.columns
 #Binary Questionnaire Variable Cohort Classification
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/binary_results_no_matching/"
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/binary_cohorts_no_matching/"
+save_path = dir_path + "Results/Phase_II_Results/binary_results/"
+dir_path = dir_path + "Feature_Cohorts/Phase_II_Cohorts/binary_cohorts/"
 feature_list = os.listdir(dir_path)
 PredPipeline(save_path, dir_path)
 
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/binary_results_standard/"
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/binary_cohorts_standard/"
+#%%
+dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
+col_names = otu_df.columns
+#Binary Questionnaire Variable Cohort Classification
+save_path = dir_path + "Results/Phase_II_Results_disease_removed/binary_results/"
+dir_path = dir_path + "Feature_Cohorts/Phase_II_Cohorts_disease_removed/binary_cohorts/"
 feature_list = os.listdir(dir_path)
 PredPipeline(save_path, dir_path)
 
+
+#%%
+
+dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
+col_names = otu_df.columns
 ##Frequency Groups compared to cohort of "never" participants
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/frequency_results_no_matching/"
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/frequency_cohorts_no_matching/"
+save_path = dir_path + "Results/Phase_II_Results_disease_removed/frequency_results/"
+dir_path = dir_path + "Feature_Cohorts/Phase_II_Cohorts_disease_removed/frequency_cohorts/"
 frequency_list = os.listdir(dir_path)
 FreqPredPipeline(save_path, dir_path)
 
+
+dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
+col_names = otu_df.columns
 ##Frequency Groups compared to cohort of "never" participants
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/frequency_results_standard/"
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/frequency_cohorts_standard/"
+save_path = dir_path + "Results/Phase_II_Results/frequency_results/"
+dir_path = dir_path + "Feature_Cohorts/Phase_II_Cohorts/frequency_cohorts/"
 frequency_list = os.listdir(dir_path)
 FreqPredPipeline(save_path, dir_path)
-
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Diabetes_test_results/"
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/Diabetes_test_cohorts/"
-feature_list = os.listdir(dir_path)
-PredPipeline(save_path, dir_path)
 
 
 

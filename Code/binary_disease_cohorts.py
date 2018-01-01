@@ -9,33 +9,45 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import euclidean_distances
 
-feature_groups = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/feature_groups.csv", index_col = 0)
-metadata_df = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
-feature_groups = feature_groups[~feature_groups.index.isin(['dna_extracted','physical_specimen_remaining','public', 'breastmilk_formula_ensure', 'acne_medication', 'acne_medication_otc', 'alcohol_consumption'])]
+
+feature_groups = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/feature_groups.csv", index_col = 0)
+metadata_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
+feature_groups = feature_groups[~feature_groups.index.isin(['dna_extracted','physical_specimen_remaining','public', 'breastmilk_formula_ensure', 
+                                                            'acne_medication', 'acne_medication_otc', 'alcohol_consumption'])]
 binary_features = feature_groups[feature_groups["group"].isin(["binary","disease"])].index.values
+print("Population size (full): ", len(metadata_df))
 
 ### Removal of samples that did not have valid annotation of important information used for matching
 for val in ["diabetes", "age_years", "bmi", "ibd", "antibiotic_history"]:
     metadata_df = metadata_df[~metadata_df[val].isin(["Not provided","Unspecified", 4, 3, 2])]
-    
+print("Population size (removed missing metadata samples): ", len(metadata_df))
+
 metadata_df.loc[:, ["bmi", "age_years"]] = metadata_df.loc[:, ["bmi", "age_years"]].astype(float)
 
 ## define set of healthy population for construction of binary questionnaire variables:
 ##      - adults (20:80), with antibiotic use in the last 6-months or later, no IBD or Diabetes, excluding obese participants
 ##      - only include most represented countries (US, UK, Can)
-metadata_df = metadata_df[(metadata_df["age_years"] >= 20.0) & 
-                          (metadata_df["age_years"] <= 80.0) &
+metadata_df = metadata_df[(metadata_df["age_years"] >= 20.0) & (metadata_df["age_years"] <= 80.0) &
                           (metadata_df["antibiotic_history"].isin(["Year", "I have not taken antibiotics in the past year."])) &
                           (metadata_df["ibd"] == 0) &
                           (metadata_df["diabetes"] == 0) &
-                          (metadata_df["bmi"] >= 12.5) & 
-                          (metadata_df["bmi"] <= 40.0) &
-                          (metadata_df["alcohol_frequency"] != 5) &
-                          (metadata_df["milk_cheese_frequency"] !=  5) &
-                          (metadata_df["meat_eggs_frequency"] != 5) &
-                          (metadata_df["vegetable_frequency"] != 5) &
-                          (~metadata_df["bowel_movement_quality"].isin(["Unspecified", "Not provided", "I don't know, I do not have a point of reference"])) &
+                          (metadata_df["bmi"] >= 12.5) & (metadata_df["bmi"] <= 40.0) &
                           (metadata_df["country"].isin(["USA", "United Kingdom", "Canada"]))]
+print("Population size (removed standard exclusion): ", len(metadata_df))
+
+"""
+metadata_df = metadata_df[(metadata_df["acid_reflux"] != 1) & (metadata_df["add_adhd"] != 1) & (metadata_df["asd"] != 1) & (metadata_df["autoimmune"] != 1) &
+                          (metadata_df["cancer"] != 1) & (metadata_df["cardiovascular_disease"] != 1) & (metadata_df["gluten"] != "I was diagnosed with celiac disease") &
+                          (metadata_df["depression_bipolar_schizophrenia"] != 1) & (metadata_df["fungal_overgrowth"] != 1) &
+                          (metadata_df["ibd"] != 1) & (metadata_df["ibs"] != 1) & (metadata_df["liver_disease"] != 1) & (metadata_df["lung_disease"] != 1) &
+                          (metadata_df["mental_illness"] != 1) & (metadata_df["mental_illness_type_depression"] != 1) & (metadata_df["migraine"] != 1) &
+                          (metadata_df["sibo"] != 1) & (metadata_df["skin_condition"] != 1) & (metadata_df["thyroid"] != 1) & (metadata_df["kidney_disease"] != 1) &
+                          (metadata_df["asd"] != 1) & (metadata_df["ibd"] != 1) & (metadata_df["cdiff"] != 1) &
+                          (metadata_df["mental_illness_type_ptsd_posttraumatic_stress_disorder"] != 1) & (metadata_df["skin_condition"] != 1) &
+                          (metadata_df["alzheimers"] != 1) & (metadata_df["epilepsy_or_seizure_disorder"] != 1) & (metadata_df["pku"] != 1)]
+
+print("Population size (removed diseased samples): ", len(metadata_df))
+"""
 
 metadata_df["bowel_movement_quality"] = metadata_df["bowel_movement_quality"].replace(["I tend to have diarrhea (watery stool)", "I tend to have diarrhea (watery stool) - Type 5, 6 and 7"], "loose")
 metadata_df["bowel_movement_quality"] = metadata_df["bowel_movement_quality"].replace(["I tend to have normal formed stool", "I tend to have normal formed stool - Type 3 and 4"], "normal")
@@ -53,8 +65,14 @@ le_sex.fit(metadata_df["sex"].unique())
 metadata_df["sex"] = le_sex.transform(metadata_df["sex"])
 le_race.fit(metadata_df["race"].unique())
 metadata_df["race"] = le_race.transform(metadata_df["race"])
-metadata_df["diet_type"] = metadata_df["diet_type"].map({"Omnivore": 0,"Omnivore but do not eat red meat": 1,"Vegetarian but eat seafood": 2, "Vegetarian": 3,"Vegan": 4,"Other": 5})
-metadata_df["antibiotic_history"] = metadata_df["antibiotic_history"].map({"Year": 0, "I have not taken antibiotics in the past year.": 1})
+metadata_df["diet_type"] = metadata_df["diet_type"].map({"Omnivore": 0,
+                                                         "Omnivore but do not eat red meat": 1,
+                                                         "Vegetarian but eat seafood": 2, 
+                                                         "Vegetarian": 3,
+                                                         "Vegan": 4,
+                                                         "Other": 5})
+metadata_df["antibiotic_history"] = metadata_df["antibiotic_history"].map({"Year": 0, 
+                                                                           "I have not taken antibiotics in the past year.": 1})
 
 ## Samples with missing geographic locations get the centroid of their country or residence
 usa_missing_geo = metadata_df[(metadata_df["longitude"] == -10.0) & (metadata_df["country"] == "USA")].index.values
@@ -66,53 +84,46 @@ metadata_df.loc[can_missing_geo, ["longitude", "latitude"]] = (-79.4, 43.9)
 
 
 base_matching_features = ["longitude", "latitude"]
-new_matching_features = ["sex", "age_years", "bmi", "longitude", "latitude", "alcohol_frequency", "milk_cheese_frequency", "bowel_movement_quality","meat_eggs_frequency", "vegetable_frequency"] # "meat_eggs_frequency",
-cohort_feats = ["sex", "age_years", "bmi", "bmi_cat", "country", "longitude", "latitude", "race", "antibiotic_history", "diet_type",  "alcohol_frequency","milk_cheese_frequency", "meat_eggs_frequency", "bowel_movement_quality", "vegetable_frequency"]
+cohort_feats = ["sex", "age_years", "bmi", "bmi_cat", "country", "longitude", "latitude", "race", "antibiotic_history", "diet_type",  
+                "alcohol_frequency","milk_cheese_frequency", "meat_eggs_frequency", "bowel_movement_quality", "vegetable_frequency"]
 
-#metadata_df.to_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/matched_selection_population.csv")
+#metadata_df.to_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/matched_selection_population.csv")
 
 ##Standard Scale all feautres so they have equal impact on the cosine similarity calculations between positive class (cases), and the healthy control population
-metadata_matching = metadata_df.loc[:, new_matching_features]
+metadata_matching = metadata_df.loc[:, base_matching_features]
 scaler = StandardScaler()
-metadata_matching= pd.DataFrame(scaler.fit_transform(metadata_df.loc[:, new_matching_features].astype(float)), index = metadata_df.index, columns = new_matching_features)
+metadata_matching= pd.DataFrame(scaler.fit_transform(metadata_df.loc[:, base_matching_features].astype(float)), index = metadata_df.index, columns = base_matching_features)
 
-#metadata_matching.to_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/normalized_matching_data.csv")
+#metadata_matching.to_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/normalized_matching_data.csv")
 
-## annotate Adjacent pairs in the cohort dataframe as matched paris
 def pairIDs(length):
-    num_pairs = length/2
+    ## annotate Adjacent pairs in the cohort dataframe as matched paris
+    num_pairs = int(length/2)
     pair_ids = []
     for val in range(num_pairs):
         pair_ids.append(val)
         pair_ids.append(val)
     return pair_ids
 
-def buildDataSubset(target_name, base_match):
-    ### compute cosine similarity matrix, for each positive sample, choose the most similar negative sample from the control population
-    ### sample without replacement, stop once each positive sample is matched to a control maintaining a balanced cohort
-    ### target_var: which frequency variable to make a balanced cohort for
-    ### base_match: boolean (use the base matching variables (standard), or informed matching variables (base + diet and alcohol))
+def buildDataSubset(target_name):
+    # compute cosine similarity matrix, for each positive sample, choose the most similar negative sample from the control population
+    # sample without replacement, stop once each positive sample is matched to a control maintaining a balanced cohort
+    # target_var: which frequency variable to make a balanced cohort for
     target = metadata_df[target_name].astype(int)  
     pos_class = target[target == 1].index
     neg_class = target[target == 0].index
     n_pos = len(pos_class)
     n_neg = len(neg_class)
-    ## if more positive samples than healthy control samples, match controls to positive samples
-    if n_pos > n_neg: 
+    if n_pos > n_neg:     ## if more positive samples than healthy control samples, match controls to positive samples
         temp = pos_class
         pos_class = neg_class
         neg_class = temp
-    if base_match: 
-        cm = euclidean_distances(metadata_matching.loc[pos_class, base_matching_features], metadata_matching.loc[neg_class, base_matching_features])
-    else: 
-        cm = euclidean_distances(metadata_matching.loc[pos_class, :], metadata_matching.loc[neg_class, :])    
+    cm = euclidean_distances(metadata_matching.loc[pos_class, base_matching_features], metadata_matching.loc[neg_class, base_matching_features])   
     cm = pd.DataFrame(cm, index = pos_class, columns = neg_class)
-    
     cohort = []        
     distances = []
     worst_distances = []
     for pos_index in cm.index:
-        
         neg_match = cm.loc[pos_index,:].idxmin(axis = 1)
         worst_match = cm.loc[pos_index,:].idxmax(axis = 1)
         dist = cm.loc[pos_index, neg_match]
@@ -132,39 +143,19 @@ def buildDataSubset(target_name, base_match):
     cohort["pairID"] = pairIDs(len(cohort))
     cohort["pairDist"] = distances
     cohort["worstPairDist"] = worst_distances
-    if base_match:
-        cohort.to_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/binary_cohorts_no_matching/" + str(target_name) + ".csv")
-    else:
-        cohort.to_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/binary_cohorts_standard_3/" + str(target_name) + ".csv")
+    cohort.to_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Feature_Cohorts/Phase_II_Cohorts/binary_cohorts/" + str(target_name) + ".csv")
 
-#%%
-        
-###Standard No Matching Cohorts
+#%%  Standard No Matching Cohorts
+    
 for feature in binary_features:
     feature_counts = metadata_df[feature].value_counts()
-    ## Skip binary variables with only one value (e.x. sampling location)
-    if 1 not in feature_counts.index:
+    if 1 not in feature_counts.index:    ## Skip binary variables with only one value (e.x. sampling location)
         continue
     n_feature_positive = feature_counts[1]
-    ## Skip variables with less than 50 positive samples
-    if n_feature_positive < 50:
-        print "       Not enough samples", feature, str(n_feature_positive)
+    if n_feature_positive < 40:    ## Skip variables with less than 50 positive samples
+        print("       Not enough samples", feature, str(n_feature_positive))
         continue
     else:
-        print feature, str(n_feature_positive)
-        buildDataSubset(feature, True)
-#%%
-###Updated Matching cohorts: base + alcohol and Diet
-for feature in binary_features:
-    feature_counts = metadata_df[feature].value_counts()
-    if 1 not in feature_counts.index:
-        continue
-    n_feature_positive = feature_counts[1]
-    if n_feature_positive < 50:
-        print "       Not enough samples", feature, str(n_feature_positive)
-        continue
-    else:
-        print feature, str(n_feature_positive)
-        buildDataSubset(feature, False)
-
+        print(feature, str(n_feature_positive))
+        buildDataSubset(feature)
                 

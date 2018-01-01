@@ -18,11 +18,11 @@ from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score as f1
 
-metadata_df = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
-otu_df = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/AGP_Otu_Data.csv", index_col = 0)
-feature_info = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/feature_info.csv", index_col = 0)
-frequency_info = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/frequency_feature_info.csv", index_col = 0)
-taxa_df = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Raw_Data/taxa_md5.xls", sep = "\t", index_col = 0)
+metadata_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
+otu_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Otu_Data.csv", index_col = 0)
+feature_info = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/feature_info.csv", index_col = 0)
+frequency_info = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/frequency_feature_info.csv", index_col = 0)
+taxa_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Raw_Data/taxa_md5.xls", sep = "\t", index_col = 0)
 taxa_df = taxa_df[taxa_df.index.isin(otu_df.columns)]
 taxa_df = taxa_df.replace(np.nan, 'Unknown', regex=True)
 otu_df = otu_df.loc[metadata_df.index, :]
@@ -34,7 +34,7 @@ otu_df = otu_df.loc[:, otu_sig]
 print otu_df.shape[1]
 num_iterations = 100
 
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/Age_cohorts/"
+dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Feature_Cohorts/Age_cohorts/"
 age_cohort = pd.read_csv(dir_path + "agp_healthy_cohort_all_ages.csv", index_col = 0)
 
 
@@ -169,6 +169,7 @@ confusion_mats = []
 for c in C_dist:
     print c
     alg_rf = SVC(C = c, kernel='linear', class_weight = 'balanced', random_state = RANDOM_STATE_SVM)  
+    alg_rf = RandomForestClassifier(n_estimators=256, class_weight = 'balanced', random_state=RANDOM_STATE_SVM)
     f_micros = []
     f_macros = []
     cm_total = pd.DataFrame(0, index=range(16),columns=range(16))
@@ -185,7 +186,7 @@ for c in C_dist:
         y_true = y[test]
         
         cm = pd.DataFrame(confusion_matrix(y_true, y_pred))
-        cm.to_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/multiclass/Age_cohort/CMs/cm_fold_" + str(fold_num) + ".csv")
+        cm.to_csv("/Users/jacksklar/Desktop/New_Age_Results/CMs/cm_fold_" + str(fold_num) + ".csv")
         cm_total += cm
         f1_micro = f1(y_true, y_pred, average = 'micro')
         f1_macro = f1(y_true, y_pred, average = 'macro')
@@ -203,7 +204,7 @@ for c in C_dist:
     cm_total = cm_total.divide(cm_total.sum(axis=1), axis = 0)   
     cm_total.index = group_labels
     cm_total.columns = group_labels   
-    cm_total.to_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/multiclass/Age_cohort/multiclass_average_conf_mat.csv")
+    cm_total.to_csv("/Users/jacksklar/Desktop/New_Age_Results/multiclass_average_conf_mat.csv")
 
     plt.figure(figsize = (15,12))
     sns.heatmap(cm_total, annot = True, cmap="YlGnBu")
@@ -211,13 +212,13 @@ for c in C_dist:
     plt.xlabel("Predicted age group")
     plt.xticks(rotation=45)
     plt.yticks(rotation=45)
-    plt.savefig("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/multiclass/Age_cohort/Age_svm_c" + str(c) + "_linear.pdf")
+    plt.savefig("/Users/jacksklar/Desktop/New_Age_Results/Age_svm_c" + str(c) + "_linear.pdf")
     plt.show()
     print 
     
 plt.figure(figsize = (20,20))
 sns.clustermap(cm_total, annot = True, cmap="YlGnBu", row_cluster=True, col_cluster=False,  method="ward", metric = "cosine", annot_kws={"size": 8})
-plt.savefig("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/multiclass/Age_cohort/Age_svm_c_001_linear_clustered_ward.pdf")
+plt.savefig("/Users/jacksklar/Desktop/New_Age_Results/Age_svm_c_001_linear_clustered_ward.pdf")
 plt.show()
     
     

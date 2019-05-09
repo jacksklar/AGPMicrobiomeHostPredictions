@@ -1,2 +1,8 @@
 # AGPMicrobiomeHostPredictions
-A broad search for significant micro biome-modifying host variables from the American Gut Project public Gut Data
+A broad search for significant microbiome-modifying host variables from the American Gut Project public Gut Data
+
+Participant metadata extracted from a standardized survey was used to create models to predict a set of binary lifestyle, disease state, and dietary consumption frequency variables. These models are used to robustly infer association between the host target variable and microbial composition of the gut. Random Forest, XGBoost, and Lasso Logistic Regression were used. These models in no way are created for the purpose of prediction of microbiome samples obtained form different studies, or for precision medicine. This is due to the noisy, sparse nature of microbiome data, and due to the large influence of the specific method the samples were processed, sequenced, and analyzed, as well as where and who performed it. Luckly, the American Gut Project has standardized their protocol as well as performing the processing of samples in the same facility. This has allowed for machine learning techniques to be used on a very large dataset of microbiome samples. 
+
+From the resulting performances of the host-associated variables on their gut microbiome composition at both the Genus level and the Operational Taxonomic Unit (OTU) level, we detect new host variables that should be considered when excluding patients from human gut microbiome studies, based on a highly distict effect on the microbiome composition, as well as additional variables that should be considered when matching experimental samples with controls. We also show that certain host-variables that do have a history of being used as criteria for exclusion from microbiome studies show little ability to discriminate between microbiome samples, and therefore should be reconsidered when used for excluding patients. 
+
+

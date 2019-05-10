@@ -14,7 +14,7 @@ import scipy.stats as stats
 import matplotlib.pyplot as plt
 import seaborn as sns        
 from sklearn.model_selection import KFold, StratifiedKFold
-#from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.preprocessing import StandardScaler
@@ -62,6 +62,90 @@ otu_df = otu_df.reindex(otu_df.mean().sort_values(ascending = False).index, axis
 
 #%%
 
+
+class modelResults:
+    def __init__(self):
+        self.tprs = []                    
+        self.aucs = []                         
+        self.importances = []
+        self.accuracy = []                         
+        self.precision = []                         
+        self.recall = []                         
+        self.f1 = []             
+        self.shuffled_aucs = [] 
+        self.shuffled_f1 = [] 
+        self.shuffled_tprs = []   
+        self.mean_fpr = np.linspace(0, 1, 101)  
+    
+    def getMetrics(self, cohort_n):
+        metrics = pd.Series([])
+        metrics.loc["n_samples"] = cohort_n
+        metrics.loc["auc_mean"] = np.mean(self.aucs)
+        metrics.loc["auc_std"] = np.std(self.aucs)
+        metrics.loc["auc_median"] = np.median(self.aucs)
+        metrics.loc["shuffled_auc_mean"] = np.mean(self.shuffled_aucs)
+        metrics.loc["shuffled_auc_median"] = np.median(self.shuffled_aucs)
+        
+        data1 = np.reshape(self.aucs, (20, 5))
+        data2 = np.reshape(self.shuffled_aucs, (20, 5))
+        t_stat, p_val = stats.ttest_ind(data1,data2, axis = 1)
+        metrics.loc["p_val"] = np.mean(p_val)
+        metrics.loc["t_stat"] = np.mean(t_stat)
+        
+        metrics.loc["acc_mean"] = np.mean(self.accuracy)
+        metrics.loc["acc_std"] = np.std(self.accuracy)
+        metrics.loc["recall_mean"] = np.mean(self.recall)
+        metrics.loc["recall_std"] = np.std(self.recall)
+        metrics.loc["prec_mean"] = np.mean(self.precision)
+        metrics.loc["prec_std"] = np.std(self.precision)
+        metrics.loc["f1_mean"] = np.mean(self.f1)
+        metrics.loc["f1_std"] = np.std(self.f1)
+        metrics.loc["shuffled_f1_mean"] = np.mean(self.shuffled_f1) 
+        metrics.loc["shuffled_f1_std"] = np.std(self.shuffled_f1)
+
+        return metrics
+        
+    def getImportances(self, col_names):
+        avg_imps = np.stack(self.importances)
+        avg_imps = pd.DataFrame(avg_imps, columns = col_names).mean(axis = 0)
+        return avg_imps
+
+    def plotROC(self, feature_name, save, title):
+        plt.figure(1, figsize=(6, 6))
+        plt.plot([-0.05, 1.05], [-0.05, 1.05], linestyle=':', lw=2, color='k', alpha=.8)
+        
+        mean_tpr = np.mean(self.tprs, axis=0)
+        mean_tpr[-1] = 1.0
+        std_tpr = np.std(self.tprs, axis=0)
+        tprs_upper = np.minimum(mean_tpr + std_tpr, 1)
+        tprs_lower = np.maximum(mean_tpr - std_tpr, 0)
+        mean_auc = auc(self.mean_fpr, mean_tpr)
+        std_auc = np.std(self.aucs)
+        plt.plot(self.mean_fpr, mean_tpr, color='b',label=r'Mean ROC (AUC = %0.2f $\pm$ %0.2f)' % (mean_auc, std_auc),lw=2, alpha=0.9)
+        plt.fill_between(self.mean_fpr, tprs_lower, tprs_upper, color='b', alpha=.3, label=r'$\pm$ 1 std. dev.')
+        
+        mean_tpr = np.mean(self.shuffled_tprs, axis=0)
+        mean_tpr[-1] = 1.0
+        std_tpr = np.std(self.shuffled_tprs, axis=0)
+        tprs_upper = np.minimum(mean_tpr + std_tpr, 1)
+        tprs_lower = np.maximum(mean_tpr - std_tpr, 0)
+        mean_auc = auc(self.mean_fpr, mean_tpr)
+        std_auc = np.std(self.shuffled_aucs)
+        plt.plot(self.mean_fpr, mean_tpr, color='r',label=r'Mean Shuffled-ROC (AUC = %0.2f $\pm$ %0.2f)' % (mean_auc, std_auc),lw=2, alpha=0.9)
+        plt.fill_between(self.mean_fpr, tprs_lower, tprs_upper, color='r', alpha=.3, label=r'$\pm$ 1 std. dev.')
+        
+        plt.xlim([-0.05, 1.05])
+        plt.ylim([-0.05, 1.05])
+        plt.xlabel('False Positive Rate')
+        plt.ylabel('True Positive Rate')
+        plt.title(title)
+        plt.legend(loc="lower right")
+        
+        if save :
+            plt.savefig(save_path + "ROCs/" + feature_name + ".png", dpi = 300)
+        plt.show()
+
+
 class AGPCohortClassification:
 
     def __init__(self, feature_name, cohort, plot, save, title):
@@ -91,87 +175,35 @@ class AGPCohortClassification:
         return X, y        
 
     def RepeatedKFoldCV(self, X, y):
-        self.tprs = []                    
-        self.aucs = []                         
-        self.importances = []
-        self.accuracy = []                         
-        self.precision = []                         
-        self.recall = []                         
-        self.f1 = []                         
-        self.shuffled_aucs = [] 
-        self.shuffled_f1 = [] 
-        self.shuffled_tprs = []   
-        self.mean_fpr = np.linspace(0, 1, 101)  
+        self.xgb = modelResults()
+        self.rf = modelResults()
+        self.lasso = modelResults()
+
         ##Repeat Cross Validation
         for n in range(1, 21):
             print(str(n) + ","),
             y_shuffled = shuffle(y)
             cv = KFold(n_splits = 5, shuffle = True)
             for fold_num, (train, test) in enumerate(cv.split(X, y, y_shuffled)):                 
-                ##Fit True Label Data
+
                 self.trainXGB(X[train], X[test], y[train], y[test], False)
-                ##Shuffled Label Null Hypothesis:
                 self.trainXGB(X[train], X[test], y_shuffled[train], y_shuffled[test], True)
+                                
+                self.trainRF(X[train], X[test], y[train], y[test], False)
+                self.trainRF(X[train], X[test], y_shuffled[train], y_shuffled[test], True)
                 
-        ###average importance values over all repeats/folds
-        self.importances = np.stack(self.importances)
-        self.importances = pd.DataFrame(self.importances, columns = otu_df.columns).mean(axis = 0).sort_values(ascending = False)
-        
-        ##save importanes/ plot rocs for binary/diseas features (frequency cohorts are saved seperately)
-        if self.save :
-            self.importances.to_csv(save_path + "Importances/" + self.feature_name + ".csv")
+                self.trainLasso(X[train], X[test], y[train], y[test], False)
+                self.trainLasso(X[train], X[test], y_shuffled[train], y_shuffled[test], True)
+                
         if self.plot:
-            self.plotROC()
-    
-    def plotROC(self):
-        plt.figure(1, figsize=(6, 6))
-        plt.plot([-0.05, 1.05], [-0.05, 1.05], linestyle=':', lw=2, color='k', alpha=.8)
-        
-        mean_tpr = np.mean(self.tprs, axis=0)
-        mean_tpr[-1] = 1.0
-        std_tpr = np.std(self.tprs, axis=0)
-        tprs_upper = np.minimum(mean_tpr + std_tpr, 1)
-        tprs_lower = np.maximum(mean_tpr - std_tpr, 0)
-        mean_auc = auc(self.mean_fpr, mean_tpr)
-        std_auc = np.std(self.aucs)
-        plt.plot(self.mean_fpr, mean_tpr, color='b',label=r'Mean ROC (AUC = %0.2f $\pm$ %0.2f)' % (mean_auc, std_auc),lw=2, alpha=0.9)
-        plt.fill_between(self.mean_fpr, tprs_lower, tprs_upper, color='b', alpha=.3, label=r'$\pm$ 1 std. dev.')
-        
-        mean_tpr = np.mean(self.shuffled_tprs, axis=0)
-        mean_tpr[-1] = 1.0
-        std_tpr = np.std(self.shuffled_tprs, axis=0)
-        tprs_upper = np.minimum(mean_tpr + std_tpr, 1)
-        tprs_lower = np.maximum(mean_tpr - std_tpr, 0)
-        mean_auc = auc(self.mean_fpr, mean_tpr)
-        std_auc = np.std(self.shuffled_aucs)
-        plt.plot(self.mean_fpr, mean_tpr, color='r',label=r'Mean Shuffled-ROC (AUC = %0.2f $\pm$ %0.2f)' % (mean_auc, std_auc),lw=2, alpha=0.9)
-        plt.fill_between(self.mean_fpr, tprs_lower, tprs_upper, color='r', alpha=.3, label=r'$\pm$ 1 std. dev.')
-        
-        plt.xlim([-0.05, 1.05])
-        plt.ylim([-0.05, 1.05])
-        plt.xlabel('False Positive Rate')
-        plt.ylabel('True Positive Rate')
-        plt.title(self.title)
-        plt.legend(loc="lower right")
-        
-        if self.save :
-            plt.savefig(save_path + "ROCs/" + self.feature_name + ".png", dpi = 300)
-        plt.show()
+            self.xgb.plotROC(self.feature_name, self.save, self.title)
     
     
     def trainXGB(self, X_train, X_test, y_train, y_test, shuffle):
-        
-        #alg = XGBClassifier(n_estimators=256, max_depth=5, learning_rate=0.1, colsample_bytree = 0.7, 
-        #                   nthread=4, scoring='roc_auc', reg_alpha = 5, gamma = 0.1, subsample = 0.7
-        #                   objective='binary:logistic', seed= 1235) 
-        ##training and probability prediction:
-        #alg.fit(X_train, y_train, verbose=False, eval_set=[(X_test, y_test)], eval_metric='auc', early_stopping_rounds=50) 
-        
-        
-        alg = RandomForestClassifier(n_estimators=64, criterion= 'gini', min_samples_split=2, min_samples_leaf=1, min_impurity_decrease=0.0)
-        alg.fit(X_train, y_train)
-        
-        
+        alg = XGBClassifier(n_estimators=256, max_depth=2, learning_rate=0.1, colsample_bytree = 0.7, 
+                           nthread=4, scoring='roc_auc', reg_alpha = 10, reg_lambda = 5, subsample = 0.5,
+                           objective='binary:logistic', seed= 1235) 
+        alg.fit(X_train, y_train, verbose=False, eval_set=[(X_test, y_test)], eval_metric='auc', early_stopping_rounds=20)   
         y_pred = alg.predict_proba(X_test)[:,1]
         y_pred_class = alg.predict(X_test)
         y_true = y_test
@@ -186,34 +218,112 @@ class AGPCohortClassification:
         rec = recall_score(y_true, y_pred_class)
         
         if shuffle:
-            self.shuffled_tprs.append(interp(self.mean_fpr, fpr, tpr))  ##For plotting roc curves
-            self.shuffled_tprs[-1][0] = 0.0
-            self.shuffled_aucs.append(roc_auc)
-            self.shuffled_f1.append(f1)  
+            self.xgb.shuffled_tprs.append(interp(self.xgb.mean_fpr, fpr, tpr))  ##For plotting roc curves
+            self.xgb.shuffled_tprs[-1][0] = 0.0
+            self.xgb.shuffled_aucs.append(roc_auc)
+            self.xgb.shuffled_f1.append(f1)  
         else:
-            self.importances.append(imp)
-            self.tprs.append(interp(self.mean_fpr, fpr, tpr))  ##For plotting roc curves
-            self.tprs[-1][0] = 0.0
-            self.aucs.append(roc_auc)
-            self.accuracy.append(acc)                        
-            self.precision.append(prec)                          
-            self.recall.append(rec)                         
-            self.f1.append(f1)  
+            self.xgb.importances.append(imp)
+            self.xgb.tprs.append(interp(self.xgb.mean_fpr, fpr, tpr))  ##For plotting roc curves
+            self.xgb.tprs[-1][0] = 0.0
+            self.xgb.aucs.append(roc_auc)
+            self.xgb.accuracy.append(acc)                        
+            self.xgb.precision.append(prec)                          
+            self.xgb.recall.append(rec)                         
+            self.xgb.f1.append(f1)  
     
-    #def trainSVM(self):
+    def trainRF(self, X_train, X_test, y_train, y_test, shuffle):
+        alg = RandomForestClassifier(n_estimators=128, criterion= 'gini', min_samples_split=2, min_samples_leaf=1)
+        alg.fit(X_train, y_train)
+        y_pred = alg.predict_proba(X_test)[:,1]
+        y_pred_class = alg.predict(X_test)
+        y_true = y_test
         
-    #def trainNB(self):
+        ##Evaluation Metrics:
+        imp = alg.feature_importances_        
+        fpr, tpr, _ = roc_curve(y_true, y_pred)
+        roc_auc = auc(fpr, tpr)
+        f1 = f1_score(y_true, y_pred_class)
+        acc = accuracy_score(y_true, y_pred_class)
+        prec = precision_score(y_true, y_pred_class)
+        rec = recall_score(y_true, y_pred_class)
+        
+        if shuffle:
+            self.rf.shuffled_tprs.append(interp(self.rf.mean_fpr, fpr, tpr))  ##For plotting roc curves
+            self.rf.shuffled_tprs[-1][0] = 0.0
+            self.rf.shuffled_aucs.append(roc_auc)
+            self.rf.shuffled_f1.append(f1)  
+        else:
+            self.rf.importances.append(imp)
+            self.rf.tprs.append(interp(self.rf.mean_fpr, fpr, tpr))  ##For plotting roc curves
+            self.rf.tprs[-1][0] = 0.0
+            self.rf.aucs.append(roc_auc)
+            self.rf.accuracy.append(acc)                        
+            self.rf.precision.append(prec)                          
+            self.rf.recall.append(rec)                         
+            self.rf.f1.append(f1)  
+            
+    def trainLasso(self, X_train, X_test, y_train, y_test, shuffle):
+        alg = LogisticRegression(solver = 'liblinear', penalty = "l1", class_weight =  'balanced')
+        alg.fit(X_train, y_train)
+        probas_ = alg.predict_proba(X_test)
+        y_pred_class = alg.predict(X_test)
+        y_pred = probas_[:,1]
+        y_true = y_test
+        
+        imp = alg.coef_[0,:]
+        fpr, tpr, _ = roc_curve(y_true, y_pred)
+        roc_auc = auc(fpr, tpr)
+        f1 = f1_score(y_true, y_pred_class)
+        acc = accuracy_score(y_true, y_pred_class)
+        prec = precision_score(y_true, y_pred_class)
+        rec = recall_score(y_true, y_pred_class)
+        
+        if shuffle:
+            self.lasso.shuffled_tprs.append(interp(self.lasso.mean_fpr, fpr, tpr))  ##For plotting roc curves
+            self.lasso.shuffled_tprs[-1][0] = 0.0
+            self.lasso.shuffled_aucs.append(roc_auc)
+            self.lasso.shuffled_f1.append(f1)  
+        else:
+            self.lasso.importances.append(imp)
+            self.lasso.tprs.append(interp(self.lasso.mean_fpr, fpr, tpr))  ##For plotting roc curves
+            self.lasso.tprs[-1][0] = 0.0
+            self.lasso.aucs.append(roc_auc)
+            self.lasso.accuracy.append(acc)                        
+            self.lasso.precision.append(prec)                          
+            self.lasso.recall.append(rec)                         
+            self.lasso.f1.append(f1)  
         
     
 
 #%%
 
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Genus_BoostedT/"
+save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Xgb_genus/"
 dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Feature_cohorts/"
 feature_list = os.listdir(dir_path)
-classifier_results = pd.DataFrame([], columns = ["p_val", "t_stat", "n_samples", "acc_mean", "acc_std", "recall_mean", "recall_std", "prec_mean", "prec_std", "f1_mean", "f1_std", "shuffled_f1_mean", "shuffled_f1_std"])
-classifier_aucs = pd.DataFrame([], columns = range(100))
-classifier_shuffled_aucs = pd.DataFrame([], columns = range(100))
+col_names = otu_df.columns
+
+
+
+metrics = ["p_val", "t_stat", "n_samples", "auc_mean", "auc_std", "auc_median", 
+           "shuffled_auc_mean",  "shuffled_auc_median", "acc_mean", "acc_std", 
+           "recall_mean", "recall_std", "prec_mean", "prec_std", "f1_mean", 
+           "f1_std", "shuffled_f1_mean", "shuffled_f1_std"]
+
+xgb_results = pd.DataFrame([], columns = metrics)
+xgb_importances = pd.DataFrame([], columns = col_names)
+xgb_aucs = pd.DataFrame([], columns = range(100))
+xgb_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+rf_results = pd.DataFrame([], columns = metrics)
+rf_importances = pd.DataFrame([], columns = col_names)
+rf_aucs = pd.DataFrame([], columns = range(100))
+rf_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+lasso_results = pd.DataFrame([], columns = metrics)
+lasso_importances = pd.DataFrame([], columns = col_names)
+lasso_aucs = pd.DataFrame([], columns = range(100))
+lasso_shuffled_aucs = pd.DataFrame([], columns = range(100))
 
 
 for feature in feature_list:
@@ -223,44 +333,55 @@ for feature in feature_list:
         continue
     if feature_info.loc[feature_name, "type"] == "Race" or feature_info.loc[feature_name, "type"]  == "other":
         continue
-    cohort = pd.read_csv(dir_path + feature, index_col = 0)    
+    
+    cohort = pd.read_csv(dir_path + feature, index_col = 0) 
+    cohort_n = len(cohort)
     CohClass = AGPCohortClassification(feature_name, cohort, True, True, "Classification of " + feature_info.loc[feature_name, "plot_name"])
     CohClass.classifyFeature()
     
-    classifier_aucs.loc[feature_name, :] = CohClass.aucs  
-    classifier_shuffled_aucs.loc[feature_name, :] = CohClass.shuffled_aucs
     
-    classifier_results.loc[feature_name, "auc_mean"] = np.mean(CohClass.aucs)
-    classifier_results.loc[feature_name, "auc_std"] = np.std(CohClass.aucs)
-    classifier_results.loc[feature_name, "auc_median"] = np.median(CohClass.aucs)
-    classifier_results.loc[feature_name, "shuffled_auc_mean"] = np.mean(CohClass.shuffled_aucs)
-    classifier_results.loc[feature_name, "shuffled_auc_median"] = np.median(CohClass.shuffled_aucs)
+    xgb_output = CohClass.xgb    
+    xgb_results.loc[feature_name, :] = xgb_output.getMetrics(cohort_n)
+    xgb_importances.loc[feature_name, :] = xgb_output.getImportances(col_names)
+    xgb_aucs.loc[feature_name, :] = xgb_output.aucs  
+    xgb_shuffled_aucs.loc[feature_name, :] = xgb_output.shuffled_aucs
+
+    rf_output = CohClass.rf    
+    rf_results.loc[feature_name, :] = rf_output.getMetrics(cohort_n)
+    rf_importances.loc[feature_name, :] = rf_output.getImportances(col_names)
+    rf_aucs.loc[feature_name, :] = rf_output.aucs  
+    rf_shuffled_aucs.loc[feature_name, :] = rf_output.shuffled_aucs
     
-    data1 = np.reshape(CohClass.aucs, (20, 5))
-    data2 = np.reshape(CohClass.shuffled_aucs, (20, 5))
-    t_stat, p_val = stats.ttest_ind(data1,data2, axis = 1)
-    #p_val, t_stat = independent_ttest(data1, data2)
-    classifier_results.loc[feature_name, "p_val"] = np.mean(p_val)
-    classifier_results.loc[feature_name, "t_stat"] = np.mean(t_stat)
+    lasso_output = CohClass.lasso    
+    lasso_results.loc[feature_name, :] = lasso_output.getMetrics(cohort_n)
+    lasso_importances.loc[feature_name, :] = lasso_output.getImportances(col_names)
+    lasso_aucs.loc[feature_name, :] = lasso_output.aucs  
+    lasso_shuffled_aucs.loc[feature_name, :] = lasso_output.shuffled_aucs
+    break
 
-    classifier_results.loc[feature_name, ["acc_mean", "acc_std"]] = [np.mean(CohClass.accuracy), np.std(CohClass.accuracy)]
-    classifier_results.loc[feature_name, ["recall_mean", "recall_std"]] = [np.mean(CohClass.recall), np.std(CohClass.recall)]
-    classifier_results.loc[feature_name, ["prec_mean", "prec_std"]] = [np.mean(CohClass.precision), np.std(CohClass.precision)]
-    classifier_results.loc[feature_name, ["f1_mean", "f1_std"]] = [np.mean(CohClass.f1), np.std(CohClass.f1)]   
-    classifier_results.loc[feature_name, ["shuffled_f1_mean", "shuffled_f1_std"]] = [np.mean(CohClass.shuffled_f1), np.std(CohClass.shuffled_f1)]   
-    classifier_results.loc[feature_name, "n_samples"] = len(cohort)
+#%%
     
-classifier_results = classifier_results.sort_values("auc_median", ascending  = False)  
-classifier_results = classifier_results[np.isfinite(classifier_results['auc_mean'])]
+xgb_results.to_csv(save_path + "xgb_results.csv")
+xgb_aucs.to_csv(save_path + "xgb_aucs.csv")
+xgb_shuffled_aucs.to_csv(save_path + "xgb_shuffled_aucs.csv")
+xgb_importances.to_csv(save_path + "xgb_importances.csv")
 
-classifier_results.to_csv(save_path + "feature_classification_results.csv")
-classifier_aucs.to_csv(save_path + "classifier_aucs.csv")
-classifier_shuffled_aucs.to_csv(save_path + "classifier_shuffled_aucs.csv")
+rf_results.to_csv(save_path + "rf_results.csv")
+rf_aucs.to_csv(save_path + "rf_aucs.csv")
+rf_shuffled_aucs.to_csv(save_path + "rf_shuffled_aucs.csv")
+rf_importances.to_csv(save_path + "rf_importances.csv")
 
+lasso_results.to_csv(save_path + "lasso_results.csv")
+lasso_aucs.to_csv(save_path + "lasso_aucs.csv")
+lasso_shuffled_aucs.to_csv(save_path + "lasso_shuffled_aucs.csv")
+lasso_importances.to_csv(save_path + "lasso_importances.csv")
+
+
+#%%
 
 ####BINARY BOXPLOTSS 
-temp = classifier_results[classifier_results["p_val"] <= 0.05]
-boxplotdata = classifier_aucs.loc[temp.index, :].values
+temp = xgb_results[xgb_results["p_val"] <= 0.05]
+boxplotdata = xgb_aucs.loc[temp.index, :].values
 boxplotdata = pd.DataFrame(boxplotdata, index = feature_info.loc[temp.index, "plot_name"]).T
 plt.figure(figsize = (5, 10))
 g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")

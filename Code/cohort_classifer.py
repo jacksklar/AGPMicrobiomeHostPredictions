@@ -13,8 +13,9 @@ from sklearn.utils import shuffle
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 import seaborn as sns        
-from sklearn.model_selection import KFold, StratifiedKFold
+from sklearn.model_selection import KFold, StratifiedKFold, StratifiedShuffleSplit
 from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import GaussianNB
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.preprocessing import StandardScaler
@@ -54,7 +55,6 @@ otu_df = otu_df.loc[metadata_df.index, :]
 otu_df = mapOTU(otu_df, taxa_df, "Genus")
 otu_df = otu_df.reindex(otu_df.mean().sort_values(ascending = False).index, axis=1)
 
-#otu_df = otu_df.div(10000, axis=0)
 #otu_df_full = otu_df
 #otu_max_abund =  otu_df.mean(axis = 0).div(10000)
 #otu_sig = otu_max_abund[otu_max_abund > 0.0001].index
@@ -62,6 +62,12 @@ otu_df = otu_df.reindex(otu_df.mean().sort_values(ascending = False).index, axis
 
 #%%
 
+
+def empiricalPVal(statistic, null_dist):
+    ###number of shuffled iterations where performance is >= standard iteration performance
+    count = len([val for val in null_dist if val >= statistic])
+    p_val = (count + 1)/float(len(null_dist) + 1)
+    return p_val
 
 class modelResults:
     def __init__(self):
@@ -71,7 +77,8 @@ class modelResults:
         self.accuracy = []                         
         self.precision = []                         
         self.recall = []                         
-        self.f1 = []             
+        self.f1 = []           
+        self.shuffled_accuracy = []
         self.shuffled_aucs = [] 
         self.shuffled_f1 = [] 
         self.shuffled_tprs = []   
@@ -84,14 +91,9 @@ class modelResults:
         metrics.loc["auc_std"] = np.std(self.aucs)
         metrics.loc["auc_median"] = np.median(self.aucs)
         metrics.loc["shuffled_auc_mean"] = np.mean(self.shuffled_aucs)
+        metrics.loc["shuffled_auc_std"] = np.std(self.shuffled_aucs)
         metrics.loc["shuffled_auc_median"] = np.median(self.shuffled_aucs)
-        
-        data1 = np.reshape(self.aucs, (20, 5))
-        data2 = np.reshape(self.shuffled_aucs, (20, 5))
-        t_stat, p_val = stats.ttest_ind(data1,data2, axis = 1)
-        metrics.loc["p_val"] = np.mean(p_val)
-        metrics.loc["t_stat"] = np.mean(t_stat)
-        
+        metrics.loc["p_val"] = np.mean([empiricalPVal(stat, self.shuffled_aucs) for stat in self.aucs])
         metrics.loc["acc_mean"] = np.mean(self.accuracy)
         metrics.loc["acc_std"] = np.std(self.accuracy)
         metrics.loc["recall_mean"] = np.mean(self.recall)
@@ -102,9 +104,10 @@ class modelResults:
         metrics.loc["f1_std"] = np.std(self.f1)
         metrics.loc["shuffled_f1_mean"] = np.mean(self.shuffled_f1) 
         metrics.loc["shuffled_f1_std"] = np.std(self.shuffled_f1)
-
+        metrics.loc["shuffled_accuracy_mean"] = np.mean(self.shuffled_accuracy) 
+        metrics.loc["shuffled_accuracy_std"] = np.std(self.shuffled_accuracy)
         return metrics
-        
+    
     def getImportances(self, col_names):
         avg_imps = np.stack(self.importances)
         avg_imps = pd.DataFrame(avg_imps, columns = col_names).mean(axis = 0)
@@ -178,100 +181,63 @@ class AGPCohortClassification:
         self.xgb = modelResults()
         self.rf = modelResults()
         self.lasso = modelResults()
+        self.gnb = modelResults()
 
         ##Repeat Cross Validation
-        for n in range(1, 21):
-            print(str(n) + ","),
+        #for n in range(1, 21):
+            
+            #print(str(n) + ","),
+            #y_shuffled = shuffle(y)
+            #cv = KFold(n_splits = 5, shuffle = True)
+        cv = StratifiedShuffleSplit(n_splits=100, test_size=0.3)
+        for fold_num, (train, test) in enumerate(cv.split(X, y)):    
             y_shuffled = shuffle(y)
-            cv = KFold(n_splits = 5, shuffle = True)
-            for fold_num, (train, test) in enumerate(cv.split(X, y, y_shuffled)):                 
-
-                self.trainXGB(X[train], X[test], y[train], y[test], False)
-                self.trainXGB(X[train], X[test], y_shuffled[train], y_shuffled[test], True)
-                                
-                self.trainRF(X[train], X[test], y[train], y[test], False)
-                self.trainRF(X[train], X[test], y_shuffled[train], y_shuffled[test], True)
-                
-                self.trainLasso(X[train], X[test], y[train], y[test], False)
-                self.trainLasso(X[train], X[test], y_shuffled[train], y_shuffled[test], True)
-                
+            print(str(fold_num) + ","),
+             
+            ##EXTREME GRADIENT BOOSTED TREES:
+            self.trainModel(X[train], X[test], y[train], y[test], False, self.xgb)
+            self.trainModel(X[train], X[test], y_shuffled[train], y_shuffled[test], True, self.xgb)
+            ##RANDOM FOREST:
+            self.trainModel(X[train], X[test], y[train], y[test], False, self.rf)
+            self.trainModel(X[train], X[test], y_shuffled[train], y_shuffled[test], True, self.rf)
+            ##LASSO-LOGISTIC REGRESSION:
+            self.trainModel(X[train], X[test], y[train], y[test], False, self.lasso)
+            self.trainModel(X[train], X[test], y_shuffled[train], y_shuffled[test], True, self.lasso)
+            ##GAUSSIAN NAIVE BAYES:
+            self.trainModel(X[train], X[test], y[train], y[test], False, self.gnb)
+            self.trainModel(X[train], X[test], y_shuffled[train], y_shuffled[test], True, self.gnb)
+            
         if self.plot:
             self.xgb.plotROC(self.feature_name, self.save, self.title)
     
     
-    def trainXGB(self, X_train, X_test, y_train, y_test, shuffle):
-        alg = XGBClassifier(n_estimators=256, max_depth=2, learning_rate=0.1, colsample_bytree = 0.7, 
-                           nthread=4, scoring='roc_auc', reg_alpha = 10, reg_lambda = 5, subsample = 0.5,
-                           objective='binary:logistic', seed= 1235) 
-        alg.fit(X_train, y_train, verbose=False, eval_set=[(X_test, y_test)], eval_metric='auc', early_stopping_rounds=20)   
-        y_pred = alg.predict_proba(X_test)[:,1]
-        y_pred_class = alg.predict(X_test)
-        y_true = y_test
-        
-        ##Evaluation Metrics:
-        imp = alg.feature_importances_        
-        fpr, tpr, _ = roc_curve(y_true, y_pred)
-        roc_auc = auc(fpr, tpr)
-        f1 = f1_score(y_true, y_pred_class)
-        acc = accuracy_score(y_true, y_pred_class)
-        prec = precision_score(y_true, y_pred_class)
-        rec = recall_score(y_true, y_pred_class)
-        
-        if shuffle:
-            self.xgb.shuffled_tprs.append(interp(self.xgb.mean_fpr, fpr, tpr))  ##For plotting roc curves
-            self.xgb.shuffled_tprs[-1][0] = 0.0
-            self.xgb.shuffled_aucs.append(roc_auc)
-            self.xgb.shuffled_f1.append(f1)  
-        else:
-            self.xgb.importances.append(imp)
-            self.xgb.tprs.append(interp(self.xgb.mean_fpr, fpr, tpr))  ##For plotting roc curves
-            self.xgb.tprs[-1][0] = 0.0
-            self.xgb.aucs.append(roc_auc)
-            self.xgb.accuracy.append(acc)                        
-            self.xgb.precision.append(prec)                          
-            self.xgb.recall.append(rec)                         
-            self.xgb.f1.append(f1)  
     
-    def trainRF(self, X_train, X_test, y_train, y_test, shuffle):
-        alg = RandomForestClassifier(n_estimators=128, criterion= 'gini', min_samples_split=2, min_samples_leaf=1)
-        alg.fit(X_train, y_train)
-        y_pred = alg.predict_proba(X_test)[:,1]
-        y_pred_class = alg.predict(X_test)
-        y_true = y_test
+    def trainModel(self, X_train, X_test, y_train, y_test, shuffle, model):
         
-        ##Evaluation Metrics:
-        imp = alg.feature_importances_        
-        fpr, tpr, _ = roc_curve(y_true, y_pred)
-        roc_auc = auc(fpr, tpr)
-        f1 = f1_score(y_true, y_pred_class)
-        acc = accuracy_score(y_true, y_pred_class)
-        prec = precision_score(y_true, y_pred_class)
-        rec = recall_score(y_true, y_pred_class)
-        
-        if shuffle:
-            self.rf.shuffled_tprs.append(interp(self.rf.mean_fpr, fpr, tpr))  ##For plotting roc curves
-            self.rf.shuffled_tprs[-1][0] = 0.0
-            self.rf.shuffled_aucs.append(roc_auc)
-            self.rf.shuffled_f1.append(f1)  
-        else:
-            self.rf.importances.append(imp)
-            self.rf.tprs.append(interp(self.rf.mean_fpr, fpr, tpr))  ##For plotting roc curves
-            self.rf.tprs[-1][0] = 0.0
-            self.rf.aucs.append(roc_auc)
-            self.rf.accuracy.append(acc)                        
-            self.rf.precision.append(prec)                          
-            self.rf.recall.append(rec)                         
-            self.rf.f1.append(f1)  
+        if model == self.xgb:
+            alg = XGBClassifier(n_estimators=128, max_depth=3, learning_rate=0.1, colsample_bytree = 0.5, 
+                                nthread=4, reg_alpha = 10, reg_lambda = 5, subsample = 0.5, 
+                                objective='binary:logistic', seed= 1235) 
+            alg.fit(X_train, y_train, verbose=False, eval_set=[(X_test, y_test)], eval_metric='auc', early_stopping_rounds=20)   
+            imp = alg.feature_importances_   
+        if model == self.rf:        
+            alg = RandomForestClassifier(n_estimators=128, criterion= 'gini', min_samples_split=2, min_samples_leaf=1)
+            alg.fit(X_train, y_train)
+            imp = alg.feature_importances_        
+        if model == self.lasso:        
+            alg = LogisticRegression(solver = 'liblinear', penalty = "l1", class_weight =  'balanced')
+            alg.fit(X_train, y_train)
+            imp = alg.coef_[0,:]
+        if model == self.gnb:    
+            alg = GaussianNB()
+            alg.fit(X_train, y_train)
+            imp = np.zeros(X_train.shape[1])
             
-    def trainLasso(self, X_train, X_test, y_train, y_test, shuffle):
-        alg = LogisticRegression(solver = 'liblinear', penalty = "l1", class_weight =  'balanced')
-        alg.fit(X_train, y_train)
-        probas_ = alg.predict_proba(X_test)
+        y_pred = alg.predict_proba(X_test)[:,1]
         y_pred_class = alg.predict(X_test)
-        y_pred = probas_[:,1]
         y_true = y_test
         
-        imp = alg.coef_[0,:]
+        ##Evaluation Metrics:
         fpr, tpr, _ = roc_curve(y_true, y_pred)
         roc_auc = auc(fpr, tpr)
         f1 = f1_score(y_true, y_pred_class)
@@ -280,21 +246,21 @@ class AGPCohortClassification:
         rec = recall_score(y_true, y_pred_class)
         
         if shuffle:
-            self.lasso.shuffled_tprs.append(interp(self.lasso.mean_fpr, fpr, tpr))  ##For plotting roc curves
-            self.lasso.shuffled_tprs[-1][0] = 0.0
-            self.lasso.shuffled_aucs.append(roc_auc)
-            self.lasso.shuffled_f1.append(f1)  
+            model.shuffled_tprs.append(interp(self.xgb.mean_fpr, fpr, tpr))  ##For plotting roc curves
+            model.shuffled_tprs[-1][0] = 0.0
+            model.shuffled_aucs.append(roc_auc)
+            model.shuffled_f1.append(f1)  
+            model.shuffled_accuracy.append(acc)
         else:
-            self.lasso.importances.append(imp)
-            self.lasso.tprs.append(interp(self.lasso.mean_fpr, fpr, tpr))  ##For plotting roc curves
-            self.lasso.tprs[-1][0] = 0.0
-            self.lasso.aucs.append(roc_auc)
-            self.lasso.accuracy.append(acc)                        
-            self.lasso.precision.append(prec)                          
-            self.lasso.recall.append(rec)                         
-            self.lasso.f1.append(f1)  
-        
-    
+            model.importances.append(imp)
+            model.tprs.append(interp(model.mean_fpr, fpr, tpr))  ##For plotting roc curves
+            model.tprs[-1][0] = 0.0
+            model.aucs.append(roc_auc)
+            model.accuracy.append(acc)                        
+            model.precision.append(prec)                          
+            model.recall.append(rec)                         
+            model.f1.append(f1)      
+
 
 #%%
 
@@ -303,12 +269,11 @@ dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Feature_co
 feature_list = os.listdir(dir_path)
 col_names = otu_df.columns
 
-
-
 metrics = ["p_val", "t_stat", "n_samples", "auc_mean", "auc_std", "auc_median", 
-           "shuffled_auc_mean",  "shuffled_auc_median", "acc_mean", "acc_std", 
+           "shuffled_auc_mean", "shuffled_auc_std",  "shuffled_auc_median", "acc_mean", "acc_std", 
            "recall_mean", "recall_std", "prec_mean", "prec_std", "f1_mean", 
-           "f1_std", "shuffled_f1_mean", "shuffled_f1_std"]
+           "f1_std", "shuffled_f1_mean", "shuffled_f1_std",
+           "shuffled_accuracy_mean", "shuffled_accuracy_std", "empirical_p_val"]
 
 xgb_results = pd.DataFrame([], columns = metrics)
 xgb_importances = pd.DataFrame([], columns = col_names)
@@ -325,6 +290,10 @@ lasso_importances = pd.DataFrame([], columns = col_names)
 lasso_aucs = pd.DataFrame([], columns = range(100))
 lasso_shuffled_aucs = pd.DataFrame([], columns = range(100))
 
+gnb_results = pd.DataFrame([], columns = metrics)
+gnb_importances = pd.DataFrame([], columns = col_names)
+gnb_aucs = pd.DataFrame([], columns = range(100))
+gnb_shuffled_aucs = pd.DataFrame([], columns = range(100))
 
 for feature in feature_list:
     feature_name = feature.split(".")[0]
@@ -357,10 +326,15 @@ for feature in feature_list:
     lasso_importances.loc[feature_name, :] = lasso_output.getImportances(col_names)
     lasso_aucs.loc[feature_name, :] = lasso_output.aucs  
     lasso_shuffled_aucs.loc[feature_name, :] = lasso_output.shuffled_aucs
+    
+    gnb_output = CohClass.gnb    
+    gnb_results.loc[feature_name, :] = gnb_output.getMetrics(cohort_n)
+    gnb_importances.loc[feature_name, :] = gnb_output.getImportances(col_names)
+    gnb_aucs.loc[feature_name, :] = gnb_output.aucs  
+    gnb_shuffled_aucs.loc[feature_name, :] = gnb_output.shuffled_aucs
     break
 
-#%%
-    
+
 xgb_results.to_csv(save_path + "xgb_results.csv")
 xgb_aucs.to_csv(save_path + "xgb_aucs.csv")
 xgb_shuffled_aucs.to_csv(save_path + "xgb_shuffled_aucs.csv")
@@ -376,9 +350,14 @@ lasso_aucs.to_csv(save_path + "lasso_aucs.csv")
 lasso_shuffled_aucs.to_csv(save_path + "lasso_shuffled_aucs.csv")
 lasso_importances.to_csv(save_path + "lasso_importances.csv")
 
+gnb_results.to_csv(save_path + "gnb_results.csv")
+gnb_aucs.to_csv(save_path + "gnb_aucs.csv")
+gnb_shuffled_aucs.to_csv(save_path + "gnb_shuffled_aucs.csv")
+gnb_importances.to_csv(save_path + "gnb_importances.csv")
+
+
 
 #%%
-
 ####BINARY BOXPLOTSS 
 temp = xgb_results[xgb_results["p_val"] <= 0.05]
 boxplotdata = xgb_aucs.loc[temp.index, :].values
@@ -495,83 +474,6 @@ for val in frequency_info["Variable"].unique():
     plt.tight_layout()
     plt.savefig(save_path + "BoxPlots/" + val + ".png", dpi = 200)
     plt.show()
-
-
-#%%
-"""
-
-    def RepeatedKFoldCV(self, X, y):
-        print("10-Repeat 5-Fold CV")
-        print("Repeat: ") 
-        tprs = []                    
-        aucs = []                         
-        importances = []                  
-        mean_fpr = np.linspace(0, 1, 101)  
-        alg = XGBClassifier(n_estimators=256, max_depth=3, learning_rate=0.2, colsample_bytree = 1.0, 
-                            reg_alpha = 5, nthread=4, min_child_weight=1, scoring='roc_auc',
-                            objective='binary:logistic', seed=1235) #logitraw
-        
-        ##Repeat Cross Validation
-        for n in np.random.randint(0, high=10000, size = 10):
-            print(str(n) + ", "),
-            cv = KFold(n_splits = 10, random_state = n, shuffle = True)
-            for fold_num, (train, test) in enumerate(cv.split(X, y)): 
-                y_suffled = shuffle(y[train])
-                
-                
-                ##Fit True Label Data
-                alg.fit(X[train], y[train], verbose=False, eval_set=[(X[test], y[test])], eval_metric='auc', early_stopping_rounds=20) 
-                probas_ = alg.predict_proba(X[test])
-                y_pred = probas_[:,1]
-                y_true = y[test]
-                
-                ##True label feature importances
-                imp = alg.feature_importances_
-                importances.append(imp)
-                
-                ##Shuffled Label Null Hypothesis:
-
-                
-                fpr, tpr, thresholds = roc_curve(y_true, y_pred)
-                tprs.append(interp(mean_fpr, fpr, tpr))  ##For plotting roc curves
-                tprs[-1][0] = 0.0
-                roc_auc = auc(fpr, tpr)
-                aucs.append(roc_auc)
-                
-        ###average importance values over all repeats/folds
-        importances = np.stack(importances)
-        importances = pd.DataFrame(importances, columns = otu_df.columns).mean(axis = 0).sort_values(ascending = False)
-        
-        ##save importanes/ plot rocs for binary/diseas features (frequency cohorts are saved seperately)
-        if self.save :
-            importances.to_csv(save_path + "Importances/" + self.feature_name + ".csv")
-        if self.plot:
-            self.plotROC(tprs, mean_fpr, aucs)
-        return aucs, tprs, mean_fpr, importances
-        
-def independent_ttest(data1, data2):
-    n = 5
-    ts = []
-    ps = []
-    for j in range(20):
-        repeat1 = data1[j,:]
-        repeat2 = data2[j,:]
-
-        mean1, mean2 = np.mean(repeat1), np.mean(repeat2)
-        se1, se2 = sem(repeat1), sem(repeat2)
-        sed = np.sqrt(se1**2.0 + se2**2.0)
-        t_stat = (mean1 - mean2) / sed
-        df = 2*n - 2
-        p = (1.0 - t.cdf(abs(t_stat), df)) * 2.0
-        ts.append(t_stat)
-        ps.append(p)
-    p = np.mean(ps)
-    t_stat = np.mean(ts)
-    return p, t_stat
-"""
-
-
-
 
 
 

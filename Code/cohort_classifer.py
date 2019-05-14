@@ -332,7 +332,6 @@ for feature in feature_list:
     gnb_importances.loc[feature_name, :] = gnb_output.getImportances(col_names)
     gnb_aucs.loc[feature_name, :] = gnb_output.aucs  
     gnb_shuffled_aucs.loc[feature_name, :] = gnb_output.shuffled_aucs
-    break
 
 
 xgb_results.to_csv(save_path + "xgb_results.csv")

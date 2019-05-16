@@ -20,7 +20,7 @@ from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import roc_curve, auc, f1_score, accuracy_score, precision_score, recall_score
+from sklearn.metrics import roc_curve, auc, accuracy_score, matthews_corrcoef
 from scipy import interp
 
 
@@ -75,12 +75,10 @@ class modelResults:
         self.aucs = []                         
         self.importances = []
         self.accuracy = []                         
-        self.precision = []                         
-        self.recall = []                         
-        self.f1 = []           
+        self.matthews = []           
         self.shuffled_accuracy = []
         self.shuffled_aucs = [] 
-        self.shuffled_f1 = [] 
+        self.shuffled_matthews = [] 
         self.shuffled_tprs = []   
         self.mean_fpr = np.linspace(0, 1, 101)  
     
@@ -96,14 +94,13 @@ class modelResults:
         metrics.loc["p_val"] = np.mean([empiricalPVal(stat, self.shuffled_aucs) for stat in self.aucs])
         metrics.loc["acc_mean"] = np.mean(self.accuracy)
         metrics.loc["acc_std"] = np.std(self.accuracy)
-        metrics.loc["recall_mean"] = np.mean(self.recall)
-        metrics.loc["recall_std"] = np.std(self.recall)
-        metrics.loc["prec_mean"] = np.mean(self.precision)
-        metrics.loc["prec_std"] = np.std(self.precision)
-        metrics.loc["f1_mean"] = np.mean(self.f1)
-        metrics.loc["f1_std"] = np.std(self.f1)
-        metrics.loc["shuffled_f1_mean"] = np.mean(self.shuffled_f1) 
-        metrics.loc["shuffled_f1_std"] = np.std(self.shuffled_f1)
+        
+        metrics.loc["matthews_mean"] = np.mean(self.matthews)
+        metrics.loc["matthews_std"] = np.std(self.matthews)
+        
+        metrics.loc["shuffled_matthews_std"] = np.std(self.shuffled_matthews)
+        metrics.loc["shuffled_matthews_mean"] = np.mean(self.shuffled_matthews)
+        
         metrics.loc["shuffled_accuracy_mean"] = np.mean(self.shuffled_accuracy) 
         metrics.loc["shuffled_accuracy_std"] = np.std(self.shuffled_accuracy)
         return metrics
@@ -215,9 +212,8 @@ class AGPCohortClassification:
     def trainModel(self, X_train, X_test, y_train, y_test, shuffle, model):
         
         if model == self.xgb:
-            alg = XGBClassifier(n_estimators=128, max_depth=3, learning_rate=0.1, colsample_bytree = 0.5, 
-                                nthread=4, reg_alpha = 10, reg_lambda = 5, subsample = 0.5, 
-                                objective='binary:logistic', seed= 1235) 
+            alg = XGBClassifier(n_estimators=256, max_depth=3, learning_rate=0.1, colsample_bytree = 0.5, 
+                                nthread=4, reg_alpha = 10, reg_lambda = 5, objective='binary:logistic') 
             alg.fit(X_train, y_train, verbose=False, eval_set=[(X_test, y_test)], eval_metric='auc', early_stopping_rounds=20)   
             imp = alg.feature_importances_   
         if model == self.rf:        
@@ -240,40 +236,35 @@ class AGPCohortClassification:
         ##Evaluation Metrics:
         fpr, tpr, _ = roc_curve(y_true, y_pred)
         roc_auc = auc(fpr, tpr)
-        f1 = f1_score(y_true, y_pred_class)
+        matthew = matthews_corrcoef(y_true, y_pred_class)
         acc = accuracy_score(y_true, y_pred_class)
-        prec = precision_score(y_true, y_pred_class)
-        rec = recall_score(y_true, y_pred_class)
         
         if shuffle:
             model.shuffled_tprs.append(interp(self.xgb.mean_fpr, fpr, tpr))  ##For plotting roc curves
             model.shuffled_tprs[-1][0] = 0.0
             model.shuffled_aucs.append(roc_auc)
-            model.shuffled_f1.append(f1)  
+            model.shuffled_matthews.append(matthew)  
             model.shuffled_accuracy.append(acc)
         else:
             model.importances.append(imp)
             model.tprs.append(interp(model.mean_fpr, fpr, tpr))  ##For plotting roc curves
             model.tprs[-1][0] = 0.0
             model.aucs.append(roc_auc)
-            model.accuracy.append(acc)                        
-            model.precision.append(prec)                          
-            model.recall.append(rec)                         
-            model.f1.append(f1)      
+            model.accuracy.append(acc)                                               
+            model.matthews.append(matthew)      
 
 
 #%%
 
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Xgb_genus/"
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Feature_cohorts/"
+save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/genus_binary_results/"
+dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/binary_cohorts/"
 feature_list = os.listdir(dir_path)
 col_names = otu_df.columns
 
-metrics = ["p_val", "t_stat", "n_samples", "auc_mean", "auc_std", "auc_median", 
+metrics = ["p_val", "n_samples", "auc_mean", "auc_std", "auc_median", 
            "shuffled_auc_mean", "shuffled_auc_std",  "shuffled_auc_median", "acc_mean", "acc_std", 
-           "recall_mean", "recall_std", "prec_mean", "prec_std", "f1_mean", 
-           "f1_std", "shuffled_f1_mean", "shuffled_f1_std",
-           "shuffled_accuracy_mean", "shuffled_accuracy_std", "empirical_p_val"]
+           "shuffled_matthews_mean", "shuffled_matthews_std","matthews_mean", "matthews_std",
+           "shuffled_accuracy_mean", "shuffled_accuracy_std"]
 
 xgb_results = pd.DataFrame([], columns = metrics)
 xgb_importances = pd.DataFrame([], columns = col_names)
@@ -308,32 +299,25 @@ for feature in feature_list:
     CohClass = AGPCohortClassification(feature_name, cohort, True, True, "Classification of " + feature_info.loc[feature_name, "plot_name"])
     CohClass.classifyFeature()
     
-    
-    xgb_output = CohClass.xgb    
-    xgb_results.loc[feature_name, :] = xgb_output.getMetrics(cohort_n)
-    xgb_importances.loc[feature_name, :] = xgb_output.getImportances(col_names)
-    xgb_aucs.loc[feature_name, :] = xgb_output.aucs  
-    xgb_shuffled_aucs.loc[feature_name, :] = xgb_output.shuffled_aucs
+    xgb_results.loc[feature_name, :] = CohClass.xgb.getMetrics(cohort_n)
+    xgb_importances.loc[feature_name, :] = CohClass.xgb.getImportances(col_names)
+    xgb_aucs.loc[feature_name, :] = CohClass.xgb.aucs  
+    xgb_shuffled_aucs.loc[feature_name, :] = CohClass.xgb.shuffled_aucs
 
-    rf_output = CohClass.rf    
-    rf_results.loc[feature_name, :] = rf_output.getMetrics(cohort_n)
-    rf_importances.loc[feature_name, :] = rf_output.getImportances(col_names)
-    rf_aucs.loc[feature_name, :] = rf_output.aucs  
-    rf_shuffled_aucs.loc[feature_name, :] = rf_output.shuffled_aucs
+    rf_results.loc[feature_name, :] = CohClass.rf.getMetrics(cohort_n)
+    rf_importances.loc[feature_name, :] = CohClass.rf.getImportances(col_names)
+    rf_aucs.loc[feature_name, :] = CohClass.rf.aucs  
+    rf_shuffled_aucs.loc[feature_name, :] = CohClass.rf.shuffled_aucs
     
-    lasso_output = CohClass.lasso    
-    lasso_results.loc[feature_name, :] = lasso_output.getMetrics(cohort_n)
-    lasso_importances.loc[feature_name, :] = lasso_output.getImportances(col_names)
-    lasso_aucs.loc[feature_name, :] = lasso_output.aucs  
-    lasso_shuffled_aucs.loc[feature_name, :] = lasso_output.shuffled_aucs
+    lasso_results.loc[feature_name, :] = CohClass.lasso.getMetrics(cohort_n)
+    lasso_importances.loc[feature_name, :] = CohClass.lasso.getImportances(col_names)
+    lasso_aucs.loc[feature_name, :] = CohClass.lasso.aucs  
+    lasso_shuffled_aucs.loc[feature_name, :] = CohClass.lasso.shuffled_aucs
     
-    gnb_output = CohClass.gnb    
-    gnb_results.loc[feature_name, :] = gnb_output.getMetrics(cohort_n)
-    gnb_importances.loc[feature_name, :] = gnb_output.getImportances(col_names)
-    gnb_aucs.loc[feature_name, :] = gnb_output.aucs  
-    gnb_shuffled_aucs.loc[feature_name, :] = gnb_output.shuffled_aucs
-
-
+    gnb_results.loc[feature_name, :] = CohClass.gnb.getMetrics(cohort_n)
+    gnb_importances.loc[feature_name, :] = CohClass.gnb.getImportances(col_names)
+    gnb_aucs.loc[feature_name, :] = CohClass.gnb.aucs  
+    gnb_shuffled_aucs.loc[feature_name, :] = CohClass.gnb.shuffled_aucs
 
 xgb_results.to_csv(save_path + "xgb_results.csv")
 xgb_aucs.to_csv(save_path + "xgb_aucs.csv")
@@ -356,31 +340,60 @@ gnb_shuffled_aucs.to_csv(save_path + "gnb_shuffled_aucs.csv")
 gnb_importances.to_csv(save_path + "gnb_importances.csv")
 
 
-
-#%%
 ####BINARY BOXPLOTSS 
-temp = xgb_results[xgb_results["p_val"] <= 0.05]
+temp = xgb_results[xgb_results["p_val"] <= 0.05].sort_values("auc_median", ascending = False)
 boxplotdata = xgb_aucs.loc[temp.index, :].values
 boxplotdata = pd.DataFrame(boxplotdata, index = feature_info.loc[temp.index, "plot_name"]).T
 plt.figure(figsize = (5, 10))
 g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")
 plt.xlabel("AUC")
 plt.ylabel("")
-plt.title("Cross-Fold Validation of Host Lifestyle/Disease Variables")
 plt.show()
 
+temp = rf_results[rf_results["p_val"] <= 0.05].sort_values("auc_median", ascending = False)
+boxplotdata = rf_aucs.loc[temp.index, :].values
+boxplotdata = pd.DataFrame(boxplotdata, index = feature_info.loc[temp.index, "plot_name"]).T
+plt.figure(figsize = (5, 10))
+g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")
+plt.xlabel("AUC")
+plt.ylabel("")
+plt.show()
+
+temp = lasso_results[lasso_results["p_val"] <= 0.05].sort_values("auc_median", ascending = False)
+boxplotdata = lasso_aucs.loc[temp.index, :].values
+boxplotdata = pd.DataFrame(boxplotdata, index = feature_info.loc[temp.index, "plot_name"]).T
+plt.figure(figsize = (5, 10))
+g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")
+plt.xlabel("AUC")
+plt.ylabel("")
+plt.show()
 
 #%%
 
 
-save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Genus_Frequency/"
-#save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/OTU_Frequency/"
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Frequency_cohorts/"
+save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/genus_frequency_results/"
+dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/frequency_cohorts/"
 frequency_list = os.listdir(dir_path)
-frequency_results = pd.DataFrame([], columns = ["p_val", "t_stat", "n_samples", "acc_mean", "acc_std", "recall_mean", "recall_std", "prec_mean", "prec_std", "f1_mean", "f1_std", "shuffled_f1_mean", "shuffled_f1_std"])
 
-frequency_aucs = pd.DataFrame([], columns = range(500))
-frequency_shuffled_aucs = pd.DataFrame([], columns = range(500))
+xgb_freq_results = pd.DataFrame([], columns = metrics)
+xgb_freq_importances = pd.DataFrame([], columns = col_names)
+xgb_freq_aucs = pd.DataFrame([], columns = range(100))
+xgb_freq_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+rf_freq_results = pd.DataFrame([], columns = metrics)
+rf_freq_importances = pd.DataFrame([], columns = col_names)
+rf_freq_aucs = pd.DataFrame([], columns = range(100))
+rf_freq_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+lasso_freq_results = pd.DataFrame([], columns = metrics)
+lasso_freq_importances = pd.DataFrame([], columns = col_names)
+lasso_freq_aucs = pd.DataFrame([], columns = range(100))
+lasso_freq_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+gnb_freq_results = pd.DataFrame([], columns = metrics)
+gnb_freq_importances = pd.DataFrame([], columns = col_names)
+gnb_freq_aucs = pd.DataFrame([], columns = range(100))
+gnb_freq_shuffled_aucs = pd.DataFrame([], columns = range(100))
 
 
 for feature in frequency_info["Variable"].unique():
@@ -400,46 +413,43 @@ for feature in frequency_info["Variable"].unique():
         cohort = pd.read_csv(dir_path + filename, index_col = 0)    
         CohClass = AGPCohortClassification(feature_name, cohort, False, False, "e")
         CohClass.classifyFeature()
-        feature_importance[freq_name] = CohClass.importances
+
+        xgb_freq_results.loc[feature_name, :] = CohClass.xgb.getMetrics(cohort_n)
+        xgb_freq_importances.loc[feature_name, :] = CohClass.xgb.getImportances(col_names)
+        xgb_freq_aucs.loc[feature_name, :] = CohClass.xgb.aucs  
+        xgb_freq_shuffled_aucs.loc[feature_name, :] = CohClass.xgb.shuffled_aucs
         
-        frequency_aucs.loc[feature_name, :] = CohClass.aucs  
-        frequency_shuffled_aucs.loc[feature_name, :] = CohClass.shuffled_aucs
-    
-        frequency_results.loc[feature_name, "auc_mean"] = np.mean(CohClass.aucs)
-        frequency_results.loc[feature_name, "auc_std"] = np.std(CohClass.aucs)
-        frequency_results.loc[feature_name, "auc_median"] = np.median(CohClass.aucs)
-        frequency_results.loc[feature_name, "shuffled_auc_mean"] = np.mean(CohClass.shuffled_aucs)
-        frequency_results.loc[feature_name, "shuffled_auc_median"] = np.median(CohClass.shuffled_aucs)
+        rf_freq_results.loc[feature_name, :] = CohClass.rf.getMetrics(cohort_n)
+        rf_freq_importances.loc[feature_name, :] = CohClass.rf.getImportances(col_names)
+        rf_freq_aucs.loc[feature_name, :] = CohClass.rf.aucs  
+        rf_freq_shuffled_aucs.loc[feature_name, :] = CohClass.rf.shuffled_aucs
         
-        data1 = np.reshape(CohClass.aucs, (100, 5))
-        data2 = np.reshape(CohClass.shuffled_aucs, (100, 5))
-        t_stat, p_val = stats.ttest_ind(data1,data2, axis = 1)
-        #p_val, t_stat = independent_ttest(data1, data2)
-        frequency_results.loc[feature_name, "p_val"] = np.mean(p_val)
-        frequency_results.loc[feature_name, "t_stat"] = np.mean(t_stat)
+        lasso_freq_results.loc[feature_name, :] = CohClass.lasso.getMetrics(cohort_n)
+        lasso_freq_importances.loc[feature_name, :] = CohClass.lasso.getImportances(col_names)
+        lasso_freq_aucs.loc[feature_name, :] = CohClass.lasso.aucs  
+        lasso_freq_shuffled_aucs.loc[feature_name, :] = CohClass.lasso.shuffled_aucs
         
-        frequency_results.loc[feature_name, ["acc_mean", "acc_std"]] = [np.mean(CohClass.accuracy), np.std(CohClass.accuracy)]
-        frequency_results.loc[feature_name, ["recall_mean", "recall_std"]] = [np.mean(CohClass.recall), np.std(CohClass.recall)]
-        frequency_results.loc[feature_name, ["prec_mean", "prec_std"]] = [np.mean(CohClass.precision), np.std(CohClass.precision)]
-        frequency_results.loc[feature_name, ["f1_mean", "f1_std"]] = [np.mean(CohClass.f1), np.std(CohClass.f1)]   
-        frequency_results.loc[feature_name, ["shuffled_f1_mean", "shuffled_f1_std"]] = [np.mean(CohClass.shuffled_f1), np.std(CohClass.shuffled_f1)]   
-        frequency_results.loc[feature_name, "n_samples"] = len(cohort)
+        gnb_freq_results.loc[feature_name, :] = CohClass.gnb.getMetrics(cohort_n)
+        gnb_freq_importances.loc[feature_name, :] = CohClass.gnb.getImportances(col_names)
+        gnb_freq_aucs.loc[feature_name, :] = CohClass.gnb.aucs  
+        gnb_freq_shuffled_aucs.loc[feature_name, :] = CohClass.gnb.shuffled_aucs
+        
         
         ##MultiROC plot
-        mean_tpr = np.mean(CohClass.tprs, axis=0)
+        mean_tpr = np.mean(CohClass.xgb.tprs, axis=0)
         mean_tpr[-1] = 1.0
-        mean_auc = auc(CohClass.mean_fpr, mean_tpr)
-        std_auc = np.std(CohClass.aucs)
-        plt.plot(CohClass.mean_fpr, 
+        mean_auc = auc(CohClass.xgb.mean_fpr, mean_tpr)
+        std_auc = np.std(CohClass.xgb.aucs)
+        plt.plot(CohClass.xgb.mean_fpr, 
                  mean_tpr,
                  label=r'%s (AUC=%0.2f$\pm$%0.2f)' % (freq_name.capitalize(), mean_auc, std_auc), 
                  lw=2, 
                  alpha=0.9, 
                  color = c)
-        std_tpr = np.std(CohClass.tprs, axis=0)
+        std_tpr = np.std(CohClass.xgb.tprs, axis=0)
         tprs_upper = np.minimum(mean_tpr + std_tpr, 1)
         tprs_lower = np.maximum(mean_tpr - std_tpr, 0)
-        plt.fill_between(CohClass.mean_fpr, tprs_lower, tprs_upper, color = c, alpha=.1,)
+        plt.fill_between(CohClass.xgb.mean_fpr, tprs_lower, tprs_upper, color = c, alpha=.1,)
         
     feature_importance.to_csv(save_path + "/Importances/" + feature + ".csv")
     plt.xlim([-0.05, 1.05])
@@ -453,19 +463,36 @@ for feature in frequency_info["Variable"].unique():
 
         
 
-frequency_results = frequency_results.sort_values("auc_median", ascending  = False)  
-frequency_results.to_csv(save_path + "frequency_classification_results.csv")
-frequency_aucs.to_csv(save_path + "frequency_aucs.csv")
-frequency_shuffled_aucs.to_csv(save_path + "frequency_shuffled_aucs.csv")
+xgb_freq_results.to_csv(save_path + "xgb_freq_results.csv")
+xgb_freq_aucs.to_csv(save_path + "xgb_freq_aucs.csv")
+xgb_freq_shuffled_aucs.to_csv(save_path + "xgb_freq_shuffled_aucs.csv")
+xgb_freq_importances.to_csv(save_path + "xgb_freq_importances.csv")
+
+rf_freq_results.to_csv(save_path + "rf_freq_results.csv")
+rf_freq_aucs.to_csv(save_path + "rf_freq_aucs.csv")
+rf_freq_shuffled_aucs.to_csv(save_path + "rf_freq_shuffled_aucs.csv")
+rf_freq_importances.to_csv(save_path + "rf_freq_importances.csv")
+
+lasso_freq_results.to_csv(save_path + "lasso_freq_results.csv")
+lasso_freq_aucs.to_csv(save_path + "lasso_freq_aucs.csv")
+lasso_freq_shuffled_aucs.to_csv(save_path + "lasso_freq_shuffled_aucs.csv")
+lasso_freq_importances.to_csv(save_path + "lasso_freq_importances.csv")
+
+gnb_freq_results.to_csv(save_path + "gnb_freq_results.csv")
+gnb_freq_aucs.to_csv(save_path + "gnb_freq_aucs.csv")
+gnb_freq_shuffled_aucs.to_csv(save_path + "gnb_freq_shuffled_aucs.csv")
+gnb_freq_importances.to_csv(save_path + "gnb_freq_importances.csv")
+
+
 
 #%%
 
 ###FREQUNECY BOXPLOTS
 for val in frequency_info["Variable"].unique():
     freq_groups = frequency_info[frequency_info["Variable"] == val].index
-    temp = frequency_results.loc[freq_groups,:].sort_values("auc_median", ascending  = False)
+    temp = xgb_freq_results.loc[freq_groups,:].sort_values("auc_median", ascending  = False)
     group_names = frequency_info.loc[temp.index, "plot_name"]
-    boxplotdata = np.vstack(temp["aucs"].values)
+    boxplotdata = np.vstack(lasso_aucs.loc[temp.index, :].values)
     boxplotdata = pd.DataFrame(boxplotdata, index = group_names).T
     g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")
     plt.xlabel("AUC")
@@ -476,4 +503,144 @@ for val in frequency_info["Variable"].unique():
     plt.show()
 
 
+#%%
+    
+    
+    
+    
+save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/age_binary_results/"
+dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/age_cohorts/"
+feature_list = os.listdir(dir_path)
+col_names = otu_df.columns
 
+metrics = ["p_val", "n_samples", "auc_mean", "auc_std", "auc_median", 
+           "shuffled_auc_mean", "shuffled_auc_std",  "shuffled_auc_median", "acc_mean", "acc_std", 
+           "shuffled_matthews_mean", "shuffled_matthews_std","matthews_mean", "matthews_std",
+           "shuffled_accuracy_mean", "shuffled_accuracy_std"]
+
+xgb_results = pd.DataFrame([], columns = metrics)
+xgb_importances = pd.DataFrame([], columns = col_names)
+xgb_aucs = pd.DataFrame([], columns = range(100))
+xgb_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+rf_results = pd.DataFrame([], columns = metrics)
+rf_importances = pd.DataFrame([], columns = col_names)
+rf_aucs = pd.DataFrame([], columns = range(100))
+rf_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+lasso_results = pd.DataFrame([], columns = metrics)
+lasso_importances = pd.DataFrame([], columns = col_names)
+lasso_aucs = pd.DataFrame([], columns = range(100))
+lasso_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+gnb_results = pd.DataFrame([], columns = metrics)
+gnb_importances = pd.DataFrame([], columns = col_names)
+gnb_aucs = pd.DataFrame([], columns = range(100))
+gnb_shuffled_aucs = pd.DataFrame([], columns = range(100))
+
+for feature in feature_list:
+    feature_name = feature.split(".")[0]
+    print feature_name
+    if feature_name == "":
+        continue
+    cohort = pd.read_csv(dir_path + feature, index_col = 0) 
+    cohort_n = len(cohort)
+    CohClass = AGPCohortClassification(feature_name, cohort, True, True, "")
+    CohClass.classifyFeature()
+    
+    xgb_results.loc[feature_name, :] = CohClass.xgb.getMetrics(cohort_n)
+    xgb_importances.loc[feature_name, :] = CohClass.xgb.getImportances(col_names)
+    xgb_aucs.loc[feature_name, :] = CohClass.xgb.aucs  
+    xgb_shuffled_aucs.loc[feature_name, :] = CohClass.xgb.shuffled_aucs
+
+    rf_results.loc[feature_name, :] = CohClass.rf.getMetrics(cohort_n)
+    rf_importances.loc[feature_name, :] = CohClass.rf.getImportances(col_names)
+    rf_aucs.loc[feature_name, :] = CohClass.rf.aucs  
+    rf_shuffled_aucs.loc[feature_name, :] = CohClass.rf.shuffled_aucs
+    
+    lasso_results.loc[feature_name, :] = CohClass.lasso.getMetrics(cohort_n)
+    lasso_importances.loc[feature_name, :] = CohClass.lasso.getImportances(col_names)
+    lasso_aucs.loc[feature_name, :] = CohClass.lasso.aucs  
+    lasso_shuffled_aucs.loc[feature_name, :] = CohClass.lasso.shuffled_aucs
+    
+    gnb_results.loc[feature_name, :] = CohClass.gnb.getMetrics(cohort_n)
+    gnb_importances.loc[feature_name, :] = CohClass.gnb.getImportances(col_names)
+    gnb_aucs.loc[feature_name, :] = CohClass.gnb.aucs  
+    gnb_shuffled_aucs.loc[feature_name, :] = CohClass.gnb.shuffled_aucs
+
+xgb_results.to_csv(save_path + "xgb_results.csv")
+xgb_aucs.to_csv(save_path + "xgb_aucs.csv")
+xgb_shuffled_aucs.to_csv(save_path + "xgb_shuffled_aucs.csv")
+xgb_importances.to_csv(save_path + "xgb_importances.csv")
+
+rf_results.to_csv(save_path + "rf_results.csv")
+rf_aucs.to_csv(save_path + "rf_aucs.csv")
+rf_shuffled_aucs.to_csv(save_path + "rf_shuffled_aucs.csv")
+rf_importances.to_csv(save_path + "rf_importances.csv")
+
+lasso_results.to_csv(save_path + "lasso_results.csv")
+lasso_aucs.to_csv(save_path + "lasso_aucs.csv")
+lasso_shuffled_aucs.to_csv(save_path + "lasso_shuffled_aucs.csv")
+lasso_importances.to_csv(save_path + "lasso_importances.csv")
+
+gnb_results.to_csv(save_path + "gnb_results.csv")
+gnb_aucs.to_csv(save_path + "gnb_aucs.csv")
+gnb_shuffled_aucs.to_csv(save_path + "gnb_shuffled_aucs.csv")
+gnb_importances.to_csv(save_path + "gnb_importances.csv")
+
+
+####BINARY BOXPLOTSS 
+temp = xgb_results[xgb_results["p_val"] <= 0.05].sort_values("auc_median", ascending = False)
+boxplotdata = xgb_aucs.loc[temp.index, :].values
+boxplotdata = pd.DataFrame(boxplotdata, index = feature_info.loc[temp.index, "plot_name"]).T
+plt.figure(figsize = (5, 10))
+g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")
+plt.xlabel("AUC")
+plt.ylabel("")
+plt.show()
+
+temp = rf_results[rf_results["p_val"] <= 0.05].sort_values("auc_median", ascending = False)
+boxplotdata = rf_aucs.loc[temp.index, :].values
+boxplotdata = pd.DataFrame(boxplotdata, index = feature_info.loc[temp.index, "plot_name"]).T
+plt.figure(figsize = (5, 10))
+g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")
+plt.xlabel("AUC")
+plt.ylabel("")
+plt.show()
+
+temp = lasso_results[lasso_results["p_val"] <= 0.05].sort_values("auc_median", ascending = False)
+boxplotdata = lasso_aucs.loc[temp.index, :].values
+boxplotdata = pd.DataFrame(boxplotdata, index = feature_info.loc[temp.index, "plot_name"]).T
+plt.figure(figsize = (5, 10))
+g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")
+plt.xlabel("AUC")
+plt.ylabel("")
+plt.show()    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

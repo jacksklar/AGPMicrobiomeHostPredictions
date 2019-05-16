@@ -6,12 +6,8 @@ Created on Wed Apr 24 14:14:31 2019
 @author: sklarjg
 """
 
-
 import numpy as np 
 import pandas as pd 
-import matplotlib.pyplot as plt
-import seaborn as sns        
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import os
 
 def mapOTU(df, taxa_df, colname):
@@ -42,82 +38,64 @@ taxa_df = taxa_df[taxa_df.index.isin(otu_df.columns)]
 taxa_df = taxa_df.replace(np.nan, 'Unknown', regex=True)
 otu_df = mapOTU(otu_df, taxa_df, "Genus")
 otu_df = otu_df.reindex(otu_df.mean().sort_values(ascending = False).index, axis=1)
-otu_df = np.log(otu_df + 1)
 
-#%%
 
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Feature_cohorts/"
-imp_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Genus_BoostedT/Importances/"
-fold_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Genus_BoostedT/Fold_change/"
-feature_list = os.listdir(dir_path)
-
-for feature in feature_list:
-    if feature.split(".")[0] == "":
-        continue
-    exists = os.path.isfile(imp_path + feature)
-    if exists:
-        print feature
-        cohort = pd.read_csv(dir_path + feature, index_col = 0)
-        
-        pos_class = cohort[cohort["target"] == 1].index
-        neg_class = cohort[cohort["target"] == 0].index
-        importances = pd.read_csv(imp_path + feature, header = None, index_col = 0)[1]        
-        feature_fold_change = pd.Series([])
-        for otu in importances.index.values:
-            mean_pos = otu_df.loc[pos_class, otu].mean()
-            mean_neg = otu_df.loc[neg_class, otu].mean()
-            mean_fold_change = mean_pos - mean_neg
-            feature_fold_change[otu] = mean_fold_change
-        feature_fold_change.to_csv(fold_path + feature)
-    
-#%%
-dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Frequency_cohorts/"
-imp_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Genus_Frequency/Importances/"
-fold_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/Genus_Frequency/Fold_change/"
-frequency_list = os.listdir(dir_path)
-
-frequency_info = pd.read_csv("/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Data/Cleaned_data/frequency_feature_info.csv", index_col = 0)
-
-for feature in frequency_info["Variable"].unique():
-    cohort_filenames = frequency_info[frequency_info["Variable"] == feature].index.values + ".csv"
-    freq_names = [ val.split("_")[-2] for val in cohort_filenames]
-    print feature
-    print 
-    print    
-    feature_fold_change = pd.DataFrame([], columns = ['daily', 'regular', 'occasional', 'rare']) 
-    
-    for filename, freq_name in zip(cohort_filenames, freq_names):
-        print filename, freq_name
-        exists = os.path.isfile(imp_path + filename)
-        if exists:
-            cohort = pd.read_csv(dir_path + filename, index_col = 0)
+def LogMeanFoldChange(feature_list, cohort_path, save_path, file_name):
+    all_features_foldchange = pd.DataFrame([], columns = otu_df.columns.values)
+    for feature in feature_list:
+        if feature.split(".")[0] == "":
+            continue
+        feature_name = feature.split(".")[0]
+        cohort = pd.read_csv(cohort_path + feature, index_col = 0)
+        if cohort.columns.contains("target"):
+            print feature_name
             pos_class = cohort[cohort["target"] == 1].index
             neg_class = cohort[cohort["target"] == 0].index
-            importances = pd.read_csv(imp_path + filename, header = None, index_col = 0)[1]        
-            for otu in importances.index.values:
+            feature_fold_change = pd.Series([])
+            for otu in otu_df.columns.values:
                 mean_pos = otu_df.loc[pos_class, otu].mean()
                 mean_neg = otu_df.loc[neg_class, otu].mean()
-                mean_fold_change = mean_pos - mean_neg
-                feature_fold_change.loc[otu, freq_name] = mean_fold_change
-    feature_fold_change.to_csv(fold_path + feature + ".csv") 
-            
+                mean_fold_change = np.log(mean_pos + 1.0) - np.log(mean_neg + 1.0)
+                feature_fold_change[otu] = mean_fold_change
+            all_features_foldchange.loc[feature_name,:] = feature_fold_change
+    all_features_foldchange.to_csv(save_path + file_name)
 
 
 #%%
 
-for feature in frequency_list:
-    exists = os.path.isfile(imp_path + feature)
-    if exists:
-        print feature
-        cohort = pd.read_csv(dir_path + feature, index_col = 0)
-        
-        pos_class = cohort[cohort["target"] == 1].index
-        neg_class = cohort[cohort["target"] == 0].index
-        importances = pd.read_csv(imp_path + feature, header = None, index_col = 0)[1]        
-        feature_fold_change = pd.Series([])
-        for otu in importances.index.values:
-            mean_pos = otu_df.loc[pos_class, otu].mean()
-            mean_neg = otu_df.loc[neg_class, otu].mean()
-            mean_fold_change = mean_pos - mean_neg
-            feature_fold_change[otu] = mean_fold_change
-        feature_fold_change.to_csv(fold_path + feature)
+cohort_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/binary_cohorts/"
+save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/genus_binary_results/"
+feature_list = os.listdir(cohort_path)
+file_name = "binary_cohort_genus_lmfc.csv"
+feature_remove = feature_info[feature_info["type"].isin(["Race","other"])].index.values
+feature_remove = [feature + ".csv" for feature in feature_remove]
+feature_list = [feature for feature in feature_list if feature not in feature_remove]
+
+
+LogMeanFoldChange(feature_list, cohort_path, save_path, file_name)
+
+
+
+cohort_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/frequency_cohorts/"
+save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/genus_frequency_results/"
+frequency_list = os.listdir(cohort_path)
+filename = "frequency_cohort_genus_lmfc.csv"
+
+LogMeanFoldChange(frequency_list, cohort_path, save_path, file_name)
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

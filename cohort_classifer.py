@@ -287,11 +287,13 @@ metrics = ["p_val", "n_samples", "auc_mean", "auc_std", "auc_median",
            "shuffled_accuracy_mean", "shuffled_accuracy_std"]
 
 #%%
+
 #Binary Groups
 save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/binary_results_updated/"
 dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/binary_cohorts_updated/"
 feature_list = os.listdir(dir_path)
 col_names = otu_df.columns
+
 xgb_FR = FeatureResults(num_iterations, col_names, "xgb", save_path)
 rf_FR = FeatureResults(num_iterations, col_names, "rf", save_path)
 lasso_FR = FeatureResults(num_iterations, col_names, "lasso", save_path)
@@ -379,23 +381,6 @@ lasso_FR.SaveModelDF()
 
 
 #%%
-###FREQUNECY BOXPLOTS
-'''
-for val in frequency_info["Variable"].unique():
-    freq_groups = frequency_info[frequency_info["Variable"] == val].index
-    temp = xgb_freq_results.loc[freq_groups,:].sort_values("auc_median", ascending  = False)
-    group_names = frequency_info.loc[temp.index, "plot_name"]
-    boxplotdata = np.vstack(lasso_aucs.loc[temp.index, :].values)
-    boxplotdata = pd.DataFrame(boxplotdata, index = group_names).T
-    g = sns.boxplot(data = boxplotdata, notch = False, showfliers=False, palette = "Blues_r", orient = "h")
-    plt.xlabel("AUC")
-    plt.ylabel("")
-    plt.title(val.replace("_", " ").capitalize())
-    plt.tight_layout()
-    plt.savefig(save_path + "BoxPlots/" + val + ".png", dpi = 200)
-    plt.show()
-'''
-
 save_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Results/age_results/"
 dir_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/age_cohorts/"
 feature_list = os.listdir(dir_path)
@@ -464,3 +449,38 @@ plt.xlabel("AUC")
 plt.ylabel("")
 plt.show()
     
+
+#%%
+'''
+save_path = "/Users/sklarjg/Desktop/temp/"
+updated_cohort_path = "/Users/sklarjg/Desktop/MICROBIOME/AmericanGutProj/Feature_Cohorts/binary_cohorts/"
+col_names = otu_df.columns
+
+
+nplant_6_10_cohort = pd.read_csv(updated_cohort_path + "nplant_6_10_cohort.csv", index_col = 0)
+nplant_11_20_cohort = pd.read_csv(updated_cohort_path + "nplant_11_20_cohort.csv", index_col = 0)
+nplant_21_30_cohort = pd.read_csv(updated_cohort_path + "nplant_21_30_cohort.csv", index_col = 0)
+nplant_30_plus_cohort = pd.read_csv(updated_cohort_path + "nplant_30_plus_cohort.csv", index_col = 0)
+
+cohorts = [nplant_6_10_cohort, nplant_11_20_cohort, nplant_21_30_cohort, nplant_30_plus_cohort]
+cohort_names = ["nplant_6_10_cohort", "nplant_11_20_cohort", "nplant_21_30_cohort", "nplant_30_plus_cohort"]
+plot_names = ["Consumes 6-10 plants", "Consumes 11-20 plants", "Consumes 21-30 plants", "Consumes 30+ plants"]
+
+xgb_FR = FeatureResults(num_iterations, col_names, "xgb", save_path)
+rf_FR = FeatureResults(num_iterations, col_names, "rf", save_path)
+lasso_FR = FeatureResults(num_iterations, col_names, "lasso", save_path)
+
+
+for cohort, feature_name, plot_name in zip(cohorts, cohort_names, plot_names):
+
+    CohClass = AGPCohortClassification(feature_name, cohort, True, True, "Classification of " + plot_name)
+    CohClass.classifyFeature()
+    cohort_n = len(cohort)
+    xgb_FR.AppendModelIter(CohClass.xgb, cohort_n)
+    rf_FR.AppendModelIter(CohClass.rf, cohort_n)
+    lasso_FR.AppendModelIter(CohClass.lasso, cohort_n)
+    
+xgb_FR.SaveModelDF()
+rf_FR.SaveModelDF()
+lasso_FR.SaveModelDF()
+'''

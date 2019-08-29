@@ -1,0 +1,194 @@
+﻿COHORT,COHORT_TYPE,QUESTIONNAIRE_VARIABLE,VARIABLE_DESCRIPTION,POSITIVE_GROUP_RESPONSE,NEGATIVE_GROUP_RESPONSE,SPECIAL_EXCLUSION_CRITIERIA,REMOVED_MATCHING_VARIABLES
+acid_reflux,standard binary,acid_reflux,has the participant been diagnosed with acid reflux,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+add_adhd,standard binary,add_adhd,has the participant been diagnosed with attention deficit disorder or attention deficit hyperactivity disorder,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+age_1-2,binary (special matching/exclusion),age_years,the self-reported participant age,[0-2],[20-80),None,age_years
+age_3-5,binary (special matching/exclusion),age_years,the self-reported participant age,[3-5],[20-80),None,age_years
+age_6-18,binary (special matching/exclusion),age_years,the self-reported participant age,[6-18],[20-80),None,age_years
+age_over70,binary (special matching/exclusion),age_years,the self-reported participant age,[70-100],[20-70),None,age_years
+alcohol_daily_cohort,frequency group - binary,alcohol_frequency,How often does the participant consume alcohol,Daily,Never,None,alcohol_frequency
+alcohol_occasional_cohort,frequency group - binary,alcohol_frequency,How often does the participant consume alcohol,Occasionally (1-2 times/week),Never,None,alcohol_frequency
+alcohol_rare_cohort,frequency group - binary,alcohol_frequency,How often does the participant consume alcohol,Rarely (a few times/month),Never,None,alcohol_frequency
+alcohol_regular_cohort,frequency group - binary,alcohol_frequency,How often does the participant consume alcohol,Regularly (3-5 times/week),Never,None,alcohol_frequency
+﻿alcohol_types_beercider,standard binary,﻿alcohol_types_beercider,does the participant drink beer or cider,Yes,No,None,None
+alcohol_types_red_wine,standard binary,alcohol_types_red_wine,does the participant drink red wine,Yes,No,None,None
+alcohol_types_sour_beers,standard binary,alcohol_types_sour_beers,does the participant drink sour beer,Yes,No,None,None
+alcohol_types_spiritshard_alcohol,standard binary,alcohol_types_spiritshard_alcohol,does the participant drink hard alcohol,Yes,No,None,None
+alcohol_types_white_wine,standard binary,alcohol_types_white_wine,does the participant drink white wine,Yes,No,None,None
+allergic_to_i_have_no_food_allergies_that_i_know_of,standard binary,allergic_to_i_have_no_food_allergies_that_i_know_of,The participant does not have any food allergies,Yes,No,None,None
+allergic_to_other,standard binary,allergic_to_other,"Is the participant allergic to some food other than peanuts, shellfish or tree nuts",Yes,No,None,None
+allergic_to_peanuts,standard binary,allergic_to_peanuts,Is the participant allergic to peanuts,Yes,No,None,None
+allergic_to_shellfish,standard binary,allergic_to_shellfish,Is the participant allergic to shellfish,Yes,No,None,None
+allergic_to_tree_nuts,standard binary,allergic_to_tree_nuts,Is the participant allergic to tree nuts,Yes,No,None,None
+antiB_6Month_cohort,binary (special matching/exclusion),antibiotic_history,The time since the participant's last antibiotic dose,6 months,I have not taken antibiotics in the past year.,None,None 
+antiB_Month_cohort,binary (special matching/exclusion),antibiotic_history,The time since the participant's last antibiotic dose,Month,I have not taken antibiotics in the past year.,None ,None
+antiB_Week_cohort,binary (special matching/exclusion),antibiotic_history,The time since the participant's last antibiotic dose,Week,I have not taken antibiotics in the past year.,None,None 
+antiB_Year_cohort,binary (special matching/exclusion),antibiotic_history,The time since the participant's last antibiotic dose,Year,I have not taken antibiotics in the past year.,None,None 
+appendix_removed,standard binary,appendix_removed,Whether the participants appendix has been removed,Yes,No,None,None
+artificial_sweeteners_occasional_cohort,frequency group - binary,artificial_sweeteners,How often does the participant use artifical sweeteners,Occasionally (1-2 times/week),Never,None,None
+artificial_sweeteners_rare_cohort,frequency group - binary,artificial_sweeteners,How often does the participant use artifical sweeteners,Rarely (a few times/month),Never,None,None
+artificial_sweeteners_regular_cohort,frequency group - binary,artificial_sweeteners,How often does the participant use artifical sweeteners,Regularly (3-5 times/week)/Daily,Never,None,None
+asd_cohort,binary (special matching/exclusion),asd,Has the participant been diagnosed with autism spectrum disorder?,Diagnosed by a medical professional (doctor/physician assistant),I do not have this condition,Ages <= 30.0,None
+autoimmune,standard binary,autoimmune,Does the participant have an autoimmune disorder other than Type I diabetes or inflammatory bowel disease,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+bmf_2_cohort,binary (special matching/exclusion),bowel_movement_frequency,Number of daily bowel movements,Two,One,None,None
+bmf_3_cohort,binary (special matching/exclusion),bowel_movement_frequency,Number of daily bowel movements,Three,One,None,None
+bmf_4_cohort,binary (special matching/exclusion),bowel_movement_frequency,Number of daily bowel movements,Four,One,None,None
+bmf_5_cohort,binary (special matching/exclusion),bowel_movement_frequency,Number of daily bowel movements,Five or more,One,None,None
+bmf_less1_cohort,binary (special matching/exclusion),bowel_movement_frequency,Number of daily bowel movements,Less than one,One,None,None
+bmq_loose_cohort,binary (special matching/exclusion),bowel_movement_quality,Does the participant tend toward constipation or diarrhea?,I tend to have diarrhea (watery stool) - Type 5/6/7,I tend to have normal formed stool - Type 3/4,None,None
+bmq_solid_cohort,binary (special matching/exclusion),bowel_movement_quality,Does the participant tend toward constipation or diarrhea?,I tend to be constipated (have difficulty passing stool) - Type 1/2,I tend to have normal formed stool - Type 3/4,None,None
+cancer,standard binary,cancer,Has the participant been diagnosed with cancer,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+cardiovascular_disease,standard binary,cardiovascular_disease,Does the participant have cardiovascular disease,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+cat,standard binary,cat,Does the participant live with a cat,Yes,No,None,None
+celiac_cohort,binary (special matching/exclusion),gluten,Does the participant follow a gluten free diet?,I was diagnosed with celiac disease,No,None,None
+chickenpox,standard binary,chickenpox,Did the participant have chicken pox,Yes,No,None,None
+clinical_condition,standard binary,clinical_condition,Has the participant been diagnosed with a clinical condition not described here. (Note that additional information about the clinical conditions has been obtained but is not publically avaliable),"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+consume_animal_products_abx,standard binary,consume_animal_products_abx,Does the participant eat animal products treated with antibiotics,Yes,No,None,None
+country_cohort,binary (special matching/exclusion),country,Country where the sample was collected,USA,United Kingdom,None,location
+csection,standard binary,csection,Was the participant born via c-section,Yes,No,None,None
+depression_bipolar_schizophrenia,standard binary,depression_bipolar_schizophrenia,"Has the participant been diagnosed with depression, bipolar disorder or schizophrenia","Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+diabetes_typeII_cohort,binary (special matching/exclusion),diabetes_type,The type of diabetes a participant has been diagnosed with,Type II diabetes,Not provided/Unspecified,Includes Obese,None
+dog,standard binary,dog,Participant has a pet dog,Yes,No,None,None
+exercise_frequency_daily_cohort,frequency group - binary,exercise_frequency,How often does the participant exercise?,Daily,Never/Rarely (a few times/month),None,None
+exercise_frequency_occasional_cohort,frequency group - binary,exercise_frequency,How often does the participant exercise?,Occasionally (1-2 times/week),Never/Rarely (a few times/month),None,None
+exercise_frequency_regular_cohort,frequency group - binary,exercise_frequency,How often does the participant exercise?,Regularly (3-5 times/week),Never/Rarely (a few times/month),None,None
+fermented_plant_frequency_daily_cohort,frequency group - binary,fermented_plant_frequency,"How often does the participant eat fermented plants (i.e. Saurkraut, Kimchi)",Daily,Never,None,None
+fermented_plant_frequency_occasional_cohort,frequency group - binary,fermented_plant_frequency,"How often does the participant eat fermented plants (i.e. Saurkraut, Kimchi)",Occasionally (1-2 times/week),Never,None,None
+fermented_plant_frequency_rare_cohort,frequency group - binary,fermented_plant_frequency,"How often does the participant eat fermented plants (i.e. Saurkraut, Kimchi)",Rarely (a few times/month),Never,None,None
+fermented_plant_frequency_regular_cohort,frequency group - binary,fermented_plant_frequency,"How often does the participant eat fermented plants (i.e. Saurkraut, Kimchi)",Regularly (3-5 times/week),Never,None,None
+frozen_dessert_frequency_occasional_cohort,frequency group - binary,frozen_dessert_frequency,How often the participant eats ice cream or frozen yogurt,Occasionally (1-2 times/week),Never,None,None
+frozen_dessert_frequency_rare_cohort,frequency group - binary,frozen_dessert_frequency,How often the participant eats ice cream or frozen yogurt,Rarely (a few times/month),Never,None,None
+frozen_dessert_frequency_regular_cohort,frequency group - binary,frozen_dessert_frequency,How often the participant eats ice cream or frozen yogurt,Regularly (3-5 times/week)/Daily,Never,None,None
+fruit_frequency_daily_cohort,frequency group - binary,fruit_frequency,How often the participant reports eating fruit,Daily,Never,None,None
+fruit_frequency_occasional_cohort,frequency group - binary,fruit_frequency,How often the participant reports eating fruit,Occasionally (1-2 times/week),Never,None,None
+fruit_frequency_rare_cohort,frequency group - binary,fruit_frequency,How often the participant reports eating fruit,Rarely (a few times/month),Never,None,None
+fruit_frequency_regular_cohort,frequency group - binary,fruit_frequency,How often the participant reports eating fruit,Regularly (3-5 times/week),Never,None,None
+fungal_overgrowth,standard binary,fungal_overgrowth,Does the participant have a fungal overgrowth in their gut,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+gender_healthy_cohort,binary (special matching/exclusion),sex,"MIMARKS standard field - participant biological sex, not sexual identity",male,female,"Excludes sex ""other""",sex
+gluten_alergy_cohort,binary (special matching/exclusion),gluten,Does the participant follow a gluten free diet?,I was diagnosed with gluten allergy (anti-gluten IgG) but not celiac disease,No,None,None
+high_fat_red_meat_frequency_occasional_cohort,frequency group - binary,high_fat_red_meat_frequency,"How often the participant eats at least one serving of high fat red meats, including prime rib, hamburger, bacon, and ribs.",Occasionally (1-2 times/week),Never,None,None
+high_fat_red_meat_frequency_rare_cohort,frequency group - binary,high_fat_red_meat_frequency,"How often the participant eats at least one serving of high fat red meats, including prime rib, hamburger, bacon, and ribs.",Rarely (a few times/month),Never,None,None
+high_fat_red_meat_frequency_regular_cohort,frequency group - binary,high_fat_red_meat_frequency,"How often the participant eats at least one serving of high fat red meats, including prime rib, hamburger, bacon, and ribs.",Regularly (3-5 times/week)/Daily,Never,None,None
+homecooked_meals_frequency_daily_cohort,frequency group - binary,homecooked_meals_frequency,How often does the participant consume meals cooked at home?,Daily,Never,None,None
+homecooked_meals_frequency_occasional_cohort,frequency group - binary,homecooked_meals_frequency,How often does the participant consume meals cooked at home?,Occasionally (1-2 times/week),Never,None,None
+homecooked_meals_frequency_regular_cohort,frequency group - binary,homecooked_meals_frequency,How often does the participant consume meals cooked at home?,Regularly (3-5 times/week),Never,None,None
+IBD_cohort,binary (special matching/exclusion),ibd,Has the participant been diagnosed with inflammatory bowel disease,Diagnosed by a medical professional (doctor/physician assistant),I do not have this condition,Includes IBD,None
+ibs,standard binary,ibs,Has the participant been diagnosed with irritable bowel syndrome,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+iud_cohort,binary (special matching/exclusion),contraceptive,Does the participant use contraceptives?,Yes I use a hormonal IUD (Mirena),No,Excludes Males,sex
+kidney_disease,standard binary,kidney_disease,Does the participant have a kidney disease,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+lactose,standard binary,lactose,Is the participant lactose intolerant,Yes,No,None,None
+liver_disease,standard binary,liver_disease,Does the participant have a liver disease,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+livingwith,standard binary,livingwith,"Participant lives with other people who have submitted samples, maps to roommates",Yes,No,None,None
+lowgrain_diet_type,standard binary,lowgrain_diet_type,Does the participant eat a low grain diet,Yes,No,None,None
+lung_disease,standard binary,lung_disease,"Does the participant have diagnosed lung disease (asthma, COPD, etc)","Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+meat_eggs_frequency_daily_cohort,frequency group - binary,meat_eggs_frequency,How of the participant eats meat or eggs,Daily,Never,None,meat_eggs_frequency
+meat_eggs_frequency_occasional_cohort,frequency group - binary,meat_eggs_frequency,How of the participant eats meat or eggs,Occasionally (1-2 times/week),Never,None,meat_eggs_frequency
+meat_eggs_frequency_rare_cohort,frequency group - binary,meat_eggs_frequency,How of the participant eats meat or eggs,Rarely (a few times/month),Never,None,meat_eggs_frequency
+meat_eggs_frequency_regular_cohort,frequency group - binary,meat_eggs_frequency,How of the participant eats meat or eggs,Regularly (3-5 times/week),Never,None,meat_eggs_frequency
+mental_illness,standard binary,mental_illness,does the participant have a mental illness,Yes,No,None,None
+mental_illness_type_depression,standard binary,mental_illness_type_depression,does the participant have unipolar depression,Yes,No,None,None
+migraine,standard binary,migraine,Has the participant been diagnosed with migraines,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+milk_cheese_frequency_daily_cohort,frequency group - binary,milk_cheese_frequency,How frequently the participant eats milk or cheese,Daily,Never,None,milk_cheese_frequency
+milk_cheese_frequency_occasional_cohort,frequency group - binary,milk_cheese_frequency,How frequently the participant eats milk or cheese,Occasionally (1-2 times/week),Never,None,milk_cheese_frequency
+milk_cheese_frequency_rare_cohort,frequency group - binary,milk_cheese_frequency,How frequently the participant eats milk or cheese,Rarely (a few times/month),Never,None,milk_cheese_frequency
+milk_cheese_frequency_regular_cohort,frequency group - binary,milk_cheese_frequency,How frequently the participant eats milk or cheese,Regularly (3-5 times/week),Never,None,None
+milk_substitute_frequency_daily_cohort,frequency group - binary,milk_substitute_frequency,"How often the participant drinks a milk substitute like soy, rice or almond milk",Daily,Never,None,None
+milk_substitute_frequency_occasional_cohort,frequency group - binary,milk_substitute_frequency,"How often the participant drinks a milk substitute like soy, rice or almond milk",Occasionally (1-2 times/week),Never,None,None
+milk_substitute_frequency_rare_cohort,frequency group - binary,milk_substitute_frequency,"How often the participant drinks a milk substitute like soy, rice or almond milk",Rarely (a few times/month),Never,None,None
+milk_substitute_frequency_regular_cohort,frequency group - binary,milk_substitute_frequency,"How often the participant drinks a milk substitute like soy, rice or almond milk",Regularly (3-5 times/week),Never,None,None
+multivitamin,standard binary,multivitamin,Does the participant take a multivitamin,Yes,No,None,None
+nail_biter,standard binary,nail_biter,Does the participant bites their nails,Yes,No,None,None
+no_gluten_cohort,binary (special matching/exclusion),gluten,Does the participant follow a gluten free diet?,I do not eat gluten because it makes me feel bad,No,None,None
+non_food_allergies_beestings,standard binary,non_food_allergies_beestings,Is the participant allergic to bee stings,Yes,No,None,None
+non_food_allergies_drug_eg_penicillin,standard binary,non_food_allergies_drug_eg_penicillin,Is the participant allergic to some type of drug,Yes,No,None,None
+non_food_allergies_pet_dander,standard binary,non_food_allergies_pet_dander,Is the participant is allergic to pet dander,Yes,No,None,None
+non_food_allergies_poison_ivyoak,standard binary,non_food_allergies_poison_ivyoak,Is the participant is allergic to poison ivy or poison oak,Yes,No,None,None
+non_food_allergies_sun,standard binary,non_food_allergies_sun,Is the participant is allergic to sun,Yes,No,None,None
+nplant_11_20_cohort,binary (special matching/exclusion),types_of_plants,Number of plant species eaten in week of observation,11 to 20,Less than 5,None,None
+nplant_21_30_cohort,binary (special matching/exclusion),types_of_plants,Number of plant species eaten in week of observation,21 to 30,Less than 5,None,None
+nplant_30_plus_cohort,binary (special matching/exclusion),types_of_plants,Number of plant species eaten in week of observation,More than 30,Less than 5,None,None
+nplant_6_10_cohort,binary (special matching/exclusion),types_of_plants,Number of plant species eaten in week of observation,6 to 10,Less than 5,None,None
+Obese_cohort,binary (special matching/exclusion),bmi_cat,"The body mass index, categorized according to the WHO. This is calculated from the bmi_corrected column.",Obese,Normal,includes 30.0 <= BMI <= 60.0,bmi
+olive_oil_daily_cohort,frequency group - binary,olive_oil,How often does the participant use olive oil in cooking,Daily,Never,None,None
+olive_oil_occasional_cohort,frequency group - binary,olive_oil,How often does the participant use olive oil in cooking,Occasionally (1-2 times/week),Never,None,None
+olive_oil_rare_cohort,frequency group - binary,olive_oil,How often does the participant use olive oil in cooking,Rarely (a few times/month),Never,None,None
+olive_oil_regular_cohort,frequency group - binary,olive_oil,How often does the participant use olive oil in cooking,Regularly (3-5 times/week),Never,None,None
+omnivore_noRed_cohort,binary (special matching/exclusion),diet_type,High level diet categorization,Omnivore but do not eat red meat,Omnivore,None,diet_type
+one_liter_of_water_a_day_frequency_daily_cohort,frequency group - binary,one_liter_of_water_a_day_frequency,How often the participant drinks at least a liter or waters (32 oz),Daily,Never/Rarely (a few times/month),None,None
+one_liter_of_water_a_day_frequency_occasional_cohort,frequency group - binary,one_liter_of_water_a_day_frequency,How often the participant drinks at least a liter or waters (32 oz),Occasionally (1-2 times/week),Never/Rarely (a few times/month),None,None
+one_liter_of_water_a_day_frequency_regular_cohort,frequency group - binary,one_liter_of_water_a_day_frequency,How often the participant drinks at least a liter or waters (32 oz),Regularly (3-5 times/week),Never/Rarely (a few times/month),None,None
+other_supplement,standard binary,other_supplement_frequency,How frequently the participant takes a supplement other than Vitamin B or Vitamin D (binary),Yes,No,None,None
+Overweight_cohort,binary (special matching/exclusion),bmi_cat,"The body mass index, categorized according to the WHO. This is calculated from the bmi_corrected column.",Overweight,Normal,None,bmi
+pescatarian_cohort,binary (special matching/exclusion),diet_type,High level diet categorization,Vegetarian but eat seafood,Omnivore,None,diet_type
+pets_other,standard binary,pets_other,Does a participant have a pet that is not a cat or dog,Yes,No,None,None
+pill_cohort,binary (special matching/exclusion),contraceptive,Does the participant use contraceptives?,"Yes I am taking the ""pill""",No,Excludes Males,sex
+poultry_frequency_occasional_cohort,frequency group - binary,poultry_frequency,"How often does the participant consume chicken, tukey, or other poultry",Occasionally (1-2 times/week),Never,None,None
+poultry_frequency_rare_cohort,frequency group - binary,poultry_frequency,"How often does the participant consume chicken, tukey, or other poultry",Rarely (a few times/month),Never,None,None
+poultry_frequency_regular_cohort,frequency group - binary,poultry_frequency,"How often does the participant consume chicken, tukey, or other poultry",Regularly (3-5 times/week)/Daily,Never,None,None
+prepared_meals_frequency_occasional_cohort,frequency group - binary,prepared_meals_frequency,"frequency with which the participant eats out at a resturaunt, including carryout",Occasionally (1-2 times/week),Never,None,None
+prepared_meals_frequency_rare_cohort,frequency group - binary,prepared_meals_frequency,"frequency with which the participant eats out at a resturaunt, including carryout",Rarely (a few times/month),Never,None,None
+prepared_meals_frequency_regular_cohort,frequency group - binary,prepared_meals_frequency,"frequency with which the participant eats out at a resturaunt, including carryout",Regularly (3-5 times/week)/Daily,Never,None,None
+probiotic_frequency_daily_cohort,frequency group - binary,probiotic_frequency,how often the participant uses a probiotic,Daily,Never,None,None
+probiotic_frequency_occasional_cohort,frequency group - binary,probiotic_frequency,how often the participant uses a probiotic,Occasionally (1-2 times/week),Never,None,None
+probiotic_frequency_rare_cohort,frequency group - binary,probiotic_frequency,how often the participant uses a probiotic,Rarely (a few times/month),Never,None,None
+probiotic_frequency_regular_cohort,frequency group - binary,probiotic_frequency,how often the participant uses a probiotic,Regularly (3-5 times/week),Never,None,None
+ready_to_eat_meals_frequency_occasional_cohort,frequency group - binary,ready_to_eat_meals_frequency,frequency of consuming market/external source prepared foods (i.e. not home-cooked),Occasionally (1-2 times/week),Never,None,None
+ready_to_eat_meals_frequency_rare_cohort,frequency group - binary,ready_to_eat_meals_frequency,frequency of consuming market/external source prepared foods (i.e. not home-cooked),Rarely (a few times/month),Never,None,None
+ready_to_eat_meals_frequency_regular_cohort,frequency group - binary,ready_to_eat_meals_frequency,frequency of consuming market/external source prepared foods (i.e. not home-cooked),Regularly (3-5 times/week)/Daily,Never,None,None
+red_meat_frequency_occasional_cohort,frequency group - binary,red_meat_frequency,how often the participant eats red meat,Occasionally (1-2 times/week),Never,None,None
+red_meat_frequency_rare_cohort,frequency group - binary,red_meat_frequency,how often the participant eats red meat,Rarely (a few times/month),Never,None,None
+red_meat_frequency_regular_cohort,frequency group - binary,red_meat_frequency,how often the participant eats red meat,Regularly (3-5 times/week)/Daily,Never,None,None
+roommates_in_study,standard binary,roommates_in_study,Are any of the roommates in the study,Yes,No,None,None
+salted_snacks_frequency_occasional_cohort,frequency group - binary,salted_snacks_frequency,"How frequently the participant eats snaly snacks (chips, pretzels, etc)",Occasionally (1-2 times/week),Never,None,None
+salted_snacks_frequency_rare_cohort,frequency group - binary,salted_snacks_frequency,"How frequently the participant eats snaly snacks (chips, pretzels, etc)",Rarely (a few times/month),Never,None,None
+salted_snacks_frequency_regular_cohort,frequency group - binary,salted_snacks_frequency,"How frequently the participant eats snaly snacks (chips, pretzels, etc)",Regularly (3-5 times/week)/Daily,Never,None,None
+seafood_frequency_occasional_cohort,frequency group - binary,seafood_frequency,How often the participant eats fish,Occasionally (1-2 times/week),Never,None,None
+seafood_frequency_rare_cohort,frequency group - binary,seafood_frequency,How often the participant eats fish,Rarely (a few times/month),Never,None,None
+seafood_frequency_regular_cohort,frequency group - binary,seafood_frequency,How often the participant eats fish,Regularly (3-5 times/week)/Daily,Never,None,None
+seasonal_allergies,standard binary,seasonal_allergies,Does the participant have seasonal allergies,Yes,No,None,None
+sibo,standard binary,sibo,Does the the participant have Small Intestinal Bacterial Overgrowth,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+skin_condition,standard binary,skin_condition,Does the participant have a skin condition,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+smoking_frequency_occasional_cohort,frequency group - binary,smoking_frequency,How often the participant smokes,Occasionally (1-2 times/week),Never,None,None
+smoking_frequency_rare_cohort,frequency group - binary,smoking_frequency,How often the participant smokes,Rarely (a few times/month),Never,None,None
+smoking_frequency_regular_cohort,frequency group - binary,smoking_frequency,How often the participant smokes,Regularly (3-5 times/week)/Daily,Never,None,None
+softener,standard binary,softener,Does the participant use fabric softener,Yes,No,None,None
+specialized_diet_exclude_dairy,standard binary,specialized_diet_exclude_dairy,Does the participant exclude dairy from their diet,Yes,No,None,None
+specialized_diet_exclude_refined_sugars,standard binary,specialized_diet_exclude_refined_sugars,does the participant avoid foods with refined sugars,Yes,No,None,None
+specialized_diet_modified_paleo_diet,standard binary,specialized_diet_modified_paleo_diet,the participant eats a modified paleo diet,Yes,No,None,None
+specialized_diet_other_restrictions_not_described_here,standard binary,specialized_diet_other_restrictions_not_described_here,the participant has additional dietary restrictions or dietary restrictions not described here,Yes,No,None,None
+specialized_diet_paleodiet_or_primal_diet,standard binary,specialized_diet_paleodiet_or_primal_diet,the participant follows a paleo or primal diet,Yes,No,None,None
+specialized_diet_westenprice_or_other_lowgrain_low_processed_fo,standard binary,specialized_diet_westenprice_or_other_lowgrain_low_processed_fo,"the participant follows a western price or other low grain, low processed food diet",Yes,No,None,None
+sugar_sweetened_drink_frequency_occasional_cohort,frequency group - binary,sugar_sweetened_drink_frequency,"How often the participant drinks sweetened drinks (Soda, Juice)",Occasionally (1-2 times/week),Never,None,None
+sugar_sweetened_drink_frequency_rare_cohort,frequency group - binary,sugar_sweetened_drink_frequency,"How often the participant drinks sweetened drinks (Soda, Juice)",Rarely (a few times/month),Never,None,None
+sugar_sweetened_drink_frequency_regular_cohort,frequency group - binary,sugar_sweetened_drink_frequency,"How often the participant drinks sweetened drinks (Soda, Juice)",Regularly (3-5 times/week)/Daily,Never,None,None
+sugary_sweets_frequency_daily_cohort,frequency group - binary,sugary_sweets_frequency,How often the participant eats sweets.,Daily,Never,None,None
+sugary_sweets_frequency_occasional_cohort,frequency group - binary,sugary_sweets_frequency,How often the participant eats sweets.,Occasionally (1-2 times/week),Never,None,None
+sugary_sweets_frequency_rare_cohort,frequency group - binary,sugary_sweets_frequency,How often the participant eats sweets.,Rarely (a few times/month),Never,None,None
+sugary_sweets_frequency_regular_cohort,frequency group - binary,sugary_sweets_frequency,How often the participant eats sweets.,Regularly (3-5 times/week),Never,None,None
+thyroid,standard binary,thyroid,Does the participant have a thyroid disorder,"Diagnosed by a medical professional (doctor, physician assistant)",I do not have this condition,None,None
+tonsils_removed,standard binary,tonsils_removed,Were the participants pharygeal tonsils removed surgically,Yes,No,None,None
+uk_immigrant_cohort,binary (special matching/exclusion),country_of_birth,Country of birth,not United Kingdom,United Kingdom,Includes UK residents,None
+Underweight_cohort,binary (special matching/exclusion),bmi_cat,"The body mass index, categorized according to the WHO. This is calculated from the bmi_corrected column.",Underweight,Normal,None,bmi
+usa_immigrant_cohort,binary (special matching/exclusion),country_of_birth,Country of birth,not USA,USA,Includes USA residents,None
+vegan_cohort,binary (special matching/exclusion),diet_type,High level diet categorization,Vegan,Omnivore,None,diet_type
+vegetable_frequency_daily_cohort,frequency group - binary,vegetable_frequency,How often the participant eats vegetables,Daily,Never/Rarely (a few times/month),None,vegetable_frequency
+vegetable_frequency_occasional_cohort,frequency group - binary,vegetable_frequency,How often the participant eats vegetables,Occasionally (1-2 times/week),Never/Rarely (a few times/month),None,vegetable_frequency
+vegetable_frequency_regular_cohort,frequency group - binary,vegetable_frequency,How often the participant eats vegetables,Regularly (3-5 times/week),Never/Rarely (a few times/month),None,vegetable_frequency
+vegetarian_cohort,binary (special matching/exclusion),diet_type,High level diet categorization,Vegetarian,Omnivore,None,diet_type
+vitamin_b_supplement_frequency_daily_cohort,frequency group - binary,vitamin_b_supplement_frequency,How often the participant uses a Vitamin B supplement,Daily,Never,None,None
+vitamin_b_supplement_frequency_occasional_cohort,frequency group - binary,vitamin_b_supplement_frequency,How often the participant uses a Vitamin B supplement,Occasionally (1-2 times/week),Never,None,None
+vitamin_b_supplement_frequency_rare_cohort,frequency group - binary,vitamin_b_supplement_frequency,How often the participant uses a Vitamin B supplement,Rarely (a few times/month),Never,None,None
+vitamin_b_supplement_frequency_regular_cohort,frequency group - binary,vitamin_b_supplement_frequency,How often the participant uses a Vitamin B supplement,Regularly (3-5 times/week),Never,None,None
+vitamin_d_supplement_frequency_daily_cohort,frequency group - binary,vitamin_d_supplement_frequency,How often the participant uses a Vitamin D supplement,Daily,Never,None,None
+vitamin_d_supplement_frequency_occasional_cohort,frequency group - binary,vitamin_d_supplement_frequency,How often the participant uses a Vitamin D supplement,Occasionally (1-2 times/week),Never,None,None
+vitamin_d_supplement_frequency_rare_cohort,frequency group - binary,vitamin_d_supplement_frequency,How often the participant uses a Vitamin D supplement,Rarely (a few times/month),Never,None,None
+vitamin_d_supplement_frequency_regular_cohort,frequency group - binary,vitamin_d_supplement_frequency,How often the participant uses a Vitamin D supplement,Regularly (3-5 times/week),Never,None,None
+weigth_decrease_cohort,binary (special matching/exclusion),weight_change,Has the participants weight has changed more than 10 lbs in the past year?,Decreased more than 10 pounds,Remained stable,None,None
+weigth_increase_cohort,binary (special matching/exclusion),weight_change,Has the participants weight has changed more than 10 lbs in the past year?,Increased more than 10 pounds,Remained stable,None,None
+whole_eggs_daily_cohort,frequency group - binary,whole_eggs,How frequently the participant consumes whole eggs (cooked or uncooked),Daily,Never,None,None
+whole_eggs_occasional_cohort,frequency group - binary,whole_eggs,How frequently the participant consumes whole eggs (cooked or uncooked),Occasionally (1-2 times/week),Never,None,None
+whole_eggs_rare_cohort,frequency group - binary,whole_eggs,How frequently the participant consumes whole eggs (cooked or uncooked),Rarely (a few times/month),Never,None,None
+whole_eggs_regular_cohort,frequency group - binary,whole_eggs,How frequently the participant consumes whole eggs (cooked or uncooked),Regularly (3-5 times/week),Never,None,None
+whole_grain_frequency_daily_cohort,frequency group - binary,whole_grain_frequency,The frequency with which the participant eats breads or pastas with whole grains,Daily,Never,None,None
+whole_grain_frequency_occasional_cohort,frequency group - binary,whole_grain_frequency,The frequency with which the participant eats breads or pastas with whole grains,Occasionally (1-2 times/week),Never,None,None
+whole_grain_frequency_rare_cohort,frequency group - binary,whole_grain_frequency,The frequency with which the participant eats breads or pastas with whole grains,Rarely (a few times/month),Never,None,None
+whole_grain_frequency_regular_cohort,frequency group - binary,whole_grain_frequency,The frequency with which the participant eats breads or pastas with whole grains,Regularly (3-5 times/week),Never,None,None

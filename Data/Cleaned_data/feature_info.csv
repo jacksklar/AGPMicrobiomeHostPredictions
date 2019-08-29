@@ -1,0 +1,118 @@
+feature,type,plot_name
+acid_reflux,Disease,Appendix Removed
+add_adhd,Disease,ADD/ADHD
+age_young_cohort,lifestyle,Youth (1-19)
+age_old_cohort,lifestyle,Seniors (70+)
+age_over70,lifestyle,Seniors (70+)
+age_1-2,lifestyle,Infants (0-2)
+age_3-5,lifestyle,Preschooler (3-5)
+age_6-18,lifestyle,Adolescent (6-18)
+alcohol_daily_cohort,lifestyle,Alcohol Consumption: Daily
+alcohol_occasional_cohort,lifestyle,Alcohol Consumption: Occasionally (1-2 times/week)
+alcohol_rare_cohort,lifestyle,Alcohol Consumption: Rarely (a few times/month)
+alcohol_regular_cohort,lifestyle,Alcohol Consumption: Regularly (3-5 times/week)
+alcohol_types_beercider,lifestyle,Consumes Alcohol: Beer/Cider
+alcohol_types_red_wine,lifestyle,Consumes Alcohol: Red Wine
+alcohol_types_sour_beers,lifestyle,Consumes Alcohol: Sour Beer
+alcohol_types_spiritshard_alcohol,lifestyle,Consumes Alcohol: Spirits
+alcohol_types_white_wine,lifestyle,Consumes Alcohol: White Wine
+drinks_1_cohort,lifestyle,Drinks per session: 1
+drinks_1_2_cohort,lifestyle,Drinks per session: 1-2
+drinks_2_3_cohort,lifestyle,Drinks per session: 2-3
+drinks_3_4_cohort,lifestyle,Drinks per session: 3-4
+drinks_4_plus_cohort,lifestyle,Drinks per session: 4+
+heavy_drinker,lifestyle,Heavy Drinker
+mild_drinker,lifestyle,Mild Drinker
+medium_drinker,lifestyle,Medium Drinker
+allergic_to_i_have_no_food_allergies_that_i_know_of,lifestyle,No Food Allergies
+allergic_to_other,lifestyle,Food Allergy: Other
+allergic_to_peanuts,lifestyle,Food Allergy: Peanuts
+allergic_to_shellfish,lifestyle,Food Allergy: Shellfish
+allergic_to_tree_nuts,lifestyle,Food Allergy: Tree Nuts
+antiB_6Month_cohort,lifestyle,Used Antibiotics: within last month - 6 months
+antiB_Month_cohort,lifestyle,Used Antibiotics: within last week - month
+antiB_Week_cohort,lifestyle,Used Antibiotics: within last week
+antiB_Year_cohort,lifestyle,Used Antibiotics: within last 6 months - year
+appendix_removed,lifestyle,Acid Reflux
+asd_cohort,Disease,Autism Spectrum Disorder (ASD)
+autoimmune,Disease,Autoimmune Disease
+cancer,Disease,Cancer
+cardiovascular_disease,Disease,Cardiovascular Disease
+cat,lifestyle,Lives with a Cat
+celiac_cohort,Disease,Celiac Disease
+chickenpox,Disease,Had Chickenpox
+clinical_condition,Disease,Clinical Condition (Other)
+consume_animal_products_abx,lifestyle,Consumes antibiotic-treated Animal Products
+country_cohort,lifestyle,Country (US/UK)
+csection,Disease,Born via C-section
+depression_bipolar_schizophrenia,Disease,Mental Illness: Depression/Bipolar/Schizophrenia
+diabetes_typeII_cohort,Disease,Diabetes Type II
+dog,lifestyle,Lives with a Dog
+fungal_overgrowth,Disease,Fungal Overgrowth
+gender_healthy_cohort,lifestyle,Sex
+gluten_alergy_cohort,lifestyle,Allergy: Gluten
+IBD_cohort,Disease,Inflammatory Bowel Disease (IBD)
+ibs,Disease,Irritable Bowel Syndrome (IBS)
+iud_cohort,lifestyle,Uses Hormonal IUD
+lactose,Disease,Lactose Intolerant
+liver_disease,Disease,Liver Disease
+lung_disease,Disease,Lung Disease
+mental_illness,Disease,Mental Illness: General
+mental_illness_type_depression,Disease,Mental Illness: Depression
+migraine,Disease,Migraine
+multivitamin,lifestyle,Takes a Multivitamin
+nail_biter,lifestyle,Bites Nails
+no_gluten_cohort,lifestyle,Special Diet: Gluten Free 
+non_food_allergies_beestings,lifestyle,Allergy: Beesting
+non_food_allergies_drug_eg_penicillin,lifestyle,Allergy: Penicillin
+non_food_allergies_pet_dander,lifestyle,Allergy: Pet dander
+non_food_allergies_poison_ivyoak,lifestyle,Allergy: Poison Ivy/Oak
+non_food_allergies_sun,lifestyle,Allergy: Sun
+Obese_cohort,lifestyle,Obese (BMI > 30.0)
+Obese_I_cohort,lifestyle,Obese (30 >= BMI > 35.0)
+Obese_II_cohort,lifestyle,Obese class II/III (BMI >= 35.0)
+other_supplement_frequency,lifestyle,Takes Vitamin Supplements
+Overweight_cohort,lifestyle,Overweight ( 25.0 <= BMI < 30.0)
+pets_other,lifestyle,Lives with Pet (other)
+pill_cohort,lifestyle,Uses Contraceptive Pill
+seasonal_allergies,lifestyle,Allergy: Seasonal
+sibo,Disease,Small intestinal bacterial overgrowth (SIBO)
+skin_condition,Disease,Skin Condition
+softener,lifestyle,Uses Fabric-Softener
+specialized_diet_exclude_dairy,lifestyle,Special Diet: No Dairy
+specialized_diet_exclude_refined_sugars,lifestyle,Special Diet: No Refined Sugars
+specialized_diet_modified_paleo_diet,lifestyle,Special Diet: Paleo
+specialized_diet_other_restrictions_not_described_here,lifestyle,Special Diet: Other Restriction
+specialized_diet_paleodiet_or_primal_diet,lifestyle,Special Diet: Primal
+specialized_diet_westenprice_or_other_lowgrain_low_processed_fo,lifestyle,Special Diet: Westen Price
+thyroid,Disease,Thyroid Disorder
+tonsils_removed,lifestyle,Tonsils Removed
+Underweight_cohort,lifestyle,Underweight (BMI < 18.5)
+uk_immigrant_cohort,lifestyle,Immigrant (UK)
+usa_immigrant_cohort,lifestyle,Immigrant (US)
+omnivore_noRed_cohort,lifestyle,Omnivore (no red meat)
+pescatarian_cohort,lifestyle,Pescatarian
+vegan_cohort,lifestyle,Vegan
+vegetarian_cohort,lifestyle,Vegetarian
+bmf_less1_cohort,BM,BM/day: < 1
+bmf_2_cohort,BM,BM/day: 2
+bmf_3_cohort,BM,BM/day: 3
+bmf_4_cohort,BM,BM/day: 4
+bmf_5_cohort,BM,BM/day: 5+
+bmq_solid_cohort,BM,"BM Qualiy: Solid (Bristol 1 ,2)"
+bmq_loose_cohort,BM,"BM Qualiy: Loose (Bristol 5, 6, 7)"
+weigth_increase_cohort,lifestyle,Past Year Weight Gain ( > 10lbs)
+weigth_decrease_cohort,lifestyle,Past Year Weight Loss ( > 10lbs)
+nplant_6_10_cohort,lifestyle,Unique Plant Species Consumed: 6 - 10
+nplant_11_20_cohort,lifestyle,Unique Plant Species Consumed: 11 - 20
+nplant_21_30_cohort,lifestyle,Unique Plant Species Consumed: 21 - 30
+nplant_30_plus_cohort,lifestyle,Unique Plant Species Consumed: > 30
+diabetes_cohort_unmatched,lifestyle,Diabetes Type II (unmatched)
+diabetes_cohort_sex,lifestyle,Diabetes Type II (sex matched)
+diabetes_cohort_bmi,lifestyle,Diabetes Type II (BMI matched)
+diabetes_cohort_dairy,lifestyle,Diabetes Type II (Dairy frequency matched)
+diabetes_cohort_veg,lifestyle,Diabetes Type II (Vegetable frequency matched)
+diabetes_cohort_matched,lifestyle,Diabetes Type II (matched)
+diabetes_cohort_meat,lifestyle,Diabetes Type II (Meat frequency matched)
+diabetes_cohort_age,lifestyle,Diabetes Type II (age matched)
+diabetes_cohort_alc,lifestyle,Diabetes Type II (alcohol frequency matched)

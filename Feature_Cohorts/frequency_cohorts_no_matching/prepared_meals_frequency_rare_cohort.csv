@@ -1,0 +1,625 @@
+sample_name,sex,age_years,bmi,bmi_cat,country,longitude,latitude,race,antibiotic_history,diet_type,alcohol_frequency,milk_cheese_frequency,meat_eggs_frequency,vegetable_frequency,target,pairID,pairDist,worstPairDist
+ERR1073450,2,40.0,20.9,Normal,USA,-122.5,48.8,Caucasian,I have not taken antibiotics in the past year.,Vegan,0,0,0,4,0,0,0.0,3.874093727278994
+ERR2092195,2,42.0,30.27,Obese,USA,-122.5,48.8,Caucasian,I have not taken antibiotics in the past year.,Vegan,0,0,0,4,1,0,0.0,3.874093727278994
+ERR1077773,1,66.0,24.2,Normal,USA,-71.5,41.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,4,4,0,1,0.013751558757809215,3.471254686510498
+ERR1842478,1,36.0,22.27,Normal,USA,-71.3,41.5,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,4,4,4,1,1,0.013751558757809215,3.471254686510498
+ERR1089696,1,43.0,28.25,Overweight,USA,-73.8,42.6,African American,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,0,4,4,0,2,0.0020822715681067666,3.446779432449217
+ERR1080418,1,61.0,24.46,Normal,USA,-73.9,42.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,2,4,1,2,0.0020822715681067666,3.446779432449217
+ERR1074438,1,68.0,23.39,Normal,USA,-123.3,44.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,4,4,0,3,0.065826069397712,3.330260276970963
+ERR1090675,2,42.0,23.46,Normal,USA,-123.0,44.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,2,0,4,3,1,3,0.065826069397712,3.330260276970963
+ERR1074573,1,62.0,19.21,Normal,USA,-117.2,34.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,0,4,0.0,4.101471941271256
+ERR1090621,1,62.0,18.72,Normal,USA,-117.2,34.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,1,4,0.0,4.101471941271256
+ERR1075665,1,43.0,21.7,Normal,USA,-122.4,37.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,4,0,5,0.0,3.614233770226936
+ERR1089942,2,23.0,21.52,Normal,USA,-122.4,37.8,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,2,0,4,1,5,0.0,3.614233770226936
+ERR1090234,2,61.0,22.87,Normal,USA,-81.5,41.5,Caucasian,Year,Omnivore but do not eat red meat,0,1,3,4,0,6,0.0020822715681117652,3.3683166140430933
+ERR1250550,1,59.0,26.78,Overweight,USA,-81.6,41.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,0,4,3,1,6,0.0020822715681117652,3.3683166140430933
+ERR1089723,1,47.0,21.95,Normal,USA,-70.9,42.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,4,4,0,7,0.002082271568106975,3.4655654776806584
+ERR1249876,2,51.0,24.67,Normal,USA,-70.8,42.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,4,3,1,7,0.002082271568106975,3.4655654776806584
+ERR1090252,1,62.0,26.63,Overweight,USA,-111.9,33.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,2,0,8,0.004164543136163548,4.210594425948093
+ERR1249958,2,45.0,24.96,Normal,USA,-111.7,33.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,2,1,3,1,8,0.004164543136163548,4.210594425948093
+ERR1089756,2,80.0,21.29,Normal,USA,-122.2,37.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,0,2,4,0,9,0.0,3.650617093903038
+ERR2405366,1,39.0,19.26,Normal,USA,-122.2,37.4,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Vegan,0,0,0,4,1,9,0.0,3.650617093903038
+ERR1090262,1,35.0,18.29,Underweight,USA,-84.1,39.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,0,10,0.0,3.563737596709581
+ERR2579653,1,37.0,19.2,Normal,USA,-84.1,39.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,3,4,1,10,0.0,3.563737596709581
+ERR1076706,2,46.0,24.38,Normal,Canada,-79.6,43.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,0,3,4,0,11,0.01375155875780972,3.5290512749390643
+ERR2092702,1,33.0,17.93,Underweight,Canada,-79.4,43.9,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,1,3,3,4,1,11,0.01375155875780972,3.5290512749390643
+ERR2404900,1,68.0,18.66,Normal,USA,-105.1,39.9,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,0,3,4,3,0,12,0.002082271568108433,3.3982417354022227
+ERR2319430,2,39.0,26.32,Overweight,USA,-105.2,39.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,4,3,1,12,0.002082271568108433,3.3982417354022227
+ERR1076844,2,36.0,21.02,Normal,USA,-82.3,27.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,13,0.04564946825858658,5.154268534902662
+ERR2318301,2,61.0,24.41,Normal,USA,-80.2,27.1,Caucasian,Year,Omnivore,1,4,3,4,1,13,0.04564946825858658,5.154268534902662
+ERR2313947,2,45.0,23.75,Normal,USA,-122.5,37.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,3,0,14,0.0,3.615626907846387
+ERR1845953,2,36.0,22.53,Normal,USA,-122.5,37.8,Caucasian,I have not taken antibiotics in the past year.,Vegan,1,0,0,4,1,14,0.0,3.615626907846387
+ERR1080179,1,58.0,20.12,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,3,2,2,0,15,0.0,5.3697834461045515
+ERR1080192,1,71.0,15.62,Underweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,3,4,1,15,0.0,5.3697834461045515
+ERR1090361,2,56.0,22.99,Normal,United Kingdom,-1.0,51.5,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,4,3,4,0,16,0.0,5.261073555352824
+ERR1091573,2,62.0,25.53,Overweight,United Kingdom,-1.0,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,3,4,1,16,0.0,5.261073555352824
+ERR1249659,1,75.0,29.56,Overweight,United Kingdom,-4.6,50.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,4,1,4,4,0,17,0.012493629408632825,5.090871909413666
+ERR2033319,2,30.0,24.5,Normal,United Kingdom,-5.2,50.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,1,17,0.012493629408632825,5.090871909413666
+ERR1091283,1,42.0,21.71,Normal,United Kingdom,-0.6,51.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,0,18,0.0,5.286929135229556
+ERR2032786,2,72.0,26.5,Overweight,United Kingdom,-0.6,51.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,5,1,4,4,1,18,0.0,5.286929135229556
+ERR1090372,2,41.0,21.91,Normal,United Kingdom,-0.2,51.5,Caucasian,Year,Omnivore but do not eat red meat,0,0,4,0,0,19,0.0,5.271256649151817
+ERR1389648,2,61.0,22.02,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,4,4,1,19,0.0,5.271256649151817
+ERR1089840,1,32.0,23.14,Normal,United Kingdom,-0.3,51.4,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,4,1,4,0,20,0.0,5.259623656640875
+ERR1389729,1,52.0,19.68,Normal,United Kingdom,-0.3,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,2,2,3,4,1,20,0.0,5.259623656640875
+ERR2056768,1,47.0,18.62,Normal,United Kingdom,-0.1,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,4,4,0,21,0.0,5.272531853599417
+ERR1091006,2,41.0,25.66,Overweight,United Kingdom,-0.1,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,1,4,4,3,1,21,0.0,5.272531853599417
+ERR1080246,2,41.0,21.34,Normal,United Kingdom,-3.4,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,4,3,0,22,0.002082271567948479,5.272587634261215
+ERR1842781,1,54.0,23.34,Normal,United Kingdom,-3.5,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,3,4,1,22,0.002082271567948479,5.272587634261215
+ERR1080247,1,47.0,22.27,Normal,United Kingdom,-3.4,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,0,3,4,0,23,0.002082271567948479,5.272587634261215
+ERR1842782,2,51.0,21.38,Normal,United Kingdom,-3.5,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,4,4,1,23,0.002082271567948479,5.272587634261215
+ERR1080309,2,60.0,17.02,Underweight,USA,-84.5,33.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,24,0.013751558757815774,4.275130860612491
+ERR2580101,1,47.0,25.34,Overweight,USA,-84.3,33.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,3,0,1,24,0.013751558757815774,4.275130860612491
+ERR2404903,1,49.0,23.17,Normal,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,3,0,25,0.0,3.54263925498707
+ERR1091346,1,60.0,19.72,Normal,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,3,4,1,25,0.0,3.54263925498707
+ERR1458723,1,45.0,19.9,Normal,USA,-94.9,29.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,26,0.054411837582109115,4.809565330510868
+ERR1417620,1,58.0,25.18,Overweight,USA,-95.6,29.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,1,26,0.054411837582109115,4.809565330510868
+ERR1089946,2,40.0,22.24,Normal,USA,-80.0,40.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,27,0.026294175207215324,3.4767258287192098
+ERR2303955,1,30.0,25.02,Overweight,USA,-79.9,40.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,4,1,27,0.026294175207215324,3.4767258287192098
+ERR1250477,1,29.0,22.31,Normal,Canada,-79.2,43.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,2,4,0,28,0.013751558757809215,3.5327744798050222
+ERR1842260,1,22.0,19.04,Normal,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,2,2,4,1,28,0.013751558757809215,3.5327744798050222
+ERR1089968,1,63.0,24.63,Normal,USA,-82.0,27.0,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,4,1,0,4,0,29,0.07888252562164562,5.155940181290792
+ERR1089921,2,66.0,34.41,Obese,USA,-81.7,26.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,5,1,29,0.07888252562164562,5.155940181290792
+ERR1250479,2,78.0,22.69,Normal,USA,-122.2,37.8,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,0,4,4,0,30,0.0,3.611449484513121
+ERR1090850,2,66.0,30.96,Obese,USA,-122.2,37.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,3,3,3,5,1,30,0.0,3.611449484513121
+ERR1089986,2,31.0,22.11,Normal,USA,-95.5,29.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,31,0.013270184762058039,4.742925517294929
+ERR1249957,2,64.0,26.41,Overweight,USA,-95.6,29.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,4,3,1,31,0.013270184762058039,4.742925517294929
+ERR1089994,1,49.0,20.82,Normal,USA,-105.1,39.9,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,2,1,4,0,32,0.002082271568108433,3.3982417354022227
+ERR2032228,1,42.0,25.73,Overweight,USA,-105.2,39.9,Caucasian,Year,Omnivore,3,4,3,3,1,32,0.002082271568108433,3.3982417354022227
+ERR1090015,2,66.0,21.52,Normal,USA,-77.1,39.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,4,4,0,33,0.01249362940863949,3.69288187827082
+ERR1090051,2,78.0,22.51,Normal,USA,-77.7,39.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,0,2,2,1,33,0.01249362940863949,3.69288187827082
+ERR1090052,2,30.0,22.32,Normal,USA,-122.4,47.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,4,4,0,34,0.0,3.7326405389053527
+ERR1090627,2,49.0,23.01,Normal,USA,-122.4,47.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,2,4,1,34,0.0,3.7326405389053527
+ERR1090856,1,29.0,25.75,Overweight,USA,-83.6,42.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,2,4,0,35,0.013270184762068498,3.3276904119071453
+ERR2697690,1,65.0,23.03,Normal,USA,-83.7,42.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,1,35,0.013270184762068498,3.3276904119071453
+ERR1090541,1,55.0,17.47,Underweight,USA,-110.9,45.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,3,0,36,0.0,3.530157917085536
+ERR1090542,2,60.0,15.34,Underweight,USA,-110.9,45.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,2,4,1,36,0.0,3.530157917085536
+ERR1090884,2,32.0,23.75,Normal,USA,-122.3,47.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,2,4,0,37,0.002082271568108433,3.745906099007147
+ERR1090657,2,58.0,21.29,Normal,USA,-122.2,47.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,3,3,1,37,0.002082271568108433,3.745906099007147
+ERR1090149,1,34.0,20.8,Normal,USA,-75.1,40.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,4,3,0,38,0.0020822715680951036,3.59077345839065
+ERR1842448,1,31.0,20.37,Normal,USA,-75.0,40.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,4,1,38,0.0020822715680951036,3.59077345839065
+ERR1090599,2,63.0,24.41,Normal,USA,-87.0,30.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,0,39,0.0137515587578077,4.698783448501904
+ERR2304080,2,67.0,33.23,Obese,USA,-87.2,30.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,4,4,1,39,0.0137515587578077,4.698783448501904
+ERR1090153,1,66.0,23.41,Normal,USA,-124.1,40.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,4,0,40,0.0,3.349188141606101
+ERR1075029,1,66.0,19.27,Normal,USA,-124.1,40.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,1,3,3,4,1,40,0.0,3.349188141606101
+ERR1090631,1,46.0,20.18,Normal,USA,-122.5,47.3,Caucasian,Year,Omnivore,1,0,4,4,0,41,0.0,3.680729117137252
+ERR1090931,2,46.0,22.67,Normal,USA,-122.5,47.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,1,41,0.0,3.680729117137252
+ERR1090942,1,53.0,16.98,Underweight,Canada,-76.1,45.3,Caucasian,Year,Vegetarian but eat seafood,0,0,0,4,0,42,0.0,3.7375731553556752
+ERR1389980,1,46.0,20.67,Normal,Canada,-76.1,45.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,4,1,42,0.0,3.7375731553556752
+ERR1090635,2,50.0,25.04,Overweight,USA,-71.4,41.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,4,4,0,43,0.018106703856211766,3.4142254536681005
+ERR1546063,1,61.0,22.96,Normal,USA,-70.8,42.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,1,1,4,1,43,0.018106703856211766,3.4142254536681005
+ERR1090636,1,43.0,24.21,Normal,USA,-71.4,41.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,2,0,3,4,0,44,0.019601500912431416,3.4142254536681005
+ERR1417544,2,59.0,30.67,Obese,USA,-70.7,42.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,1,3,4,1,44,0.019601500912431416,3.4142254536681005
+ERR1090654,2,34.0,24.49,Normal,USA,-110.9,32.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,2,4,4,0,45,0.0,4.343259427762476
+ERR1090863,1,65.0,18.3,Underweight,USA,-110.9,32.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,3,4,1,45,0.0,4.343259427762476
+ERR1090987,1,63.0,21.3,Normal,United Kingdom,-2.5,51.4,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,0,4,4,0,46,0.002082271568161751,5.231656051178303
+ERR2032183,2,53.0,23.74,Normal,United Kingdom,-2.6,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,4,1,46,0.002082271568161751,5.231656051178303
+ERR1091382,1,43.0,24.8,Normal,United Kingdom,0.2,52.2,Caucasian,Year,Omnivore,2,4,3,3,0,47,0.0,5.349119662778168
+ERR2091997,1,55.0,19.71,Normal,United Kingdom,0.2,52.2,Caucasian,Year,Omnivore,2,3,2,4,1,47,0.0,5.349119662778168
+ERR1091385,1,73.0,22.04,Normal,United Kingdom,-0.2,53.9,Caucasian,Year,Omnivore,3,3,2,5,0,48,0.0137515587578077,5.523301180381798
+ERR2092042,1,63.0,19.68,Normal,United Kingdom,-0.4,53.8,Caucasian,Year,Omnivore,3,4,4,4,1,48,0.0137515587578077,5.523301180381798
+ERR1091388,1,39.0,23.44,Normal,United Kingdom,-0.3,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,5,4,3,4,0,49,0.0,5.269981958882189
+ERR1090992,2,51.0,24.39,Normal,United Kingdom,-0.3,51.5,Caucasian,Year,Omnivore,2,4,3,4,1,49,0.0,5.269981958882189
+ERR1249791,1,50.0,22.32,Normal,USA,-97.0,32.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,0,2,3,0,50,0.0,4.366379262781508
+ERR1091083,2,54.0,27.26,Overweight,USA,-97.0,32.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,0,3,4,1,50,0.0,4.366379262781508
+ERR1091089,2,50.0,22.87,Normal,USA,-74.0,40.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,4,4,0,51,0.0,3.506214485154432
+ERR1090706,1,52.0,24.28,Normal,USA,-74.0,40.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,4,1,51,0.0,3.506214485154432
+ERR1842682,2,48.0,21.02,Normal,USA,-118.1,34.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,1,1,3,0,52,0.0020822715680551152,4.072648082932432
+ERR1597048,1,68.0,21.74,Normal,USA,-118.2,34.2,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,0,4,3,4,1,52,0.0020822715680551152,4.072648082932432
+ERR1091109,2,27.0,21.79,Normal,USA,-82.9,42.6,Caucasian,I have not taken antibiotics in the past year.,Other,0,1,4,0,0,53,0.0020822715681051004,3.3576547530956793
+ERR1090953,2,60.0,20.83,Normal,USA,-83.0,42.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,0,4,3,1,53,0.0020822715681051004,3.3576547530956793
+ERR1091111,1,25.0,18.79,Normal,USA,-82.9,42.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,0,0,54,0.013270184762068498,3.3576547530956793
+ERR1080058,2,54.0,24.39,Normal,USA,-83.0,42.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,3,4,1,54,0.013270184762068498,3.3576547530956793
+ERR1091113,2,69.0,24.8,Normal,USA,-70.9,43.0,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,4,3,1,4,0,55,0.029036848498844445,3.5222230724258035
+ERR1091836,1,52.0,19.13,Normal,USA,-71.5,43.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,0,4,4,1,55,0.029036848498844445,3.5222230724258035
+ERR1091449,1,49.0,22.65,Normal,United Kingdom,-2.0,53.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,0,4,4,0,56,0.01249362940866837,5.416403920031599
+ERR1249828,1,57.0,20.16,Normal,United Kingdom,-2.6,53.1,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,3,1,2,4,1,56,0.01249362940866837,5.416403920031599
+ERR1091127,2,60.0,23.58,Normal,United Kingdom,-0.2,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,2,2,0,57,0.008329086272380415,5.312801262045442
+ERR1458842,2,67.0,22.41,Normal,United Kingdom,0.2,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,0,3,3,1,57,0.008329086272380415,5.312801262045442
+ERR1091130,1,68.0,25.2,Overweight,United Kingdom,-1.4,51.0,Caucasian,Year,Omnivore but do not eat red meat,0,4,3,3,0,58,0.010411357840531502,5.204187571024665
+ERR2313963,1,60.0,24.96,Normal,United Kingdom,-1.9,51.0,Caucasian,Year,Omnivore,3,2,2,4,1,58,0.010411357840531502,5.204187571024665
+ERR1091148,1,55.0,24.57,Normal,United Kingdom,0.0,51.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,2,3,0,59,0.0,5.232478580798843
+ERR1091569,1,52.0,21.97,Normal,United Kingdom,0.0,51.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,1,59,0.0,5.232478580798843
+ERR1091153,1,63.0,19.73,Normal,United Kingdom,-1.5,54.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,2,3,4,0,60,0.0,5.518198136327441
+ERR1091473,1,64.0,25.73,Overweight,United Kingdom,-1.5,54.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,0,3,3,1,60,0.0,5.518198136327441
+ERR1091475,2,65.0,22.45,Normal,United Kingdom,-0.1,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,3,4,0,61,0.0,5.262178570684681
+ERR1091483,2,38.0,24.49,Normal,United Kingdom,-0.1,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,3,2,1,61,0.0,5.262178570684681
+ERR2032509,1,49.0,29.1,Overweight,United Kingdom,-1.2,53.0,Caucasian,Year,Omnivore,1,3,4,4,0,62,0.012493629408632825,5.415664702946427
+ERR2314161,2,63.0,29.07,Overweight,United Kingdom,-1.8,53.0,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,4,0,4,1,62,0.012493629408632825,5.415664702946427
+ERR1250542,1,59.0,19.08,Normal,United Kingdom,-1.5,52.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,4,0,63,0.0,5.348758975810811
+ERR1389647,2,69.0,21.15,Normal,United Kingdom,-1.5,52.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,2,3,4,1,63,0.0,5.348758975810811
+ERR1091173,2,30.0,19.58,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,3,0,64,0.0,5.271256649151817
+ERR2056783,1,54.0,21.95,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Other,4,2,4,4,1,64,0.0,5.271256649151817
+ERR1091524,1,37.0,20.31,Normal,United Kingdom,-0.3,51.6,Caucasian,I have not taken antibiotics in the past year.,Vegan,0,0,0,3,0,65,0.0,5.280352470080823
+ERR1844516,2,65.0,21.74,Normal,United Kingdom,-0.3,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,3,1,65,0.0,5.280352470080823
+ERR1842148,1,71.0,23.42,Normal,United Kingdom,-3.2,50.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,3,2,3,4,0,66,0.002082271567948479,5.15013421145711
+ERR1842565,1,57.0,20.83,Normal,United Kingdom,-3.1,50.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,4,1,66,0.002082271567948479,5.15013421145711
+ERR1091196,2,75.0,25.75,Overweight,United Kingdom,-2.2,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,0,67,0.002082271568161751,5.287605184691604
+ERR1250519,1,40.0,21.35,Normal,United Kingdom,-2.1,51.9,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,1,2,3,1,67,0.002082271568161751,5.287605184691604
+ERR1091616,1,39.0,18.34,Underweight,United Kingdom,1.0,52.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,1,4,0,68,0.0,5.338404431259409
+ERR1597017,1,38.0,19.1,Normal,United Kingdom,1.0,52.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,4,2,1,68,0.0,5.338404431259409
+ERR1091617,1,68.0,20.69,Normal,United Kingdom,-0.2,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,4,4,0,69,0.0,5.260900856676527
+ERR1249771,2,58.0,26.91,Overweight,United Kingdom,-0.2,51.4,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,3,4,1,4,1,69,0.0,5.260900856676527
+ERR2697554,2,68.0,19.44,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,3,0,70,0.0,5.3697834461045515
+ERR2579637,2,68.0,22.53,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,2,2,4,1,70,0.0,5.3697834461045515
+ERR1250549,1,49.0,25.24,Overweight,United Kingdom,-0.3,51.5,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,1,1,3,4,0,71,0.0,5.269981958882189
+ERR1091138,1,38.0,34.48,Obese,United Kingdom,-0.3,51.5,Caucasian,Year,Omnivore,2,2,3,4,1,71,0.0,5.269981958882189
+ERR1417433,1,36.0,20.28,Normal,United Kingdom,-0.1,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,0,4,4,0,72,0.0,5.282897359268434
+ERR1417414,1,59.0,21.26,Normal,United Kingdom,-0.1,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,2,2,4,1,72,0.0,5.282897359268434
+ERR1249897,1,45.0,16.6,Underweight,USA,-82.5,27.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,0,5,0,73,0.0,5.039562498527585
+ERR1090797,1,46.0,26.31,Overweight,USA,-82.5,27.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,2,1,73,0.0,5.039562498527585
+ERR1091717,1,45.0,16.24,Underweight,USA,-73.7,41.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,74,0.004164543136213533,3.4620657914612836
+ERR2304091,1,39.0,21.75,Normal,USA,-73.9,41.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,4,4,1,74,0.004164543136213533,3.4620657914612836
+ERR1389683,2,58.0,30.4,Obese,USA,-86.2,39.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,4,4,0,75,0.0137515587578077,3.559744858460649
+ERR2032921,2,52.0,29.16,Overweight,USA,-86.0,39.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,1,75,0.0137515587578077,3.559744858460649
+ERR1249928,1,66.0,23.24,Normal,United Kingdom,-1.9,53.9,Caucasian,Year,Vegetarian but eat seafood,1,4,2,3,0,76,0.0020822715682683865,5.502691108804484
+ERR1091530,1,55.0,30.82,Obese,United Kingdom,-1.8,53.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,1,4,1,76,0.0020822715682683865,5.502691108804484
+ERR1417455,1,46.0,20.2,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,3,4,0,77,0.0,5.271256649151817
+ERR1091189,2,53.0,23.59,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,3,1,77,0.0,5.271256649151817
+ERR1417461,1,37.0,19.15,Normal,United Kingdom,-1.1,50.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,3,4,0,78,0.008329086272433731,5.177122316864583
+ERR1842398,2,31.0,26.11,Overweight,United Kingdom,-1.5,50.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,4,3,1,78,0.008329086272433731,5.177122316864583
+ERR1845883,1,62.0,22.98,Normal,United Kingdom,-0.1,51.5,Other,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,0,79,0.0,5.272531853599417
+ERR1091372,2,35.0,18.17,Underweight,United Kingdom,-0.1,51.5,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,1,2,3,1,79,0.0,5.272531853599417
+ERR1417466,1,37.0,19.37,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,80,0.0,5.271256649151817
+ERR1091521,1,42.0,23.03,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,1,3,4,1,80,0.0,5.271256649151817
+ERR1250563,1,74.0,21.71,Normal,United Kingdom,-4.5,50.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,3,4,0,81,0.014518424249429533,5.102482807751134
+ERR1080182,1,54.0,26.15,Overweight,United Kingdom,-4.8,50.5,Caucasian,Year,Omnivore,2,1,3,3,1,81,0.014518424249429533,5.102482807751134
+ERR1417494,1,62.0,25.39,Overweight,United Kingdom,-0.4,53.1,Caucasian,Year,Omnivore,3,2,3,4,0,82,0.0,5.436092563007455
+ERR1389704,2,66.0,22.69,Normal,United Kingdom,-0.4,53.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,4,4,1,82,0.0,5.436092563007455
+ERR1417510,1,57.0,20.97,Normal,United Kingdom,-6.3,58.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,4,3,0,83,0.0,5.9333766296015416
+ERR1841727,1,37.0,20.72,Normal,United Kingdom,-6.3,58.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,3,1,83,0.0,5.9333766296015416
+ERR1597011,2,37.0,26.47,Overweight,United Kingdom,0.5,51.2,Caucasian,Year,Omnivore,2,3,3,3,0,84,0.0020822715678418435,5.249216248968535
+ERR1842155,1,60.0,22.77,Normal,United Kingdom,0.4,51.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,4,4,1,84,0.0020822715678418435,5.249216248968535
+ERR1843496,1,42.0,23.08,Normal,United Kingdom,-4.1,53.2,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,4,1,4,0,85,0.0,5.401413336713612
+ERR2092000,1,60.0,20.96,Normal,United Kingdom,-4.1,53.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,2,4,1,85,0.0,5.401413336713612
+ERR1597015,1,44.0,19.68,Normal,United Kingdom,-4.0,51.0,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,2,3,2,4,0,86,0.026945695182979776,5.171047764443708
+ERR1459038,1,68.0,24.96,Normal,United Kingdom,-3.7,50.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,2,4,1,86,0.026945695182979776,5.171047764443708
+ERR1458826,1,62.0,19.71,Normal,United Kingdom,-2.9,53.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,5,3,4,0,87,0.0020822715682683865,5.469261596925572
+ERR1841484,1,65.0,31.92,Obese,United Kingdom,-2.8,53.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,3,1,87,0.0020822715682683865,5.469261596925572
+ERR1389719,1,34.0,24.11,Normal,United Kingdom,0.1,51.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,4,0,88,0.0020822715678418435,5.254399583524167
+ERR1091549,1,59.0,25.94,Overweight,United Kingdom,0.2,51.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,3,4,1,88,0.0020822715678418435,5.254399583524167
+ERR2697558,1,46.0,27.44,Overweight,USA,-105.0,40.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,4,0,89,0.0,3.32305637363551
+ERR1090904,1,23.0,22.24,Normal,USA,-105.0,40.5,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,4,1,4,1,89,0.0,3.32305637363551
+ERR1091828,1,39.0,21.87,Normal,USA,-105.0,39.7,Caucasian,Year,Omnivore,1,0,4,4,0,90,0.0,3.424069957659219
+ERR1073012,1,37.0,19.27,Normal,USA,-105.0,39.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,3,4,1,90,0.0,3.424069957659219
+ERR2303831,1,41.0,22.31,Normal,USA,-122.2,47.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,2,0,0,91,0.0,3.733404796925472
+ERR1545886,1,32.0,18.07,Underweight,USA,-122.2,47.7,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Vegetarian,2,4,2,4,1,91,0.0,3.733404796925472
+ERR2696821,1,76.0,22.86,Normal,USA,-75.2,39.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,2,2,0,4,0,92,0.0020822715681150976,3.6136376275188136
+ERR1089937,1,62.0,22.27,Normal,USA,-75.3,39.9,Caucasian,Year,Omnivore,4,2,2,4,1,92,0.0020822715681150976,3.6136376275188136
+ERR1250008,2,24.0,19.61,Normal,USA,-71.1,42.3,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,0,4,3,4,0,93,0.0,3.440869231951788
+ERR1090303,1,33.0,27.44,Overweight,USA,-71.1,42.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,4,1,93,0.0,3.440869231951788
+ERR1250025,1,36.0,27.78,Overweight,USA,-84.4,33.7,Hispanic,Year,Omnivore,1,0,3,4,0,94,0.024603809401612137,4.300693118322301
+ERR1845849,2,67.0,27.17,Overweight,USA,-83.4,33.8,Caucasian,Year,Vegetarian,1,4,0,4,1,94,0.024603809401612137,4.300693118322301
+ERR1841558,2,25.0,21.72,Normal,USA,-71.1,42.4,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Vegetarian,0,1,2,0,0,95,0.0,3.4521571856116195
+ERR1075876,2,39.0,20.28,Normal,USA,-71.1,42.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,4,1,95,0.0,3.4521571856116195
+ERR1250596,1,59.0,19.69,Normal,USA,-72.3,43.8,Caucasian,Year,Omnivore but do not eat red meat,1,1,1,4,0,96,0.008329086272427483,3.599428147696044
+ERR1841458,2,66.0,32.98,Obese,USA,-72.7,43.8,Caucasian,Year,Omnivore,3,4,3,3,1,96,0.008329086272427483,3.599428147696044
+ERR1250600,1,59.0,22.27,Normal,USA,-117.3,32.8,Caucasian,Year,Omnivore,4,2,3,4,0,97,0.0,4.256511621021133
+ERR1250601,2,61.0,20.54,Normal,USA,-117.3,32.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,3,3,1,97,0.0,4.256511621021133
+ERR1458888,2,55.0,26.45,Overweight,USA,-71.1,42.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,3,3,0,98,0.0,3.4521571856116195
+ERR1090561,1,35.0,35.15,Obese,USA,-71.1,42.4,African American,I have not taken antibiotics in the past year.,Other,0,2,1,2,1,98,0.0,3.4521571856116195
+ERR1250112,2,68.0,24.39,Normal,USA,-80.3,25.7,Caucasian,I have not taken antibiotics in the past year.,Vegan,0,0,4,4,0,99,0.004164543136003594,5.329580516995545
+ERR1842185,1,20.0,21.97,Normal,USA,-80.5,25.7,Hispanic,I have not taken antibiotics in the past year.,Omnivore,1,4,3,3,1,99,0.004164543136003594,5.329580516995545
+ERR1845911,2,31.0,20.05,Normal,United Kingdom,-0.6,51.4,Other,I have not taken antibiotics in the past year.,Omnivore,0,0,4,0,0,100,0.002082271568161751,5.255795144115158
+ERR1843467,2,46.0,23.55,Normal,United Kingdom,-0.5,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,4,4,1,100,0.002082271568161751,5.255795144115158
+ERR1250132,2,38.0,22.89,Normal,USA,-151.3,60.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,4,4,0,101,0.06325546016800478,5.373990920890632
+ERR1841738,1,58.0,23.4,Normal,USA,-149.6,61.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,4,1,1,4,1,101,0.06325546016800478,5.373990920890632
+ERR1389750,2,29.0,23.73,Normal,USA,-81.6,30.3,Caucasian,I have not taken antibiotics in the past year.,Vegan,0,0,0,4,0,102,0.004164543136270184,4.743144101158676
+ERR1090946,1,50.0,20.6,Normal,USA,-81.4,30.3,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,1,1,3,1,102,0.004164543136270184,4.743144101158676
+ERR1389758,2,79.0,24.09,Normal,United Kingdom,0.1,51.6,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,4,3,4,0,103,0.0020822715680551152,5.285444304472539
+ERR1843668,1,57.0,19.24,Normal,United Kingdom,0.0,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,2,4,1,103,0.0020822715680551152,5.285444304472539
+ERR2032536,1,72.0,21.79,Normal,United Kingdom,-2.0,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,3,4,0,104,0.002082271568161751,5.290115439617849
+ERR2056913,1,61.0,22.86,Normal,United Kingdom,-2.1,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,4,1,104,0.002082271568161751,5.290115439617849
+ERR1417564,1,56.0,24.19,Normal,United Kingdom,-2.2,50.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,3,4,0,105,0.013105798286866263,5.173276538145638
+ERR1249809,1,28.0,20.76,Normal,United Kingdom,-2.2,50.7,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,1,0,4,1,105,0.013105798286866263,5.173276538145638
+ERR1389773,1,71.0,23.78,Normal,United Kingdom,-3.0,53.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,0,106,0.004164543136216866,5.47873978434588
+ERR1458985,2,31.0,26.01,Overweight,United Kingdom,-2.8,53.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,3,4,1,106,0.004164543136216866,5.47873978434588
+ERR1389778,1,66.0,18.64,Normal,United Kingdom,0.1,50.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,0,4,4,0,107,0.004164543136163548,5.2029070022489625
+ERR1842162,1,38.0,18.72,Normal,United Kingdom,-0.1,50.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,3,4,1,107,0.004164543136163548,5.2029070022489625
+ERR1842205,2,49.0,25.75,Overweight,United Kingdom,-3.2,56.0,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,4,1,4,0,108,0.0,5.714058045337716
+ERR2314057,2,57.0,21.74,Normal,United Kingdom,-3.2,56.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,3,3,1,108,0.0,5.714058045337716
+ERR2091858,2,55.0,29.84,Overweight,United Kingdom,-3.1,55.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,1,1,1,2,0,109,0.0,5.704306905081044
+ERR2091857,1,50.0,23.63,Normal,United Kingdom,-3.1,55.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,3,3,1,109,0.0,5.704306905081044
+ERR1417613,1,57.0,25.5,Overweight,United Kingdom,-3.3,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,3,3,0,110,0.0,5.242427884561264
+ERR2056911,1,41.0,33.41,Obese,United Kingdom,-3.3,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,3,3,1,110,0.0,5.242427884561264
+ERR2032553,1,53.0,19.84,Normal,USA,-117.1,32.6,Asian or Pacific Islander,Year,Omnivore but do not eat red meat,0,3,2,2,0,111,0.0020822715682683865,4.2830516827087735
+ERR2091864,2,49.0,25.09,Overweight,USA,-117.0,32.6,Hispanic,Year,Omnivore,0,4,4,3,1,111,0.0020822715682683865,4.2830516827087735
+ERR1854682,1,51.0,19.49,Normal,USA,-117.3,33.1,Caucasian,I have not taken antibiotics in the past year.,Other,3,2,3,3,0,112,0.0,4.2176561647627056
+ERR1845945,1,78.0,22.5,Normal,USA,-117.3,33.1,Caucasian,I have not taken antibiotics in the past year.,Other,3,4,3,4,1,112,0.0,4.2176561647627056
+ERR2032579,1,60.0,18.88,Normal,USA,-117.0,32.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,4,4,2,4,0,113,0.0,4.25746648933309
+ERR1080080,1,54.0,21.26,Normal,USA,-117.0,32.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,4,3,1,113,0.0,4.25746648933309
+ERR1854693,2,70.0,24.75,Normal,USA,-117.0,32.6,Hispanic,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,3,1,4,0,114,0.0,4.283369035906936
+ERR2091882,1,52.0,21.09,Normal,USA,-117.0,32.6,Hispanic,I have not taken antibiotics in the past year.,Omnivore,0,1,4,0,1,114,0.0,4.283369035906936
+ERR1250635,2,30.0,20.8,Normal,USA,-95.2,39.0,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,1,3,3,0,115,0.004164543136216866,3.5705901859034457
+ERR2092236,1,47.0,19.57,Normal,USA,-95.4,39.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,4,4,3,4,1,115,0.004164543136216866,3.5705901859034457
+ERR1316063,1,62.0,19.74,Normal,USA,-107.3,39.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,0,0,4,0,116,0.0,3.424430977461556
+ERR1459091,1,60.0,20.53,Normal,USA,-107.3,39.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,2,3,3,4,1,116,0.0,3.424430977461556
+ERR1841604,1,54.0,19.77,Normal,USA,-122.2,37.4,Caucasian,Year,Vegetarian but eat seafood,1,1,3,4,0,117,0.0020822715680551152,3.6451512720022334
+ERR2313943,1,45.0,19.26,Normal,USA,-122.1,37.4,Caucasian,Year,Vegetarian but eat seafood,2,3,0,4,1,117,0.0020822715680551152,3.6451512720022334
+ERR1389911,1,47.0,25.7,Overweight,USA,-93.0,45.2,Caucasian,I have not taken antibiotics in the past year.,Vegan,3,1,0,4,0,118,0.004164543136216866,3.5841726517081867
+ERR1459077,1,40.0,17.7,Underweight,USA,-93.2,45.2,Caucasian,I have not taken antibiotics in the past year.,Vegan,1,0,0,4,1,118,0.004164543136216866,3.5841726517081867
+ERR1417643,2,27.0,16.04,Underweight,USA,-75.9,40.6,Caucasian,I have not taken antibiotics in the past year.,Other,0,0,4,0,0,119,0.01665817254485455,3.524401372428556
+ERR1090855,1,42.0,22.71,Normal,USA,-75.1,40.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,2,3,4,1,119,0.01665817254485455,3.524401372428556
+ERR1678428,1,64.0,21.63,Normal,USA,-92.3,34.8,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Vegetarian,2,1,1,4,0,120,0.013270184762066406,4.114169284579859
+ERR2057186,1,33.0,24.27,Normal,USA,-92.4,34.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,3,3,1,120,0.013270184762066406,4.114169284579859
+ERR1841619,1,64.0,20.8,Normal,USA,-96.5,47.0,Caucasian,Year,Omnivore,0,4,3,4,0,121,0.014518424249421886,3.7809056400090104
+ERR2032797,2,38.0,33.09,Obese,USA,-96.8,46.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,1,3,2,4,1,121,0.014518424249421886,3.7809056400090104
+ERR1458984,1,55.0,26.43,Overweight,United Kingdom,0.1,52.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,122,0.0020822715680551152,5.358304460762254
+ERR1091001,1,43.0,24.83,Normal,United Kingdom,0.2,52.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,3,4,1,122,0.0020822715680551152,5.358304460762254
+ERR1458987,1,63.0,20.31,Normal,United Kingdom,-0.3,51.4,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,4,2,4,0,123,0.0,5.259623656640875
+ERR1458924,1,46.0,24.56,Normal,United Kingdom,-0.3,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,1,123,0.0,5.259623656640875
+ERR1459012,1,48.0,23.71,Normal,United Kingdom,-0.1,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,4,0,124,0.0,5.272531853599417
+ERR1091373,2,62.0,23.04,Normal,United Kingdom,-0.1,51.5,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,1,1,4,1,124,0.0,5.272531853599417
+ERR1597051,1,55.0,21.95,Normal,United Kingdom,-2.1,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,0,125,0.0020822715682683865,5.257541479965322
+ERR1091131,1,53.0,26.05,Overweight,United Kingdom,-2.2,51.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,3,3,2,4,1,125,0.0020822715682683865,5.257541479965322
+ERR1459037,1,60.0,24.21,Normal,United Kingdom,-2.3,53.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,0,126,0.004164543136216866,5.402133842263901
+ERR2032754,2,61.0,25.55,Overweight,United Kingdom,-2.5,53.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,4,4,1,126,0.004164543136216866,5.402133842263901
+ERR1389974,1,44.0,20.83,Normal,Canada,-79.3,43.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,5,3,4,0,127,0.01327018476206902,3.531842205081343
+ERR2404926,2,64.0,36.18,Obese,Canada,-79.4,43.9,Caucasian,Year,Omnivore,3,4,4,4,1,127,0.01327018476206902,3.531842205081343
+ERR1843638,2,60.0,24.13,Normal,United Kingdom,-1.3,52.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,4,3,3,0,128,0.012493629408650597,5.40387383102571
+ERR2314051,2,70.0,20.89,Normal,United Kingdom,-0.7,52.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,4,1,128,0.012493629408650597,5.40387383102571
+ERR2056832,1,36.0,25.09,Overweight,USA,-97.0,32.6,Caucasian,Year,Omnivore,0,2,2,0,0,129,0.039810554286202005,4.366379262781508
+ERR1091727,2,65.0,28.35,Overweight,USA,-97.3,32.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,1,1,0,1,129,0.039810554286202005,4.366379262781508
+ERR1842749,1,73.0,18.25,Underweight,USA,-122.1,37.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,4,4,4,0,130,0.0,3.697300176884809
+ERR2032862,1,22.0,20.98,Normal,USA,-122.1,37.0,Other,Year,Vegetarian but eat seafood,1,1,1,4,1,130,0.0,3.697300176884809
+ERR2091897,1,61.0,16.14,Underweight,USA,-83.0,40.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,2,4,4,0,131,0.002082271568101768,3.5360892368366112
+ERR2405347,2,21.0,28.97,Overweight,USA,-82.9,40.0,Hispanic,Year,Omnivore,2,2,4,3,1,131,0.002082271568101768,3.5360892368366112
+ERR1459177,1,55.0,27.46,Overweight,USA,-86.6,39.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,2,0,132,0.01673793060147656,3.5445081228576556
+ERR1597043,1,32.0,24.96,Normal,USA,-86.1,39.8,Caucasian,Year,Omnivore,3,3,4,4,1,132,0.01673793060147656,3.5445081228576556
+ERR1459191,1,47.0,19.94,Normal,USA,-73.5,41.6,Hispanic,Year,Omnivore,0,0,2,4,0,133,0.006246814704319745,3.428877857309258
+ERR2314319,1,41.0,24.19,Normal,USA,-73.2,41.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,0,0,4,1,133,0.006246814704319745,3.428877857309258
+ERR1841689,1,24.0,29.32,Overweight,United Kingdom,-0.1,51.5,Caucasian,I have not taken antibiotics in the past year.,Vegan,1,0,0,4,0,134,0.0,5.272531853599417
+ERR1249801,1,69.0,25.53,Overweight,United Kingdom,-0.1,51.5,Caucasian,Year,Omnivore,1,1,3,4,1,134,0.0,5.272531853599417
+ERR1842286,1,52.0,23.56,Normal,United Kingdom,-1.1,51.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,4,0,135,2.9802322387695312e-08,5.28059615581562
+ERR1597093,1,61.0,29.76,Overweight,United Kingdom,-1.1,51.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,1,135,2.9802322387695312e-08,5.28059615581562
+ERR2032697,1,61.0,30.9,Obese,United Kingdom,-1.9,53.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,1,3,4,0,136,0.004164543136216866,5.502691108804484
+ERR1091605,1,61.0,20.34,Normal,United Kingdom,-1.7,53.9,Caucasian,Year,Vegetarian,3,3,3,4,1,136,0.004164543136216866,5.502691108804484
+ERR1841699,2,46.0,24.68,Normal,United Kingdom,-2.5,53.5,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,3,1,3,0,137,0.004164543136216866,5.452780083837558
+ERR1091371,1,64.0,24.16,Normal,United Kingdom,-2.3,53.5,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,0,2,2,4,1,137,0.004164543136216866,5.452780083837558
+ERR1841701,2,55.0,23.1,Normal,United Kingdom,-2.1,51.9,Caucasian,Year,Omnivore but do not eat red meat,0,4,4,4,0,138,0.008329086272433731,5.288860051180732
+ERR1597139,1,37.0,21.97,Normal,United Kingdom,-1.7,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,3,4,1,138,0.008329086272433731,5.288860051180732
+ERR1843703,1,43.0,21.72,Normal,United Kingdom,1.0,51.4,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,2,2,4,0,139,0.008329086272407072,5.276267240061244
+ERR1417499,1,64.0,22.26,Normal,United Kingdom,0.6,51.4,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,4,2,1,3,1,139,0.008329086272407072,5.276267240061244
+ERR1843715,2,60.0,23.43,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,3,4,0,140,0.0,5.271256649151817
+ERR1091576,1,58.0,28.12,Overweight,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,1,2,3,1,140,0.0,5.271256649151817
+ERR1843724,2,62.0,24.97,Normal,United Kingdom,-1.5,54.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,3,2,0,141,0.0020822715680551152,5.528879735583813
+ERR2091922,1,57.0,18.7,Normal,United Kingdom,-1.6,54.1,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,3,3,2,4,1,141,0.0020822715680551152,5.528879735583813
+ERR1597146,1,30.0,19.47,Normal,United Kingdom,-0.3,51.2,Caucasian,Year,Omnivore,0,2,4,4,0,142,0.0020822715680551152,5.238943968615613
+ERR1841522,1,54.0,28.84,Overweight,United Kingdom,-0.4,51.2,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,0,2,4,1,142,0.0020822715680551152,5.238943968615613
+ERR1842780,1,45.0,20.7,Normal,United Kingdom,-3.2,55.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,0,3,4,0,143,0.0,5.703151052940385
+ERR1090226,2,45.0,23.15,Normal,United Kingdom,-3.2,55.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,4,1,143,0.0,5.703151052940385
+ERR1597234,1,67.0,20.9,Normal,United Kingdom,-1.2,52.4,Other,I have not taken antibiotics in the past year.,Omnivore,0,4,3,4,0,144,0.008329086272407072,5.352499122629062
+ERR1841707,1,69.0,26.19,Overweight,United Kingdom,-1.6,52.4,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,3,4,3,3,1,144,0.008329086272407072,5.352499122629062
+ERR1597235,1,56.0,18.65,Normal,United Kingdom,-0.9,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,3,4,0,145,2.9802322387695312e-08,5.251971270837314
+ERR1091465,1,58.0,20.9,Normal,United Kingdom,-0.9,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,1,145,2.9802322387695312e-08,5.251971270837314
+ERR1842418,1,36.0,25.96,Overweight,United Kingdom,-3.6,56.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,1,4,4,0,146,0.008329086272380415,5.709448723281901
+ERR2092038,2,34.0,24.05,Normal,United Kingdom,-3.2,56.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,2,4,1,146,0.008329086272380415,5.709448723281901
+ERR2319880,1,67.0,19.58,Normal,USA,-104.9,39.7,Caucasian,Year,Vegetarian but eat seafood,1,3,2,4,0,147,0.0,3.4246201151132123
+ERR2319865,1,53.0,20.36,Normal,USA,-104.9,39.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,1,147,0.0,3.4246201151132123
+ERR1546034,1,24.0,24.03,Normal,Canada,-122.8,49.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,2,4,0,148,0.0155285423291901,3.898814209382006
+ERR2092065,2,58.0,22.38,Normal,Canada,-123.2,49.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,2,4,1,148,0.0155285423291901,3.898814209382006
+ERR1842466,2,45.0,21.9,Normal,USA,-122.1,37.4,Hispanic,I have not taken antibiotics in the past year.,Omnivore,0,4,4,4,0,149,0.0,3.6454634985956527
+ERR1091767,1,64.0,18.56,Normal,USA,-122.1,37.4,Caucasian,Year,Vegan,0,0,0,4,1,149,0.0,3.6454634985956527
+ERR2579386,2,33.0,21.24,Normal,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,4,3,0,150,0.0,3.54263925498707
+ERR2318181,2,46.0,22.92,Normal,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,2,2,1,150,0.0,3.54263925498707
+ERR1678480,1,62.0,22.81,Normal,USA,-88.3,41.9,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,4,1,4,0,151,0.004164543136216866,3.2637895471152527
+ERR1389686,1,54.0,19.73,Normal,USA,-88.1,41.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,4,1,151,0.004164543136216866,3.2637895471152527
+ERR2523874,1,38.0,18.88,Normal,USA,-72.8,41.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,0,4,4,0,152,0.0,3.4705259908857427
+ERR2523875,2,44.0,24.45,Normal,USA,-72.8,41.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,3,4,1,152,0.0,3.4705259908857427
+ERR2696827,1,55.0,18.32,Underweight,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,3,4,3,4,0,153,0.0,3.4491279893346913
+ERR2308516,1,53.0,23.63,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,4,3,1,153,0.0,3.4491279893346913
+ERR1546069,1,46.0,17.94,Underweight,USA,-71.4,42.2,Caucasian,Year,Omnivore,0,3,2,4,0,154,0.0,3.4264087221849495
+ERR1545870,1,47.0,22.86,Normal,USA,-71.4,42.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,2,2,1,154,0.0,3.4264087221849495
+ERR1843815,1,35.0,17.57,Underweight,United Kingdom,1.1,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,4,4,0,155,0.0020822715678418435,5.32928934861542
+ERR1678421,1,44.0,27.12,Overweight,United Kingdom,1.0,51.9,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,2,2,2,3,1,155,0.0020822715678418435,5.32928934861542
+ERR1842574,1,58.0,25.23,Overweight,United Kingdom,-4.2,56.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,1,4,0,156,0.0062468147042364355,5.724436071778866
+ERR2696709,2,60.0,25.8,Overweight,United Kingdom,-4.5,56.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,2,4,1,156,0.0062468147042364355,5.724436071778866
+ERR1843835,2,66.0,23.37,Normal,United Kingdom,-2.1,53.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,2,3,3,4,0,157,0.008329086272433731,5.436387744884682
+ERR1091525,1,66.0,19.08,Normal,United Kingdom,-2.5,53.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,3,1,157,0.008329086272433731,5.436387744884682
+ERR2056880,1,57.0,20.52,Normal,United Kingdom,-1.9,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,0,158,0.006246814704307526,5.260067730769357
+ERR2319364,2,61.0,25.25,Overweight,United Kingdom,-2.2,51.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,4,4,3,4,1,158,0.006246814704307526,5.260067730769357
+ERR2056881,1,30.0,20.57,Normal,United Kingdom,-1.8,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,2,4,4,0,159,0.008329086272433731,5.2613316374477215
+ERR1841734,2,66.0,23.62,Normal,United Kingdom,-1.4,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,4,4,1,159,0.008329086272433731,5.2613316374477215
+ERR1842586,1,25.0,20.2,Normal,United Kingdom,-2.7,52.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,3,3,0,160,0.004164543136270184,5.291816782804296
+ERR1417521,1,59.0,23.34,Normal,United Kingdom,-2.5,52.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,2,3,1,160,0.004164543136270184,5.291816782804296
+ERR1842592,1,46.0,23.24,Normal,USA,-118.4,34.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,3,4,0,161,0.0,4.097588262230859
+ERR1389932,1,50.0,27.48,Overweight,USA,-118.4,34.0,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,0,0,4,1,161,0.0,4.097588262230859
+ERR1846096,2,39.0,24.76,Normal,United Kingdom,-2.9,53.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,3,0,162,0.0,5.437276330822431
+ERR1091533,2,58.0,27.32,Overweight,United Kingdom,-2.9,53.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,4,4,1,162,0.0,5.437276330822431
+ERR2314050,2,56.0,26.32,Overweight,USA,-122.7,45.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,3,0,163,0.0,3.4483527991959813
+ERR1076919,1,47.0,24.57,Normal,USA,-122.7,45.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,4,1,163,0.0,3.4483527991959813
+ERR2056920,1,63.0,23.71,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,0,164,0.0,5.3697834461045515
+ERR2579638,1,69.0,20.57,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,3,3,2,4,1,164,0.0,5.3697834461045515
+ERR2091953,1,63.0,23.85,Normal,United Kingdom,-1.3,51.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,3,4,2,4,0,165,0.0,5.288486201539446
+ERR1841686,1,69.0,22.83,Normal,United Kingdom,-1.3,51.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,4,1,165,0.0,5.288486201539446
+ERR2091954,2,68.0,23.82,Normal,United Kingdom,-0.9,51.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,4,0,166,0.0,5.220924904721679
+ERR1842210,1,50.0,22.41,Normal,United Kingdom,-0.9,51.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,2,4,1,166,0.0,5.220924904721679
+ERR2091966,1,61.0,18.08,Underweight,United Kingdom,-2.5,51.1,Caucasian,Year,Vegetarian,2,2,3,4,0,167,0.0,5.200488406762688
+ERR2091967,2,59.0,22.46,Normal,United Kingdom,-2.5,51.1,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,0,4,4,1,167,0.0,5.200488406762688
+ERR2091972,1,24.0,23.81,Normal,United Kingdom,-0.2,51.5,Other,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,0,168,0.0,5.271256649151817
+ERR1389691,2,44.0,21.63,Normal,United Kingdom,-0.2,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,3,3,1,168,0.0,5.271256649151817
+ERR2091973,2,24.0,32.51,Obese,United Kingdom,-1.5,53.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,0,169,0.0,5.4437235537291
+ERR1842310,1,63.0,34.27,Obese,United Kingdom,-1.5,53.3,Caucasian,Year,Omnivore but do not eat red meat,1,1,2,3,1,169,0.0,5.4437235537291
+ERR2319371,1,43.0,20.83,Normal,United Kingdom,-0.1,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,170,0.0,5.262178570684681
+ERR1596999,1,59.0,18.61,Normal,United Kingdom,-0.1,51.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,3,4,1,170,0.0,5.262178570684681
+ERR1854738,1,35.0,21.29,Normal,United Kingdom,0.3,51.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,171,0.0,5.236339045734753
+ERR1389724,1,51.0,22.78,Normal,United Kingdom,0.3,51.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,3,3,1,171,0.0,5.236339045734753
+ERR2579716,2,29.0,21.16,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,4,4,0,172,0.0,5.3697834461045515
+ERR1315855,1,43.0,21.3,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,4,4,1,172,0.0,5.3697834461045515
+ERR1842894,1,69.0,20.34,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,4,1,4,0,173,0.0,5.3697834461045515
+ERR1091051,2,31.0,28.19,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,1,4,4,1,173,0.0,5.3697834461045515
+ERR2032780,1,29.0,17.63,Underweight,United Kingdom,-1.2,52.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,174,0.002082271568161751,5.362998315696829
+ERR1091141,1,61.0,32.61,Obese,United Kingdom,-1.3,52.5,Caucasian,Year,Omnivore,1,1,3,3,1,174,0.002082271568161751,5.362998315696829
+ERR2314074,1,42.0,23.33,Normal,United Kingdom,-1.8,53.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,3,3,0,175,0.006246814704307526,5.461292429936432
+ERR1842529,2,75.0,23.46,Normal,United Kingdom,-2.1,53.5,Caucasian,Year,Vegetarian,0,4,2,4,1,175,0.006246814704307526,5.461292429936432
+ERR2314078,2,45.0,24.73,Normal,United Kingdom,0.1,52.2,Caucasian,Year,Omnivore,1,3,3,4,0,176,0.0,5.347860288526381
+ERR1091000,2,51.0,19.61,Normal,United Kingdom,0.1,52.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,2,0,1,176,0.0,5.347860288526381
+ERR2319384,1,70.0,23.05,Normal,United Kingdom,-2.2,53.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,3,0,177,0.00832908627246039,5.413952220848284
+ERR1389705,1,57.0,20.12,Normal,United Kingdom,-2.6,53.1,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,3,1,1,4,1,177,0.00832908627246039,5.413952220848284
+ERR2404935,1,70.0,22.44,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,4,0,178,0.0,5.3697834461045515
+ERR1091160,2,67.0,28.66,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,2,4,1,178,0.0,5.3697834461045515
+ERR2306127,1,65.0,29.26,Overweight,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,1,4,3,3,0,179,0.0,5.3697834461045515
+ERR2579639,2,69.0,23.01,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,3,1,179,0.0,5.3697834461045515
+ERR2306131,1,33.0,22.03,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,1,1,2,4,0,180,0.0,5.3697834461045515
+ERR2309181,2,61.0,22.4,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,0,2,4,1,180,0.0,5.3697834461045515
+ERR1846157,1,29.0,24.14,Normal,United Kingdom,-1.9,55.4,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,3,3,4,0,181,0.02654036952413281,5.663967997032987
+ERR1843729,2,50.0,24.65,Normal,United Kingdom,-1.7,55.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,4,1,181,0.02654036952413281,5.663967997032987
+ERR2314091,2,52.0,31.35,Obese,United Kingdom,-2.3,53.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,2,0,182,0.0,5.4552095640536615
+ERR1842198,1,54.0,23.18,Normal,United Kingdom,-2.3,53.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,3,3,1,182,0.0,5.4552095640536615
+ERR2032796,2,49.0,26.63,Overweight,USA,-71.2,43.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,0,183,0.021195675532292745,3.5532847764419806
+ERR1089702,2,68.0,22.47,Normal,USA,-70.4,43.4,Caucasian,Year,Omnivore,0,2,3,2,1,183,0.021195675532292745,3.5532847764419806
+ERR1846172,1,37.0,20.3,Normal,USA,-74.0,40.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,4,4,0,184,0.0020822715681117652,3.5415283536384905
+ERR1459173,1,22.0,24.03,Normal,USA,-73.9,40.6,Other,Year,Omnivore,0,4,1,4,1,184,0.0020822715681117652,3.5415283536384905
+ERR1846175,1,67.0,20.03,Normal,USA,-80.8,28.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,3,2,2,4,0,185,0.035801407777809505,5.0367311148231
+ERR1091412,1,43.0,22.6,Normal,USA,-82.4,28.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,3,3,1,185,0.035801407777809505,5.0367311148231
+ERR1846176,2,69.0,22.38,Normal,USA,-80.8,28.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,1,2,2,4,0,186,0.037746841060186394,5.0367311148231
+ERR1091337,2,47.0,19.26,Normal,USA,-82.5,28.1,Caucasian,Year,Omnivore,2,0,4,3,1,186,0.037746841060186394,5.0367311148231
+ERR2318087,2,28.0,26.61,Overweight,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,4,0,187,0.0,3.4491279893346913
+ERR1089849,1,39.0,23.05,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,1,187,0.0,3.4491279893346913
+ERR1846217,1,54.0,23.44,Normal,USA,-104.9,38.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,188,0.040189939248006325,3.5258417257246637
+ERR1091313,2,59.0,22.52,Normal,USA,-105.3,38.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,2,3,1,188,0.040189939248006325,3.5258417257246637
+ERR2057004,1,45.0,21.47,Normal,United Kingdom,-0.1,51.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,4,0,189,0.0,5.272531853599417
+ERR1091166,2,52.0,27.16,Overweight,United Kingdom,-0.1,51.5,Caucasian,Year,Omnivore,1,4,4,3,1,189,0.0,5.272531853599417
+ERR2314136,2,58.0,24.3,Normal,United Kingdom,1.0,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,3,4,0,190,0.008329086272380415,5.328017963066126
+ERR2032750,2,69.0,23.71,Normal,United Kingdom,0.6,51.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,4,4,1,190,0.008329086272380415,5.328017963066126
+ERR2057019,1,50.0,19.47,Normal,United Kingdom,-2.9,57.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,0,191,4.2146848510894035e-08,5.838023251334501
+ERR2057020,2,51.0,25.35,Overweight,United Kingdom,-2.9,57.1,Caucasian,Year,Omnivore,4,2,4,3,1,191,4.2146848510894035e-08,5.838023251334501
+ERR2314145,1,69.0,25.02,Overweight,USA,-71.5,43.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,2,3,0,192,0.03347586120294643,3.5616376034527146
+ERR1090134,1,40.0,24.53,Normal,USA,-72.5,43.2,Caucasian,Year,Omnivore,4,4,3,4,1,192,0.03347586120294643,3.5616376034527146
+ERR2696444,1,52.0,23.3,Normal,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,2,4,0,193,0.0,3.54263925498707
+ERR2404962,1,56.0,22.6,Normal,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,4,1,193,0.0,3.54263925498707
+ERR2696445,2,53.0,20.18,Normal,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,3,4,0,194,0.0,3.54263925498707
+ERR2579916,1,46.0,38.06,Obese,Canada,-79.4,43.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,4,1,194,0.0,3.54263925498707
+ERR2579757,2,41.0,22.33,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,5,1,4,4,0,195,0.0,3.4491279893346913
+ERR2308522,2,58.0,22.05,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,1,4,1,195,0.0,3.4491279893346913
+ERR2579758,1,34.0,19.83,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,3,4,0,196,0.0,3.4491279893346913
+ERR2091851,1,80.0,30.85,Obese,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,3,3,3,1,196,0.0,3.4491279893346913
+ERR2032902,2,47.0,25.1,Overweight,USA,-117.0,32.7,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,1,0,4,0,197,0.0,4.270417291182622
+ERR2091865,2,73.0,31.45,Obese,USA,-117.0,32.7,Hispanic,I have not taken antibiotics in the past year.,Omnivore,1,4,2,2,1,197,0.0,4.270417291182622
+ERR2032915,1,57.0,37.2,Obese,USA,-122.0,37.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,3,4,0,198,0.013270184762074772,3.6198671272992904
+ERR2313944,1,59.0,23.33,Normal,USA,-122.1,37.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,4,4,1,198,0.013270184762074772,3.6198671272992904
+ERR2032917,0,62.0,27.12,Overweight,USA,-117.2,33.1,Hispanic,I have not taken antibiotics in the past year.,Omnivore,2,3,3,3,0,199,0.0,4.217976382313346
+ERR1089922,1,55.0,23.57,Normal,USA,-117.2,33.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,3,4,1,199,0.0,4.217976382313346
+ERR2579760,1,40.0,22.49,Normal,USA,-117.2,33.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,2,4,3,0,200,0.0,4.217976382313346
+ERR1089923,2,54.0,21.43,Normal,USA,-117.2,33.1,Caucasian,Year,Omnivore,1,3,3,4,1,200,0.0,4.217976382313346
+ERR2092032,2,69.0,20.34,Normal,Canada,-71.1,45.7,Caucasian,Year,Omnivore,0,0,4,4,0,201,0.058283420430132446,3.831158507854733
+ERR1458868,1,31.0,20.09,Normal,Canada,-73.6,45.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,2,4,1,201,0.058283420430132446,3.831158507854733
+ERR2057055,1,67.0,18.85,Normal,United Kingdom,-1.3,51.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,1,2,4,0,202,0.0020822715680551152,5.288486201539446
+ERR1842545,1,70.0,20.34,Normal,United Kingdom,-1.4,51.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,3,3,3,4,1,202,0.0020822715680551152,5.288486201539446
+ERR2057057,2,64.0,23.15,Normal,United Kingdom,-2.0,53.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,0,203,0.012493629408632825,5.4588577141318035
+ERR1843804,2,33.0,29.46,Overweight,United Kingdom,-1.4,53.5,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,3,4,1,203,0.012493629408632825,5.4588577141318035
+ERR2092048,1,72.0,23.17,Normal,United Kingdom,-2.2,51.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,4,0,204,0.002082271568161751,5.266709242686594
+ERR1678465,1,56.0,26.43,Overweight,United Kingdom,-2.1,51.7,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,2,1,4,1,204,0.002082271568161751,5.266709242686594
+ERR2319417,1,41.0,21.55,Normal,United Kingdom,-0.1,51.6,Other,I have not taken antibiotics in the past year.,Vegan,0,0,0,4,0,205,0.0,5.282897359268434
+ERR1091192,2,43.0,21.87,Normal,United Kingdom,-0.1,51.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,4,4,1,205,0.0,5.282897359268434
+ERR2314158,2,63.0,20.88,Normal,United Kingdom,-3.5,50.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,2,4,0,206,0.0,5.146297545049139
+ERR1841680,1,40.0,26.34,Overweight,United Kingdom,-3.5,50.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,3,1,206,0.0,5.146297545049139
+ERR2314159,1,55.0,23.31,Normal,United Kingdom,-3.5,50.7,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,3,2,4,0,207,0.0,5.146297545049139
+ERR1846146,1,59.0,27.85,Overweight,United Kingdom,-3.5,50.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,3,3,1,207,0.0,5.146297545049139
+ERR2032936,1,62.0,20.57,Normal,USA,-79.0,36.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,0,208,0.002082271568081774,4.053891158255544
+ERR1091720,1,76.0,27.46,Overweight,USA,-78.9,36.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,5,1,4,4,1,208,0.002082271568081774,4.053891158255544
+ERR2092344,1,30.0,20.98,Normal,USA,-117.8,34.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,4,3,0,209,0.014518424249429533,4.099511523965746
+ERR1250137,1,35.0,24.88,Normal,USA,-118.1,34.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,3,1,209,0.014518424249429533,4.099511523965746
+ERR2033474,1,41.0,18.54,Normal,USA,-117.0,32.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,210,0.0,4.24451663898899
+ERR2092161,1,50.0,27.44,Overweight,USA,-117.0,32.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,4,3,1,210,0.0,4.24451663898899
+ERR2303931,1,80.0,15.55,Underweight,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Vegan,1,0,0,4,0,211,0.0,3.4491279893346913
+ERR1091827,1,21.0,23.91,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,2,3,3,4,1,211,0.0,3.4491279893346913
+ERR2092076,2,57.0,23.67,Normal,USA,-74.0,40.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,4,0,212,0.0,3.5297476587552756
+ERR1389626,2,40.0,20.08,Normal,USA,-74.0,40.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,2,4,1,212,0.0,3.5297476587552756
+ERR2303954,1,66.0,26.31,Overweight,USA,-87.7,42.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,4,0,213,0.0,3.2565180407274594
+ERR1090474,2,66.0,21.93,Normal,USA,-87.7,42.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,4,4,1,213,0.0,3.2565180407274594
+ERR2318177,1,48.0,19.59,Normal,USA,-122.5,38.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,4,4,0,214,0.0020822715680551152,3.5664716252792785
+ERR1091435,1,49.0,20.05,Normal,USA,-122.6,38.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,0,3,4,1,214,0.0020822715680551152,3.5664716252792785
+ERR2057147,2,35.0,23.73,Normal,USA,-113.9,47.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,2,4,4,0,215,0.004164543136243525,3.6797837856251503
+ERR1090983,1,65.0,14.5,Underweight,USA,-114.1,47.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,1,3,3,1,215,0.004164543136243525,3.6797837856251503
+ERR2579815,2,55.0,23.99,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,3,4,3,4,0,216,0.0,5.3697834461045515
+ERR1091557,1,54.0,19.35,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,2,3,1,216,0.0,5.3697834461045515
+ERR2318189,2,23.0,21.8,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegan,1,0,0,4,0,217,0.0,5.3697834461045515
+ERR2318002,2,46.0,21.39,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,3,3,4,1,217,0.0,5.3697834461045515
+ERR2308600,2,61.0,19.64,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegan,1,0,0,4,0,218,0.0,5.3697834461045515
+ERR2697555,1,66.0,20.19,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,4,1,218,0.0,5.3697834461045515
+ERR2306155,1,53.0,18.34,Underweight,United Kingdom,-1.5,52.6,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Vegetarian,0,4,1,4,0,219,0.0,5.3697834461045515
+ERR1250547,1,47.0,21.8,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,1,2,4,1,219,0.0,5.3697834461045515
+ERR2308606,1,68.0,27.89,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,3,4,0,220,0.0,5.3697834461045515
+ERR1091646,2,39.0,28.41,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,1,220,0.0,5.3697834461045515
+ERR2579843,1,62.0,24.03,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,1,4,2,2,0,221,0.0,5.3697834461045515
+ERR1389690,1,52.0,23.1,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,3,4,1,221,0.0,5.3697834461045515
+ERR2308617,2,66.0,20.78,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,4,0,222,0.0,5.3697834461045515
+ERR2308531,2,55.0,29.99,Overweight,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,1,3,3,3,1,222,0.0,5.3697834461045515
+ERR2696854,1,57.0,22.31,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,0,223,0.0,5.3697834461045515
+ERR2309184,2,74.0,24.97,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,3,4,3,4,1,223,0.0,5.3697834461045515
+ERR2318202,1,52.0,17.01,Underweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,2,3,0,224,0.0,5.3697834461045515
+ERR2032522,2,48.0,24.38,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,4,3,1,224,0.0,5.3697834461045515
+ERR2303974,1,47.0,26.49,Overweight,United Kingdom,-1.5,52.6,Other,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,3,4,3,4,0,225,0.0,5.3697834461045515
+ERR1841516,1,36.0,16.51,Underweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,3,3,1,225,0.0,5.3697834461045515
+ERR2303978,1,33.0,21.05,Normal,United Kingdom,-1.5,52.6,Other,I have not taken antibiotics in the past year.,Omnivore,2,1,3,4,0,226,0.0,5.3697834461045515
+ERR2579650,2,75.0,22.72,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,3,4,1,226,0.0,5.3697834461045515
+ERR2309325,1,40.0,18.3,Underweight,USA,-117.1,32.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,0,227,0.0,4.270098975412592
+ERR1250605,1,52.0,20.09,Normal,USA,-117.1,32.7,Caucasian,Year,Omnivore,3,2,1,3,1,227,0.0,4.270098975412592
+ERR2308636,2,40.0,18.19,Underweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,0,4,4,0,228,0.0,5.3697834461045515
+ERR1389764,1,42.0,28.6,Overweight,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,0,2,4,4,1,228,0.0,5.3697834461045515
+ERR2308637,1,46.0,36.8,Obese,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,1,3,3,0,229,0.0,5.3697834461045515
+ERR1389768,1,64.0,32.28,Obese,United Kingdom,-1.5,52.6,Other,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,1,3,1,4,1,229,0.0,5.3697834461045515
+ERR2303993,1,64.0,24.22,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,4,4,0,230,0.0,5.3697834461045515
+ERR2318007,1,48.0,22.86,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,3,0,2,4,1,230,0.0,5.3697834461045515
+ERR2319598,1,64.0,20.6,Normal,USA,-86.8,36.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,3,4,0,231,0.0,3.9988743254823844
+ERR1842196,2,67.0,21.57,Normal,USA,-86.8,36.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,0,2,3,1,231,0.0,3.9988743254823844
+ERR2404965,1,35.0,22.37,Normal,USA,-83.0,40.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,3,0,232,0.027069530385388094,3.5239979288231553
+ERR1315917,1,22.0,19.58,Normal,USA,-84.3,40.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,4,3,1,232,0.027069530385388094,3.5239979288231553
+ERR2579896,2,28.0,19.49,Normal,USA,-122.8,45.4,Caucasian,Year,Omnivore,0,0,4,4,0,233,0.002082271568108433,3.435093252635855
+ERR1841653,1,59.0,25.69,Overweight,USA,-122.7,45.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,4,4,1,233,0.002082271568108433,3.435093252635855
+ERR2579936,2,51.0,24.37,Normal,USA,-93.6,45.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,3,0,234,0.029991743601004452,3.5919155367273796
+ERR1250480,1,53.0,19.74,Normal,USA,-94.3,45.5,Other,I have not taken antibiotics in the past year.,Omnivore,1,1,3,4,1,234,0.029991743601004452,3.5919155367273796
+ERR2309337,1,57.0,37.69,Obese,USA,-98.6,39.8,Other,I have not taken antibiotics in the past year.,Other,0,0,0,0,0,235,0.0,3.4491279893346913
+ERR1389734,2,23.0,23.73,Normal,USA,-98.6,39.8,Hispanic,I have not taken antibiotics in the past year.,Omnivore,0,2,2,4,1,235,0.0,3.4491279893346913
+ERR2309338,2,63.0,27.17,Overweight,USA,-98.6,39.8,Hispanic,Year,Omnivore,0,2,4,3,0,236,0.0,3.4491279893346913
+ERR2313983,2,21.0,22.24,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,4,2,4,1,236,0.0,3.4491279893346913
+ERR2579951,1,29.0,18.71,Normal,USA,-117.0,32.8,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,1,0,4,0,237,0.0,4.25746648933309
+ERR1854678,2,47.0,27.18,Overweight,USA,-117.0,32.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,4,3,1,237,0.0,4.25746648933309
+ERR2314358,1,64.0,21.29,Normal,USA,-118.7,34.2,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,3,0,1,4,0,238,0.004164543136216866,4.070731301600877
+ERR1389682,1,38.0,22.48,Normal,USA,-118.9,34.2,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,4,4,1,3,1,238,0.004164543136216866,4.070731301600877
+ERR2304034,1,27.0,21.65,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,2,4,4,4,0,239,0.0,5.3697834461045515
+ERR1389841,1,58.0,22.57,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,3,3,1,239,0.0,5.3697834461045515
+ERR2304039,1,69.0,20.28,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,2,2,4,0,240,0.0,5.3697834461045515
+ERR2318016,1,54.0,26.31,Overweight,United Kingdom,-1.5,52.6,Other,I have not taken antibiotics in the past year.,Omnivore,3,2,3,4,1,240,0.0,5.3697834461045515
+ERR2306196,1,59.0,23.52,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,3,3,0,241,0.0,5.3697834461045515
+ERR2056820,1,59.0,19.36,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,2,3,3,1,241,0.0,5.3697834461045515
+ERR2306197,2,62.0,30.38,Obese,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,1,3,4,0,242,0.0,5.3697834461045515
+ERR2318020,1,53.0,24.8,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore but do not eat red meat,4,3,2,3,1,242,0.0,5.3697834461045515
+ERR2306204,2,47.0,24.14,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,3,4,0,243,0.0,5.3697834461045515
+ERR1842301,2,60.0,28.21,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,2,2,2,3,1,243,0.0,5.3697834461045515
+ERR2309368,2,45.0,20.53,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,0,0,244,0.0,5.3697834461045515
+ERR2404921,1,59.0,22.46,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,2,3,3,1,244,0.0,5.3697834461045515
+ERR2308704,2,43.0,18.88,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,1,2,3,0,245,0.0,5.3697834461045515
+ERR2314008,2,38.0,25.76,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,2,3,1,245,0.0,5.3697834461045515
+ERR2306232,2,70.0,25.54,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,3,3,0,246,0.0,5.3697834461045515
+ERR1854703,1,49.0,19.15,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,0,3,4,1,246,0.0,5.3697834461045515
+ERR2306233,1,69.0,18.6,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,0,2,2,3,0,247,0.0,5.3697834461045515
+ERR1843752,2,63.0,25.41,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,4,4,1,247,0.0,5.3697834461045515
+ERR2309379,1,45.0,24.18,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,3,0,248,0.0,5.3697834461045515
+ERR2696823,1,67.0,25.95,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,2,1,0,4,1,248,0.0,5.3697834461045515
+ERR2580097,2,55.0,21.95,Normal,USA,-118.4,34.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,3,0,249,0.002082271568161751,4.0846361459011185
+ERR1091672,2,30.0,23.67,Normal,USA,-118.5,34.1,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,3,4,1,249,0.002082271568161751,4.0846361459011185
+ERR2309385,1,20.0,19.14,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,250,0.0,3.4491279893346913
+ERR1389894,1,69.0,31.01,Obese,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,4,2,1,250,0.0,3.4491279893346913
+ERR2523925,1,51.0,25.4,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,0,251,0.0,5.3697834461045515
+ERR1843756,1,61.0,24.43,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,2,3,4,1,251,0.0,5.3697834461045515
+ERR2696884,1,61.0,22.32,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,2,4,0,4,0,252,0.0,5.3697834461045515
+ERR2697563,1,72.0,25.58,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,4,4,1,252,0.0,5.3697834461045515
+ERR2523929,1,47.0,22.99,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,0,253,0.0,5.3697834461045515
+ERR2303840,2,45.0,29.63,Overweight,United Kingdom,-1.5,52.6,Other,I have not taken antibiotics in the past year.,Omnivore,3,3,2,3,1,253,0.0,5.3697834461045515
+ERR2696886,1,71.0,25.79,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,1,0,3,4,0,254,0.0,5.3697834461045515
+ERR2318033,1,65.0,23.05,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,4,1,4,1,254,0.0,5.3697834461045515
+ERR2523931,1,58.0,23.1,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,2,4,0,255,0.0,5.3697834461045515
+ERR2696438,1,61.0,21.67,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,5,2,2,3,1,255,0.0,5.3697834461045515
+ERR2696467,1,33.0,20.62,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,4,4,0,256,0.0,5.3697834461045515
+ERR1842566,2,51.0,27.34,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,3,3,1,256,0.0,5.3697834461045515
+ERR2696478,1,41.0,17.54,Underweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,0,2,4,0,257,0.0,5.3697834461045515
+ERR2306102,2,50.0,24.02,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,3,3,1,257,0.0,5.3697834461045515
+ERR2696895,1,58.0,25.06,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,5,0,258,0.0,5.3697834461045515
+ERR2306103,1,45.0,34.95,Obese,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,4,1,258,0.0,5.3697834461045515
+ERR2306243,1,50.0,20.18,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,4,4,0,259,0.0,3.4491279893346913
+ERR2579662,1,33.0,20.51,Normal,USA,-98.6,39.8,Caucasian,Year,Omnivore,1,0,3,3,1,259,0.0,3.4491279893346913
+ERR2523941,1,51.0,19.46,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,3,4,0,260,0.0,5.3697834461045515
+ERR2579694,2,53.0,19.81,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,2,4,1,260,0.0,5.3697834461045515
+ERR2405016,1,58.0,31.18,Obese,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,0,261,0.0,5.3697834461045515
+ERR2032734,2,36.0,23.89,Normal,United Kingdom,-1.5,52.6,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Vegetarian,1,3,2,4,1,261,0.0,5.3697834461045515
+ERR2697633,2,61.0,24.72,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,2,2,2,0,262,0.0,5.3697834461045515
+ERR2303850,2,56.0,23.37,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,1,262,0.0,5.3697834461045515
+ERR2697641,2,66.0,25.31,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,3,3,0,263,0.0,5.3697834461045515
+ERR2309194,1,36.0,22.91,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,0,1,263,0.0,5.3697834461045515
+ERR2405038,2,67.0,22.81,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,2,4,0,264,0.0,5.3697834461045515
+ERR2309195,1,37.0,20.55,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,4,1,264,0.0,5.3697834461045515
+ERR2696903,1,29.0,29.37,Overweight,United Kingdom,-1.5,52.6,Other,I have not taken antibiotics in the past year.,Vegan,0,0,5,4,0,265,0.0,5.3697834461045515
+ERR2308548,2,24.0,22.4,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,4,3,1,265,0.0,5.3697834461045515
+ERR2405043,2,45.0,21.38,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Vegan,2,0,0,4,0,266,0.0,5.3697834461045515
+ERR2306108,2,44.0,26.61,Overweight,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,2,2,3,3,1,266,0.0,5.3697834461045515
+ERR2523969,1,35.0,21.19,Normal,USA,-84.5,33.9,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,5,1,2,3,0,267,0.016737930601483195,4.275130860612491
+ERR1075106,1,36.0,17.85,Underweight,USA,-84.0,34.0,Caucasian,Year,Omnivore,4,1,4,4,1,267,0.016737930601483195,4.275130860612491
+ERR2405074,2,27.0,19.15,Normal,United Kingdom,-1.6,54.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,4,4,0,268,0.0,5.602750121957422
+ERR1080231,1,63.0,21.8,Normal,United Kingdom,-1.6,54.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,2,3,3,1,268,0.0,5.602750121957422
+ERR2308731,1,52.0,21.8,Normal,USA,-105.2,40.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,0,4,0,0,269,0.002082271568108433,3.3597915578484767
+ERR1075758,2,51.0,19.55,Normal,USA,-105.1,40.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,4,4,1,269,0.002082271568108433,3.3597915578484767
+ERR2309404,1,29.0,30.68,Obese,USA,-98.6,39.8,Caucasian,Year,Omnivore,0,2,2,0,0,270,0.0,3.4491279893346913
+ERR2587834,2,24.0,20.67,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,3,4,1,270,0.0,3.4491279893346913
+ERR2308737,2,31.0,19.72,Normal,USA,-74.0,40.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,0,271,0.0,3.517976337789784
+ERR1090643,2,57.0,24.8,Normal,USA,-74.0,40.8,Caucasian,Year,Omnivore,2,2,3,3,1,271,0.0,3.517976337789784
+ERR2308753,2,54.0,19.37,Normal,USA,-111.9,33.3,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,3,4,4,0,272,0.013105798286866263,4.210594425948093
+ERR2032462,1,41.0,18.11,Underweight,USA,-111.9,33.4,Caucasian,I have not taken antibiotics in the past year.,Vegan,0,0,0,4,1,272,0.013105798286866263,4.210594425948093
+ERR2304096,1,38.0,26.81,Overweight,USA,-98.6,39.8,Hispanic,I have not taken antibiotics in the past year.,Omnivore,2,1,3,3,0,273,0.0,3.4491279893346913
+ERR2579674,1,39.0,29.29,Overweight,USA,-98.6,39.8,African American,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,1,0,4,1,273,0.0,3.4491279893346913
+ERR2308791,2,68.0,29.41,Overweight,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Vegan,1,0,0,4,0,274,0.0,3.4491279893346913
+ERR2587889,2,46.0,21.18,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,2,3,1,274,0.0,3.4491279893346913
+ERR2308805,1,49.0,19.74,Normal,USA,-117.2,32.8,Caucasian,I have not taken antibiotics in the past year.,Other,0,0,0,4,0,275,0.0,4.256828915693028
+ERR1250609,2,39.0,25.4,Overweight,USA,-117.2,32.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,2,4,1,275,0.0,4.256828915693028
+ERR2308822,2,43.0,28.13,Overweight,USA,-117.1,32.9,Hispanic,I have not taken antibiotics in the past year.,Omnivore,0,0,0,0,0,276,0.0,4.244196380664134
+ERR2091867,2,53.0,24.96,Normal,USA,-117.1,32.9,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,1,3,3,3,1,276,0.0,4.244196380664134
+ERR2579425,1,64.0,20.02,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,2,1,4,0,277,0.0,3.4491279893346913
+ERR2319860,2,34.0,21.7,Normal,USA,-98.6,39.8,African American,I have not taken antibiotics in the past year.,Omnivore,1,3,2,3,1,277,0.0,3.4491279893346913
+ERR2308932,2,79.0,24.75,Normal,USA,-117.2,32.7,Caucasian,Year,Omnivore,3,4,3,4,0,278,0.0,4.269781651386588
+ERR1090954,2,65.0,29.41,Overweight,USA,-117.2,32.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,1,4,1,278,0.0,4.269781651386588
+ERR2405292,2,53.0,28.07,Overweight,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,0,279,0.0,3.4491279893346913
+ERR2523869,1,29.0,18.47,Underweight,USA,-98.6,39.8,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,0,1,2,2,1,279,0.0,3.4491279893346913
+ERR2304174,0,61.0,22.47,Normal,USA,-97.8,30.6,Caucasian,Year,Omnivore,0,0,2,4,0,280,0.052423193147473526,4.6171155982675005
+ERR1678475,1,64.0,21.79,Normal,USA,-97.8,30.2,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,0,2,4,1,280,0.052423193147473526,4.6171155982675005
+ERR2405336,1,64.0,24.24,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,0,3,4,0,281,0.0,3.4491279893346913
+ERR2303846,1,41.0,22.46,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,4,3,1,281,0.0,3.4491279893346913
+ERR2524192,2,56.0,23.49,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,1,3,0,282,0.0,3.4491279893346913
+ERR2032171,1,30.0,24.03,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,4,4,1,282,0.0,3.4491279893346913
+ERR2524201,2,75.0,21.31,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Vegan,2,0,1,4,0,283,0.0,3.4491279893346913
+ERR2308558,1,59.0,19.66,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,3,4,1,283,0.0,3.4491279893346913
+ERR2697704,1,58.0,26.79,Overweight,United Kingdom,-1.8,50.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,0,284,0.0,5.16810083177692
+ERR1249925,1,52.0,22.27,Normal,United Kingdom,-1.8,50.7,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,0,4,0,4,1,284,0.0,5.16810083177692
+ERR2696565,1,55.0,18.69,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,3,3,3,0,285,0.0,5.3697834461045515
+ERR2309200,1,51.0,25.69,Overweight,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,0,2,3,3,1,285,0.0,5.3697834461045515
+ERR2697718,1,67.0,18.64,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,4,3,4,0,286,0.0,5.3697834461045515
+ERR2303855,2,67.0,21.81,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,3,3,1,4,1,286,0.0,5.3697834461045515
+ERR2697748,1,58.0,15.91,Underweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegan,0,0,0,3,0,287,0.0,5.3697834461045515
+ERR2308550,1,27.0,21.28,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Vegan,1,0,0,4,1,287,0.0,5.3697834461045515
+ERR2696610,2,52.0,28.73,Overweight,United Kingdom,-1.5,52.6,Asian or Pacific Islander,Year,Omnivore,0,4,3,2,0,288,0.0,5.3697834461045515
+ERR2697568,2,53.0,22.77,Normal,United Kingdom,-1.5,52.6,Other,I have not taken antibiotics in the past year.,Omnivore,3,2,3,4,1,288,0.0,5.3697834461045515
+ERR2697761,1,60.0,22.31,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,1,4,0,289,0.0,5.3697834461045515
+ERR2308553,1,42.0,27.82,Overweight,United Kingdom,-1.5,52.6,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,1,3,4,4,1,289,0.0,5.3697834461045515
+ERR2697771,1,52.0,19.49,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,1,4,0,290,0.0,5.3697834461045515
+ERR2309201,1,40.0,21.09,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,2,3,2,4,1,290,0.0,5.3697834461045515
+ERR2696623,2,67.0,23.14,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,3,4,0,291,0.0,5.3697834461045515
+ERR2404934,1,48.0,24.17,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,4,4,2,4,1,291,0.0,5.3697834461045515
+ERR2524210,2,48.0,21.91,Normal,USA,-122.0,37.4,Other,I have not taken antibiotics in the past year.,Vegan,1,0,0,4,0,292,0.0,3.6457768877314445
+ERR1075704,2,62.0,20.57,Normal,USA,-122.0,37.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,2,3,3,3,1,292,0.0,3.6457768877314445
+ERR2696998,1,62.0,20.63,Normal,USA,-80.1,26.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,1,0,1,4,0,293,0.0,5.242331872371746
+ERR1417546,1,72.0,20.8,Normal,USA,-80.1,26.4,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,4,4,4,1,293,0.0,5.242331872371746
+ERR2696649,1,29.0,20.18,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,1,3,4,0,294,0.0,3.4491279893346913
+ERR2308559,2,62.0,21.02,Normal,USA,-98.6,39.8,Caucasian,Year,Omnivore,1,0,3,3,1,294,0.0,3.4491279893346913
+ERR2697056,1,62.0,23.17,Normal,USA,-72.3,43.0,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,3,3,2,4,0,295,0.045502702991247264,3.5077858658731307
+ERR1080315,2,25.0,29.18,Overweight,USA,-71.2,42.7,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,3,3,4,1,295,0.045502702991247264,3.5077858658731307
+ERR2696692,2,38.0,23.46,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,4,3,3,0,296,0.0,5.3697834461045515
+ERR2579709,1,52.0,23.44,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,3,4,1,296,0.0,5.3697834461045515
+ERR2696693,2,55.0,22.46,Normal,United Kingdom,-1.5,52.6,Asian or Pacific Islander,I have not taken antibiotics in the past year.,Omnivore,1,4,3,0,0,297,0.0,5.3697834461045515
+ERR2318040,1,55.0,18.99,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,3,3,3,1,297,0.0,5.3697834461045515
+ERR2697853,2,32.0,23.62,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian,1,0,0,2,0,298,0.0,5.3697834461045515
+ERR2579710,1,66.0,22.03,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,0,0,4,2,1,298,0.0,5.3697834461045515
+ERR2697873,1,53.0,26.85,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,4,0,299,0.0,5.3697834461045515
+ERR2696829,1,30.0,22.71,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,1,2,4,3,1,299,0.0,5.3697834461045515
+ERR2696723,1,38.0,22.99,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegan,0,0,0,4,0,300,0.0,5.3697834461045515
+ERR2579715,1,35.0,17.31,Underweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,2,4,1,300,0.0,5.3697834461045515
+ERR2697894,1,63.0,18.01,Underweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,2,4,2,4,0,301,0.0,5.3697834461045515
+ERR2696443,1,41.0,26.03,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,1,3,4,1,301,0.0,5.3697834461045515
+ERR2697896,2,43.0,20.06,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,0,4,4,0,302,0.0,5.3697834461045515
+ERR2318050,1,59.0,20.68,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,0,0,4,4,1,302,0.0,5.3697834461045515
+ERR2697921,1,66.0,33.64,Obese,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,4,3,4,3,0,303,0.0,5.3697834461045515
+ERR2303861,1,35.0,22.31,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,3,2,2,4,1,303,0.0,5.3697834461045515
+ERR2697932,1,40.0,31.63,Obese,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,4,3,4,0,304,0.0,5.3697834461045515
+ERR2318052,2,50.0,24.27,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,0,0,3,4,1,304,0.0,5.3697834461045515
+ERR2697940,2,50.0,18.52,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,3,2,3,0,305,0.0,5.3697834461045515
+ERR2318054,1,57.0,15.37,Underweight,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,4,4,3,3,1,305,0.0,5.3697834461045515
+ERR2697957,2,60.0,24.19,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegan,3,0,0,3,0,306,0.0,5.3697834461045515
+ERR2032192,2,34.0,23.05,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,2,2,3,1,306,0.0,5.3697834461045515
+ERR2696743,2,41.0,23.4,Normal,USA,-98.6,39.8,Caucasian,Year,Omnivore,0,4,3,0,0,307,0.0,3.4491279893346913
+ERR2314098,2,67.0,25.85,Overweight,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,4,2,4,1,307,0.0,3.4491279893346913
+ERR2698006,1,64.0,18.54,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,3,4,4,0,308,0.0,5.3697834461045515
+ERR2318060,2,60.0,27.2,Overweight,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,3,3,3,3,1,308,0.0,5.3697834461045515
+ERR2698008,1,58.0,20.18,Normal,United Kingdom,-1.5,52.6,Caucasian,Year,Omnivore,3,4,4,4,0,309,0.0,5.3697834461045515
+ERR2318062,1,30.0,19.22,Normal,United Kingdom,-1.5,52.6,Caucasian,I have not taken antibiotics in the past year.,Omnivore,2,2,3,4,1,309,0.0,5.3697834461045515
+ERR2698041,1,53.0,21.93,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore but do not eat red meat,0,1,2,3,0,310,0.0,3.4491279893346913
+ERR2309226,1,37.0,19.21,Normal,USA,-98.6,39.8,Caucasian,I have not taken antibiotics in the past year.,Omnivore,0,4,4,5,1,310,0.0,3.4491279893346913
+ERR2696777,1,68.0,28.89,Overweight,USA,-73.8,40.9,Caucasian,I have not taken antibiotics in the past year.,Vegetarian but eat seafood,1,2,1,4,0,311,0.008329086272427066,3.5080565650312896
+ERR2057164,2,63.0,28.7,Overweight,USA,-73.4,40.9,Caucasian,Year,Omnivore,1,2,3,3,1,311,0.008329086272427066,3.5080565650312896

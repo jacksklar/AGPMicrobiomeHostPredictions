@@ -177,8 +177,7 @@ class AGPCohortClassification:
         return X, y        
     
     ## 25 iteration 4-fold cross validation
-    ##      - cohort is matched for a set of standard host-variables 
-    ##      - pairs are kept grouped between training and test to maintain this balance
+    ##      - pairs must be in consecutive rows, are kept grouped between training and test to maintain this balance
     ## 3 standard machine learning classifiers: random forests, ridge-logistic regression, SVM
     ##      - classifiers chosen for performing well with high-dimensional, low sample data that is noisy, and zero-inflated
     ## Target variable shuffled and model trained over same split of data to assess ability for classifier to find signal in noise

@@ -1,9 +1,11 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
 Created on Tue Apr  2 12:17:44 2019
-@author: sklarjg
+@author: Jack G. Sklar
 """
+
 import os
 import numpy as np 
 import pandas as pd 
@@ -21,6 +23,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import roc_curve, auc, accuracy_score, matthews_corrcoef
 from scipy import interp
 
+
+
 metadata_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
 otu_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Otu_Data.csv", index_col = 0)
 otu_df = otu_df.loc[metadata_df.index, :]
@@ -32,30 +36,6 @@ taxa_df = taxa_df.replace(np.nan, 'Unknown', regex=True)
 feature_info = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/feature_info.csv", index_col = 0)
 frequency_info = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/frequency_feature_info.csv", index_col = 0)
 
-
-## Funtion maps abundance of bacteria from the lowest level (Operational Taxonomuc Unit, OTU) to rank of interest
-## Used to test trade-off between loss of information and reduction of feature space
-## OTU -> Genus -> Family -> Order -> Class ...
-def mapOTU(df, taxa_df, colname):
-    taxa_df = taxa_df[taxa_df.index.isin(df.columns)]
-    taxa_path = taxa_df["Kingdom"]
-    for level in taxa_df.columns[1:-1]:
-        taxa_path = taxa_path.str.cat(taxa_df[level], sep='_')
-        if level == colname:
-            break
-    ### Get groups of OTUs belonging to the same phylogenetic tree branch
-    taxa_groups = taxa_path.to_frame(0).groupby([0])
-    print(colname)
-    print(len(taxa_groups.groups))
-    summedOTUs = pd.DataFrame([],columns = taxa_groups.groups)
-    ### Sum OTU counts
-    for group in taxa_groups.groups:
-        otu_list = taxa_groups.groups[group].values
-        summedOTUs[group] = df[otu_list].sum(axis = 1)
-    return summedOTUs
-
-#otu_df = mapOTU(otu_df, taxa_df, "Genus")
-#otu_df = otu_df.reindex(otu_df.mean().sort_values(ascending = False).index, axis=1)
 
 ##OTU abundance converted to relative abundance, removal of OTUs with mean relative abundance bellow 0.01% 
 otu_df_full = otu_df
@@ -72,11 +52,13 @@ RANDOM_STATE_LR = 893244
 RANDOM_STATE_XGB = 478423
 RANDOM_STATE_CV = 124213
 
+
 def empiricalPVal(statistic, null_dist):
     ###number of shuffled iterations where performance is >= standard iteration performance
     count = len([val for val in null_dist if val >= statistic])
     p_val = (count + 1)/float(len(null_dist) + 1)
     return p_val
+
 
 class modelResults:
     def __init__(self):
@@ -148,6 +130,7 @@ class modelResults:
         if save :
             plt.savefig(save_path + "ROCs/" + feature_name + "_" + model + ".png", dpi = 300)
         plt.show()
+
 
 class AGPCohortClassification:
     def __init__(self, feature_name, cohort, plot, save, title):
@@ -250,6 +233,7 @@ class AGPCohortClassification:
             model_type.aucs.append(roc_auc)
             model_type.accuracy.append(acc)                                               
             model_type.matthews.append(matthew)      
+
 
 ## Aggregate classification results of all questionnaire variables into single csv file for analysis/comparison 
 class QuestionnaireResults():

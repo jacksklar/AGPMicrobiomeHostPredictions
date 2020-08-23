@@ -10,6 +10,7 @@ import pandas as pd
 from sklearn.preprocessing import LabelEncoder
 from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from cohort_construction_utils import buildDataSubset
 
 
 metadata_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
@@ -39,74 +40,6 @@ metadata_df.loc[uk_missing_geo, ["longitude", "latitude"]] = (-1.5, 52.6)
 metadata_df.loc[can_missing_geo, ["longitude", "latitude"]] = (-79.4, 43.9)
 metadata_df = metadata_df.loc[metadata_df["bmi"] <= 60, :]
 
-cohort_matching_features = ["longitude", "latitude"]
-cohort_feats = ["sex", "age_years", "bmi", "bmi_cat", "country", "longitude", "latitude", "race", 
-                "antibiotic_history", "diet_type", "alcohol_frequency","milk_cheese_frequency", 
-                "bowel_movement_quality", "meat_eggs_frequency", "vegetable_frequency"]
-
-
-metadata_matching = metadata_df.loc[:, cohort_matching_features]
-scaler = StandardScaler() 
-metadata_matching= pd.DataFrame(scaler.fit_transform(metadata_matching.loc[:, cohort_matching_features].astype(float)), index = metadata_matching.index, columns = metadata_matching.columns)
-
-def pairIDs(length):
-    num_pairs = int(length/2)
-    pair_ids = []
-    for val in range(num_pairs):
-        pair_ids.append(val)
-        pair_ids.append(val)
-    return pair_ids
-
-
-def buildDataSubset(metadata, target_var, pos_target, neg_target, match_subset): 
-    ##target_var: name of metadata variable
-    ##pos_target: positive class label
-    ##neg_target: negavtive class label (possibly a list of labels)
-    ##age_related: boolean (remove age related variables from matchign criteria)
-    target = metadata[target_var]
-    if type(pos_target) == list:
-        pos_class = target[target.isin(pos_target)].index
-    else:
-        pos_class = target[target == pos_target].index
-    if type(neg_target) == list:
-        neg_class = target[target.isin(neg_target)].index
-    else:
-        neg_class = target[target == neg_target].index
-    n_pos = len(pos_class)
-    n_neg = len(neg_class)
-    if n_pos > n_neg: 
-        temp = pos_class
-        pos_class = neg_class
-        neg_class = temp
-    cm = euclidean_distances(metadata_matching.loc[pos_class, :], metadata_matching.loc[neg_class, :]) 
-    cm = pd.DataFrame(cm, index = pos_class, columns = neg_class)
-    cohort = []
-    distances = []
-    worst_distances = []
-    for pos_index in cm.index:
-        
-        neg_match = cm.loc[pos_index,:].idxmin(axis = 1)
-        worst_match = cm.loc[pos_index,:].idxmax(axis = 1)
-        dist = cm.loc[pos_index, neg_match]
-        worst_dist = cm.loc[pos_index, worst_match]
-
-        cm.drop(neg_match, axis = 1, inplace = True)
-        cohort.append(pos_index)
-        cohort.append(neg_match)
-        
-        distances.append(dist)
-        distances.append(dist)
-        worst_distances.append(worst_dist)
-        worst_distances.append(worst_dist)
-        
-    cohort = metadata.loc[cohort, cohort_feats]
-    cohort["target"] = metadata.loc[cohort.index, target_var]
-    if pos_target != 1:
-        cohort["target"] = cohort["target"].map({pos_target: 1, neg_target: 0})
-    cohort["pairID"] = pairIDs(len(cohort))
-    cohort["pairDist"] = distances
-    cohort["worstPairDist"] = worst_distances
-    return cohort
 
 save_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Feature_Cohorts/Phase_II_Cohorts/binary_cohorts/"
 

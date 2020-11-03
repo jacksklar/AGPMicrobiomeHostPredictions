@@ -8,14 +8,13 @@ Created on Mon Jul  1 15:42:27 2019
 
 
 import pandas as pd
-import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics.pairwise import euclidean_distances
 
 
 
-def process_AGP_population():
+def process_AGP_population(dir_path):
     metadata_df = pd.read_csv(dir_path + "Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
     print("Full Population size: ", str(len(metadata_df)))
     for val in ["diabetes", "age_years", "bmi", "ibd", "antibiotic_history"]:
@@ -59,7 +58,7 @@ def process_metadata_population(remove_diseases=False):
     metadata_df = pd.read_csv("/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/Data/Cleaned_data/AGP_Metadata.csv", index_col = 0)
     feature_groups = feature_groups[~feature_groups.index.isin(['dna_extracted','physical_specimen_remaining','public', 'breastmilk_formula_ensure', 
                                                                 'acne_medication', 'acne_medication_otc', 'alcohol_consumption'])]
-    binary_features = feature_groups[feature_groups["group"] == "binary")].index.values
+    binary_features = feature_groups[feature_groups["group"] == "binary"].index.values
     print("Population size (full): ", len(metadata_df))
     
     ### Removal of samples that did not have valid annotation of important information used for matching
@@ -136,7 +135,7 @@ def pairIDs(length):
     return pair_ids
 
 
-def buildDataSubset(metadata, target_var, pos_target, neg_target):
+def buildDataSubset(metadata_df, target_var, pos_target, neg_target):
     """    
     Compute cosine similarity matrix, for each positive sample, 
     choose the most similar negative sample from the control population
@@ -147,7 +146,7 @@ def buildDataSubset(metadata, target_var, pos_target, neg_target):
         target_var: which frequency variable to make a balanced cohort for
 
     """
-    target = metadata[target_var]
+    target = metadata_df[target_var]
     if type(pos_target) == list:
         pos_class = target[target.isin(pos_target)].index
     else:
@@ -171,7 +170,8 @@ def buildDataSubset(metadata, target_var, pos_target, neg_target):
     # calculations between positive class (cases), and the healthy control population
     metadata_matching = metadata_df.loc[:, matching_features]
     scaler = StandardScaler()
-    metadata_matching= pd.DataFrame(scaler.fit_transform(metadata_df.loc[:, matching_features].astype(float)), index = metadata_df.index, columns = base_matching_features)
+    metadata_matching= pd.DataFrame(scaler.fit_transform(metadata_df.loc[:, matching_features].astype(float)), 
+                                    index = metadata_df.index, columns = matching_features)
     cm = euclidean_distances(metadata_matching.loc[pos_class, :], metadata_matching.loc[neg_class, :])
     cm = pd.DataFrame(cm, index = pos_class, columns = neg_class)
     cohort = []        
@@ -189,8 +189,8 @@ def buildDataSubset(metadata, target_var, pos_target, neg_target):
         distances.append(dist)
         worst_distances.append(worst_dist)
         worst_distances.append(worst_dist)
-    cohort = metadata.loc[cohort, cohort_feats]
-    cohort["target"] = metadata.loc[cohort.index, target_var]
+    cohort = metadata_df.loc[cohort, cohort_feats]
+    cohort["target"] = metadata_df.loc[cohort.index, target_var]
     if pos_target != 1:
         cohort["target"] = cohort["target"].map({pos_target: 1, neg_target: 0})
     cohort["pairID"] = pairIDs(len(cohort))

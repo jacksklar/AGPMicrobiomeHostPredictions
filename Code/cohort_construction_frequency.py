@@ -18,18 +18,28 @@ def create_frequency_cohorts(output_path, exclude_diseases=False):
                    'probiotic_frequency','ready_to_eat_meals_frequency','red_meat_frequency', 'salted_snacks_frequency', 'seafood_frequency',
                    'smoking_frequency', 'sugar_sweetened_drink_frequency', 'sugary_sweets_frequency',
                    'vegetable_frequency','vitamin_b_supplement_frequency','vitamin_d_supplement_frequency','whole_eggs',
-                   'whole_grain_frequency','alcohol_frequency']        
-
+                   'whole_grain_frequency','alcohol_frequency']
     file_names = ["_rare_cohort.csv", "_occasional_cohort.csv", "_regular_cohort.csv", "_daily_cohort.csv"]
+    combine_threshold = 100 if not exclude_diseases else 100
     for var in freq_values:
         group_counts = metadata_df[var].value_counts()
-        if group_counts[0] <= 100:
+        print(group_counts)
+        # combine never group if size is bellow threshold and combine with occasionally if still too small
+        if group_counts[0] <= combine_threshold:
             print("      Never group: ",  group_counts[0], group_counts[0] + group_counts[1])
             metadata_df.loc[metadata_df[var] == 1, var] = 0
             group_counts = metadata_df[var].value_counts()
-            if group_counts[0] <= 100:
+            if group_counts[0] <= combine_threshold:
                 print("      Never group: ",  group_counts[0], group_counts[0] + group_counts[2])
                 metadata_df.loc[metadata_df[var] == 2, var] = 0
+        # combine daily group if size is bellow threshold and combine with occasionally if still too small
+        if group_counts[4] <= combine_threshold:
+            print("      Daily group: ",  group_counts[4], group_counts[4] + group_counts[3])
+            metadata_df.loc[metadata_df[var] == 3, var] = 4
+            group_counts = metadata_df[var].value_counts()
+            if group_counts[4] <= combine_threshold:
+                print("      Daily group: ",  group_counts[4], group_counts[4] + group_counts[2])
+                metadata_df.loc[metadata_df[var] == 2, var] = 4
     for var in freq_values:
         print(var)
         frequency_groups = np.sort(metadata_df[var].unique())
@@ -37,7 +47,6 @@ def create_frequency_cohorts(output_path, exclude_diseases=False):
             frequency_groups = np.delete(frequency_groups, np.argwhere(frequency_groups == 5))
         control_value = frequency_groups[0]
         case_groups = frequency_groups[1:]
-        print(control_value, case_groups)
         for group in case_groups:
             if metadata_df[var].value_counts()[group] < 40:
                 print("Not constructing " + str(file_names[group -1].split("_")[1]) + " too small")

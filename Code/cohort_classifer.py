@@ -328,15 +328,14 @@ def FreqPredPipeline(save_path, dir_path):
     #xgb_FR.SaveModelDF()
     rf_FR.SaveModelDF()
     lasso_FR.SaveModelDF()
-    #PlotFeatureBox(svm_FR.model_results, svm_FR.model_aucs, save_path, "svm")
-    #PlotFeatureBox(rf_FR.model_results, rf_FR.model_aucs, save_path, "rf")
-    #PlotFeatureBox(lasso_FR.model_results, lasso_FR.model_aucs, save_path, "lasso")
+
     
         
 #%%
-#Recompute
+    
+dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
 col_names = otu_df.columns
-#excluded Groups
+
 dir_path = "/Users/jacksklar/Desktop/newcohortsforrf/alc_matched/"
 save_path = "/Users/jacksklar/Desktop/New_Cohort_Results/alc_matched/"
 feature_list = os.listdir(dir_path)
@@ -355,28 +354,21 @@ PredPipeline(save_path, dir_path)
     
 #%%
 
-    
+
 #excluded Groups
-dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
 save_path = dir_path + "Results/Phase_I_Results_xgb/"
 dir_path = dir_path + "Feature_Cohorts/Phase_I_Cohorts/"
 feature_list = os.listdir(dir_path)
 PredPipeline(save_path, dir_path)
 
-#%%
 
-
-dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
-col_names = otu_df.columns
 #Binary Questionnaire Variable Cohort Classification
 save_path = dir_path + "Results/Phase_II_Results/binary_results/"
 dir_path = dir_path + "Feature_Cohorts/Phase_II_Cohorts/binary_cohorts/"
 feature_list = os.listdir(dir_path)
 PredPipeline(save_path, dir_path)
 
-#%%
-dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
-col_names = otu_df.columns
+
 #Binary Questionnaire Variable Cohort Classification
 save_path = dir_path + "Results/Phase_II_Results_disease_removed/binary_results/"
 dir_path = dir_path + "Feature_Cohorts/Phase_II_Cohorts_disease_removed/binary_cohorts/"
@@ -384,10 +376,6 @@ feature_list = os.listdir(dir_path)
 PredPipeline(save_path, dir_path)
 
 
-#%%
-
-dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
-col_names = otu_df.columns
 ##Frequency Groups compared to cohort of "never" participants
 save_path = dir_path + "Results/Phase_II_Results_disease_removed/frequency_results/"
 dir_path = dir_path + "Feature_Cohorts/Phase_II_Cohorts_disease_removed/frequency_cohorts/"
@@ -395,8 +383,6 @@ frequency_list = os.listdir(dir_path)
 FreqPredPipeline(save_path, dir_path)
 
 
-dir_path = "/Users/jacksklar/Desktop/AGPMicrobiomeHostPredictions/"
-col_names = otu_df.columns
 ##Frequency Groups compared to cohort of "never" participants
 save_path = dir_path + "Results/Phase_II_Results/frequency_results/"
 dir_path = dir_path + "Feature_Cohorts/Phase_II_Cohorts/frequency_cohorts/"
